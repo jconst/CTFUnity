@@ -7,7 +7,9 @@ public class Fire : MonoBehaviour {
 	private float turnChance = 0.1f;
 	private float speed = 4f;
 	private float radius = 1f;
-	private float lifeTime = 20f;
+	float safetime=1f;
+	float time=0;
+	private float lifeTime = 6f;
 
 	// Use this for initialization
 	void Start () {
@@ -16,12 +18,15 @@ public class Fire : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		time += Time.deltaTime;
 		lifeTime -= Time.deltaTime;
 		if (lifeTime <= 0) {
 			Destroy (this.gameObject);
 		} else {
 			Move();		
 		}
+		if (time >= safetime)
+						gameObject.renderer.material.color = Color.yellow;
 		
 	}
 
@@ -31,8 +36,7 @@ public class Fire : MonoBehaviour {
 
 	void Move() {
 		if (Random.value < turnChance) {
-			heading = RandomDir();			
-			transform.Rotate(heading);
+			heading = RandomDir();		
 		}
 		
 		Vector3 newDir = (Vector3)((heading) * speed * Time.deltaTime);		
@@ -59,13 +63,13 @@ public class Fire : MonoBehaviour {
 		} else return false;
 	}
 
-	void OnCollisionEnter (Collision coll) {
+	void OnTriggerEnter (Collider coll) {
 		GameObject collObject = coll.gameObject;
 		Player player = collObject.GetComponent<Player>();
 
-		print(coll);
+		//print(coll);
 
-		if (player) {
+		if (player&&time>=safetime) {
 			player.KillPlayer();
 		}
 	}

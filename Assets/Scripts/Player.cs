@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
 	public string color;
 	public string otherColor;
 	public Vector3 initialPos;
+	GUIText score;
 
 	
 	public GameObject item1;
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		initialPos = transform.position;
-
+		score = GameObject.Find (color + "Score").GetComponent<GUIText> ();
 		if (!item1) {
 					item1 = new GameObject ();
 				}
@@ -106,6 +107,9 @@ public class Player : MonoBehaviour {
 				}
 		if (col.CompareTag (color + "Flag") && carrying) {
 			carrying=false;
+			int sc = int.Parse(score.text);
+			sc+=1;
+			score.text=sc.ToString();
 			flag.Reset();
 			flag=null;
 				}

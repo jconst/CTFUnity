@@ -21,6 +21,10 @@ public class Fire : MonoBehaviour {
 	void Update () {
 		lifeTime -= Time.deltaTime;
 		time += Time.deltaTime;
+
+		if (time >= safetime)
+						gameObject.renderer.material.color = Color.yellow;
+
 		if (lifeTime <= 0) {
 			Destroy (this.gameObject);
 		} else {

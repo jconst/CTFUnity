@@ -117,14 +117,10 @@ public class Player : MonoBehaviour {
 
 	public void KillPlayer()
 	{
-		GameObject player = Instantiate (this.gameObject) as GameObject;
-		player.transform.position = initialPos;
-		Player p = player.GetComponent<Player> ();
-		p.initialPos = initialPos;
-		p.carrying = false;
-		p.speed = 4f;
+		transform.position = initialPos;
 		if (carrying)
-						flag.Reset ();
-		Destroy (this.gameObject);
+			flag.Reset();
+		carrying = false;
+		speed = 4f;
 	}
 }

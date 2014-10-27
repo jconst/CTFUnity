@@ -5,11 +5,10 @@ public class FollowCam : MonoBehaviour
 {
     static public FollowCam S;
 
-    public float easing = 1f;
-    public Vector2 minXY;
     public GameObject poi;
-    public bool _____________________________;
-    public float camZ;
+    private float camZ;
+    private Vector2 minXY = new Vector2(-100, -100);
+    // private float easing = 1f;
 
     void Awake()
     {
@@ -25,7 +24,7 @@ public class FollowCam : MonoBehaviour
         dest.y = Mathf.Max(minXY.y, dest.y);
         // dest = Vector3.Lerp(transform.position, dest, easing);
         dest.z = camZ;
-        
+
         transform.position = dest;
     }
 }

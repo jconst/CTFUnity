@@ -6,7 +6,6 @@ public class Player : MonoBehaviour {
 	public string controllerNum;
 	public string color;
 	public string otherColor;
-	public GameObject flag;
 	public Vector3 initialPos;
 
 	
@@ -16,11 +15,12 @@ public class Player : MonoBehaviour {
 	public GameObject item4;
 
 	float speed=4f;
+	bool carrying=false;
+	Flag flag;
 	bool safe=true;
 
 	// Use this for initialization
 	void Start () {
-		flag = GameObject.FindGameObjectWithTag (color + "Flag");
 		initialPos = transform.position;
 
 		if (!item1) {
@@ -66,22 +66,49 @@ public class Player : MonoBehaviour {
 			GameObject go= Instantiate(item4) as GameObject;
 			go.transform.position=transform.position;
 		}
+
+		Vector3 relativePos = Camera.main.WorldToViewportPoint (transform.position);
+
+		if (relativePos.x > 1f)
+						relativePos.x = 1f;
+		if (relativePos.y > 1f)
+			relativePos.y = 1f;
+		if (relativePos.x < 0f)
+			relativePos.x = 0f;
+		if (relativePos.y < 0f)
+			relativePos.y = 0f;
+		transform.position = Camera.main.ViewportToWorldPoint (relativePos);
+
 	
 	}
 
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.CompareTag (color + "Side")) 
+		Debug.Log ("dongs");
+		if (col.CompareTag (color + "Side")) {
+						safe = true;
+			Debug.Log ("dongsyay");
+				}
 		
-			safe=true;
-		
-		if (col.CompareTag (otherColor + "Side"))
+		if (col.CompareTag (otherColor + "Side")) {
 						safe = false;
+			Debug.Log ("dongspoop");
+				}
 		if (col.CompareTag ("Player")) 
 		{
-			if(!safe)
+			if(!safe&&col.gameObject.GetComponent<Player>().color.Equals(otherColor))
 				KillPlayer();
 		}
+		if (col.CompareTag (otherColor + "Flag")) {
+			carrying=true;
+			col.gameObject.GetComponent<Flag>().Pickup(this.gameObject);
+			flag=col.gameObject.GetComponent<Flag>();
+				}
+		if (col.CompareTag (color + "Flag") && carrying) {
+			carrying=false;
+			flag.Reset();
+			flag=null;
+				}
 	}
 
 	public void KillPlayer()
@@ -90,7 +117,10 @@ public class Player : MonoBehaviour {
 		player.transform.position = initialPos;
 		Player p = player.GetComponent<Player> ();
 		p.initialPos = initialPos;
+		p.carrying = false;
 		p.speed = 4f;
+		if (carrying)
+						flag.Reset ();
 		Destroy (this.gameObject);
 	}
 }

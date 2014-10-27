@@ -233,7 +233,6 @@ MonoBehaviour:
   color: Blue
   otherColor: Red
   initialPos: {x: 0, y: 0, z: 0}
-  score: {fileID: 0}
   item1: {fileID: 0}
   item2: {fileID: 0}
   item3: {fileID: 0}
@@ -1073,7 +1072,6 @@ MonoBehaviour:
   color: Red
   otherColor: Blue
   initialPos: {x: 0, y: 0, z: 0}
-  score: {fileID: 0}
   item1: {fileID: 0}
   item2: {fileID: 0}
   item3: {fileID: 0}
@@ -1230,7 +1228,6 @@ MonoBehaviour:
   color: Red
   otherColor: Blue
   initialPos: {x: 0, y: 0, z: 0}
-  score: {fileID: 0}
   item1: {fileID: 0}
   item2: {fileID: 0}
   item3: {fileID: 0}

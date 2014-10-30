@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c163f8095ad0749ad9547b33f45d67b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: Blue
+  color: Red
   fireFreq: 0
 --- !u!212 &594154670
 SpriteRenderer:
@@ -1043,7 +1043,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 2276687274c2643cc87bd864e6baf1d6, type: 2}
       propertyPath: color
-      value: Blue
+      value: Red
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2276687274c2643cc87bd864e6baf1d6, type: 2}
@@ -1314,6 +1314,7 @@ GameObject:
   - 65: {fileID: 1644711965}
   - 23: {fileID: 1644711964}
   - 54: {fileID: 1644711968}
+  - 114: {fileID: 1644711969}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -1387,6 +1388,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1644711969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1644711963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f378bf1f17a2c4c9b1f1f9f70fe666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerNum: 2
+  color: Blue
+  otherColor: Red
+  initialPos: {x: 0, y: 0, z: 0}
+  item1: {fileID: 0}
+  item2: {fileID: 0}
+  item3: {fileID: 0}
+  item4: {fileID: 0}
 --- !u!1 &1673733772
 GameObject:
   m_ObjectHideFlags: 0

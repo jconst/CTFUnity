@@ -714,7 +714,7 @@ GameObject:
   - 65: {fileID: 883692717}
   - 23: {fileID: 883692716}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Divider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

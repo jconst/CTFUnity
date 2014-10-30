@@ -4,8 +4,8 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
 	public string controllerNum;
-	public string color;
-	public string otherColor;
+	public string team;
+	public int number;
 	public Vector3 initialPos;
 	GUIText score;
 
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		initialPos = transform.position;
-		score = GameObject.Find (color + "Score").GetComponent<GUIText> ();
+		score = GameObject.Find (team + "Score").GetComponent<GUIText> ();
 		if (!item1) {
 			item1 = new GameObject ();
 		}
@@ -90,27 +90,22 @@ public class Player : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col)
 	{
-		Debug.Log ("dongs");
-		if (col.CompareTag (color + "Side")) {
+		if (col.CompareTag (team + "Side")) {
 			safe = true;
-			Debug.Log ("dongsyay");
-		}
-		
-		if (col.CompareTag (otherColor + "Side")) {
+		} else if (col.tag.EndsWith("Side")) {
 			safe = false;
-			Debug.Log ("dongspoop");
 		}
 		if (col.CompareTag ("Player")) 
 		{
-			if(!safe&&col.gameObject.GetComponent<Player>().color.Equals(otherColor))
+			if(!safe && col.gameObject.GetComponent<Player>().team != team)
 				KillPlayer();
 		}
-		if (col.CompareTag (otherColor + "Flag")) {
+		if (col.tag.EndsWith("Flag") && !col.tag.StartsWith(team)) {
 			carrying=true;
 			col.gameObject.GetComponent<Flag>().Pickup(this.gameObject);
 			flag=col.gameObject.GetComponent<Flag>();
 		}
-		if (col.CompareTag (color + "Flag") && carrying) {
+		if (col.CompareTag (team + "Flag") && carrying) {
 			carrying=false;
 			int sc = int.Parse(score.text);
 			sc+=1;

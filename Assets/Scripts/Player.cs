@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
 	bool carrying=false;
 	Flag flag;
 	bool safe=true;
+	GameObject spawnpoint;
 
 	// Use this for initialization
 	void Start () {
@@ -53,26 +54,40 @@ public class Player : MonoBehaviour {
 
 		pos += velocity * Time.deltaTime;
 		transform.position = pos;
+		string droppedItemName=null;
+		GameObject go=null;
 
 		if(Input.GetButtonDown("Item1"+controllerNum))
 		{
-			GameObject go= Instantiate(item1) as GameObject;
+			go= Instantiate(item1) as GameObject;
 			go.transform.position=transform.position;
+			droppedItemName=item1.name;
 		}
 		if(Input.GetButtonDown("Item2"+controllerNum))
 		{
-			GameObject go= Instantiate(item2) as GameObject;
+			go= Instantiate(item2) as GameObject;
 			go.transform.position=transform.position;
+			droppedItemName=item2.name;
 		}
 		if(Input.GetButtonDown("Item3"+controllerNum))
 		{
-			GameObject go= Instantiate(item3) as GameObject;
+			go= Instantiate(item3) as GameObject;
 			go.transform.position=transform.position;
+			droppedItemName=item3.name;
 		}
 		if(Input.GetButtonDown("Item4"+controllerNum))
 		{
-			GameObject go= Instantiate(item4) as GameObject;
+			go= Instantiate(item4) as GameObject;
 			go.transform.position=transform.position;
+			droppedItemName=item4.name;
+		}
+
+		if(go && droppedItemName.Equals("SpawnPoint"))
+		   {
+			spawnpoint=go;
+			SpawnPad sp=spawnpoint.GetComponent<SpawnPad>();
+			sp.Owner=this;
+			sp.Team=team;
 		}
 
 		Vector3 relativePos = Camera.main.WorldToViewportPoint (transform.position);
@@ -113,14 +128,28 @@ public class Player : MonoBehaviour {
 			flag.Reset();
 			flag=null;
 		}
+		if (col.CompareTag ("SpawnPad") && 
+						!col.gameObject.GetComponent<SpawnPad> ().Team.Equals (team)) {
+			Destroy(col.gameObject);
+				}
 	}
 
 	public void KillPlayer()
 	{
-		transform.position = initialPos;
+		if (spawnpoint) {
+			transform.position=spawnpoint.transform.position;
+			Destroy(spawnpoint);
+			spawnpoint=null;
+		}
+		else transform.position = initialPos;
 		if (carrying)
 			flag.Reset();
 		carrying = false;
 		speed = 4f;
+	}
+
+	public void InvalidateSpawn()
+	{
+		spawnpoint = null;
 	}
 }

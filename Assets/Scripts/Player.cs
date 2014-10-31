@@ -82,12 +82,12 @@ public class Player : MonoBehaviour {
 			droppedItemName=item4.name;
 		}
 
-		if(go && droppedItemName.Equals("SpawnPoint"))
+		if(go && droppedItemName.Equals(team+"SpawnPad"))
 		   {
-			spawnpoint=go;
-			SpawnPad sp=spawnpoint.GetComponent<SpawnPad>();
+			if(spawnpoint) Destroy(spawnpoint);
+			SpawnPad sp=go.GetComponent<SpawnPad>();
 			sp.Owner=this;
-			sp.Team=team;
+			spawnpoint=go;
 		}
 
 		Vector3 relativePos = Camera.main.WorldToViewportPoint (transform.position);
@@ -130,6 +130,7 @@ public class Player : MonoBehaviour {
 		}
 		if (col.CompareTag ("SpawnPad") && 
 						!col.gameObject.GetComponent<SpawnPad> ().Team.Equals (team)) {
+			col.gameObject.GetComponent<SpawnPad>().Owner.InvalidateSpawn();
 			Destroy(col.gameObject);
 				}
 	}

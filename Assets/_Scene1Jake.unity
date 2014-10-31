@@ -155,6 +155,7 @@ GameObject:
   - 20: {fileID: 215785551}
   - 124: {fileID: 215785550}
   - 92: {fileID: 215785549}
+  - 114: {fileID: 215785548}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -162,6 +163,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &215785548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 215785547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c638eee8f47514aeebf3ddf2b853d878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poi: {fileID: 342487425}
 --- !u!92 &215785549
 Behaviour:
   m_ObjectHideFlags: 0
@@ -196,7 +209,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.70963645
+  orthographic size: 2.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -306,11 +319,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerNum: 1
-  color: Blue
-  otherColor: Red
+  team: Blue
+  number: 0
   initialPos: {x: 0, y: 0, z: 0}
   item1: {fileID: 100000, guid: dcbcecebff760de4c82fa1c439895ff3, type: 2}
-  item2: {fileID: 0}
+  item2: {fileID: 100000, guid: bd169178a4dcdbe47999a00fb13fba9a, type: 2}
   item3: {fileID: 0}
   item4: {fileID: 0}
 --- !u!65 &342487431
@@ -432,7 +445,7 @@ Transform:
   m_GameObject: {fileID: 513994221}
   m_LocalRotation: {x: .707106829, y: 1.68643286e-08, z: 1.68643286e-08, w: -.707106829}
   m_LocalPosition: {x: .0484676361, y: -.246705174, z: 0}
-  m_LocalScale: {x: 1.79999995, y: 1, z: 1}
+  m_LocalScale: {x: 1.35000002, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -535,7 +548,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.70963645
+  orthographic size: 2.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -799,7 +812,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.70963645
+  orthographic size: 2.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1134,6 +1147,7 @@ GameObject:
   - 65: {fileID: 1644711965}
   - 23: {fileID: 1644711964}
   - 54: {fileID: 1644711968}
+  - 114: {fileID: 1644711969}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -1207,6 +1221,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1644711969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1644711963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f378bf1f17a2c4c9b1f1f9f70fe666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerNum: 4
+  team: Blue
+  number: 0
+  initialPos: {x: 0, y: 0, z: 0}
+  item1: {fileID: 0}
+  item2: {fileID: 0}
+  item3: {fileID: 0}
+  item4: {fileID: 0}
 --- !u!1 &1810782573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,7 +1292,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.70963645
+  orthographic size: 2.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1380,9 +1413,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f378bf1f17a2c4c9b1f1f9f70fe666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerNum: 2
-  color: Red
-  otherColor: Blue
+  controllerNum: 3
+  team: Red
+  number: 0
   initialPos: {x: 0, y: 0, z: 0}
   item1: {fileID: 0}
   item2: {fileID: 0}
@@ -1537,8 +1570,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerNum: 2
-  color: Red
-  otherColor: Blue
+  team: Red
+  number: 0
   initialPos: {x: 0, y: 0, z: 0}
   item1: {fileID: 100000, guid: dcbcecebff760de4c82fa1c439895ff3, type: 2}
   item2: {fileID: 0}

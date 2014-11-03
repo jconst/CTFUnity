@@ -82,12 +82,18 @@ public class Player : MonoBehaviour {
 			droppedItemName=item4.name;
 		}
 
-		if(go && droppedItemName.Equals(team+"SpawnPad"))
+		if(go && droppedItemName.Equals("SpawnPad"))
 		   {
 			if(spawnpoint) Destroy(spawnpoint);
 			SpawnPad sp=go.GetComponent<SpawnPad>();
 			sp.Owner=this;
 			spawnpoint=go;
+		}
+
+		if(go && droppedItemName.Equals("Turret"))
+		{
+			Turret t = go.GetComponent<Turret>();
+			t.team=team;
 		}
 
 		Vector3 relativePos = Camera.main.WorldToViewportPoint (transform.position);

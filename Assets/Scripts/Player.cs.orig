@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -57,12 +57,38 @@ public class Player : MonoBehaviour {
 			}
 		});
 
+<<<<<<< HEAD
 		if(go && droppedItemName.Equals("SpawnPad")) {
+=======
+		if(go && droppedItemName.Equals("SpawnPad"))
+		   {
+>>>>>>> f7530b6f5f9310fd4fa0bada2fcfa160515fe640
 			if(spawnpoint) Destroy(spawnpoint);
 			SpawnPad sp=go.GetComponent<SpawnPad>();
 			sp.Owner=this;
 			spawnpoint=go;
 		}
+<<<<<<< HEAD
+=======
+
+		if(go && droppedItemName.Equals("Turret"))
+		{
+			Turret t = go.GetComponent<Turret>();
+			t.team=team;
+		}
+
+		Vector3 relativePos = Camera.main.WorldToViewportPoint (transform.position);
+
+		if (relativePos.x > 1f)
+			relativePos.x = 1f;
+		if (relativePos.y > 1f)
+			relativePos.y = 1f;
+		if (relativePos.x < 0f)
+			relativePos.x = 0f;
+		if (relativePos.y < 0f)
+			relativePos.y = 0f;
+		transform.position = Camera.main.ViewportToWorldPoint (relativePos);
+>>>>>>> f7530b6f5f9310fd4fa0bada2fcfa160515fe640
 	}
 
 	void OnTriggerEnter(Collider col)

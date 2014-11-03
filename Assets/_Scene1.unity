@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: 
-  fireFreq: 0
+  secondsSinceLastShot: 0
 --- !u!212 &594154670
 SpriteRenderer:
   m_ObjectHideFlags: 0

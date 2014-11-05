@@ -179,8 +179,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 44534626}
   - 33: {fileID: 44534625}
-  - 65: {fileID: 44534624}
   - 23: {fileID: 44534623}
+  - 61: {fileID: 44534624}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Edge
@@ -208,18 +208,17 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!65 &44534624
-BoxCollider:
+--- !u!61 &44534624
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 44534622}
+  m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1}
+  m_Center: {x: 3.81469727e-06, y: 3.7252903e-09}
 --- !u!33 &44534625
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -435,8 +434,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 737269350}
   - 33: {fileID: 737269349}
-  - 65: {fileID: 737269348}
   - 23: {fileID: 737269347}
+  - 61: {fileID: 737269348}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Edge
@@ -464,18 +463,17 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!65 &737269348
-BoxCollider:
+--- !u!61 &737269348
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 737269346}
+  m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1}
+  m_Center: {x: 0, y: 3.7252903e-09}
 --- !u!33 &737269349
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -504,8 +502,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 865460152}
   - 33: {fileID: 865460151}
-  - 65: {fileID: 865460150}
   - 23: {fileID: 865460149}
+  - 61: {fileID: 865460150}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Edge
@@ -533,18 +531,17 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!65 &865460150
-BoxCollider:
+--- !u!61 &865460150
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 865460148}
+  m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1}
+  m_Center: {x: 6.98491931e-10, y: 0}
 --- !u!33 &865460151
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -656,8 +653,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1414055857}
   - 33: {fileID: 1414055856}
-  - 65: {fileID: 1414055855}
   - 23: {fileID: 1414055854}
+  - 61: {fileID: 1414055855}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Edge
@@ -685,18 +682,17 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!65 &1414055855
-BoxCollider:
+--- !u!61 &1414055855
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1414055853}
+  m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1}
+  m_Center: {x: 6.98491931e-10, y: 0}
 --- !u!33 &1414055856
 MeshFilter:
   m_ObjectHideFlags: 0

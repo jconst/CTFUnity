@@ -14,7 +14,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   m_Layer: 0
-  m_Name: BlueSpawnPad
+  m_Name: SpawnPad
   m_TagString: SpawnPad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,8 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51f62253777db2498e016daa2affd38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Owner: {fileID: 0}
-  Team: Blue
+  owner: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

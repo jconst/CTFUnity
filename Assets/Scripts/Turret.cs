@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Turret : MonoBehaviour
+public class Turret : DropItem
 {
     public string team;
     public const float secondsBetweenShots = 1f;

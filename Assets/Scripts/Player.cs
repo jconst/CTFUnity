@@ -8,7 +8,6 @@ public class Player : MonoBehaviour {
 	public string team;
 	public int number;
 	public Vector3 initialPos;
-	GUIText score;
 
 	public List<string> dropItems =
 	   new List<string> {
@@ -19,17 +18,32 @@ public class Player : MonoBehaviour {
 
 	public Flag flag;
 	public bool carrying=false;
+	public SpawnPad spawnpoint;
 	float speed=4f;
-	GameObject spawnpoint;
 
 	// Use this for initialization
 	void Start () {
 		initialPos = transform.position;
-		score = GameObject.Find (team + "Score").GetComponent<GUIText> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		MoveStep();
+		dropItems.Each((item, indexFromZero) => {
+			int index = indexFromZero+1;
+			if (Input.GetButtonDown("Item"+index+controllerNum) ||
+			    (controllerNum == "1" && Input.GetKeyDown(index.ToString()))) {
+				DropNewItem(item);
+			}
+		});
+	}
+
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		//needs tackle mechanics
+	}
+
+	void MoveStep() {
 		Vector3 velocity = Vector3.zero;
 		Vector3 pos = transform.position;
 		velocity.x = Input.GetAxis ("Horizontal" + controllerNum)*speed;
@@ -43,38 +57,21 @@ public class Player : MonoBehaviour {
 
 		pos += velocity * Time.deltaTime;
 		transform.position = pos;
-		string droppedItemName = null;
-		GameObject go = null;
-
-		dropItems.Each((item, indexFromZero) => {
-			int index = indexFromZero+1;
-			if (Input.GetButtonDown("Item"+index+controllerNum) ||
-			    (controllerNum == "1" && Input.GetKeyDown(index.ToString()))) {
-				go = Instantiate(Resources.Load(item)) as GameObject;
-				go.transform.position = transform.position;
-				droppedItemName = item;
-			}
-		});
-
-		if(go && droppedItemName == "SpawnPad") {
-			if (spawnpoint) 
-				Destroy(spawnpoint);
-			SpawnPad sp = go.GetComponent<SpawnPad>();
-			sp.owner = this;
-			spawnpoint = go;
-		}
 	}
 
-	void OnTriggerEnter2D(Collider2D col)
+	public void DropNewItem(string itemName)
 	{
-		//needs tackle mechanics
+		DropItem dropItem = ((GameObject)Instantiate(Resources.Load(itemName),
+				                          			 transform.position,
+					                    			 Quaternion.identity)).GetComponent<DropItem>();
+		dropItem.WasDroppedByPlayer(this);
 	}
 
 	public void KillPlayer()
 	{
 		if (spawnpoint) {
 			transform.position=spawnpoint.transform.position;
-			Destroy(spawnpoint);
+			Destroy(spawnpoint.gameObject);
 			spawnpoint=null;
 		}
 		else transform.position = initialPos;

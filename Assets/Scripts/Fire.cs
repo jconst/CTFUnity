@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Fire : MonoBehaviour {
+public class Fire : DropItem {
 	private Vector3 startPos;
 	public Vector2 heading = Vector2.up;
 	private float turnChance = 0.1f;

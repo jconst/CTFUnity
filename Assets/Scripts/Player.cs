@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
 	public List<string> dropItems =
 	   new List<string> {
 	   	"Fire",
-	   	"SpawnPad",
+	   	"SmokeBomb",
 	   	"Turret"
 	};
 

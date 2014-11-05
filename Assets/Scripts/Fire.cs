@@ -63,13 +63,10 @@ public class Fire : MonoBehaviour {
 		} else return false;
 	}
 
-	void OnTriggerEnter (Collider coll) {
-		GameObject collObject = coll.gameObject;
-		Player player = collObject.GetComponent<Player>();
+	void OnTriggerEnter2D (Collider2D coll) {
+		Player player = coll.GetComponent<Player>();
 
-		//print(coll);
-
-		if (player&&time>=safetime) {
+		if (player && time >= safetime) {
 			player.KillPlayer();
 		}
 	}

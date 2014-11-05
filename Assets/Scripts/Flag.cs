@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Flag : MonoBehaviour {
-
-	public string color;
-	GameObject carrier;
+public class Flag : MonoBehaviour
+{
+	Player carrier;
 	Vector3 initialPosit;
 	bool following=false;
 
@@ -16,15 +15,16 @@ public class Flag : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (following) {
-						transform.position = carrier.transform.position;
-				}
+			transform.position = carrier.transform.position;
+		}
 	}
 
-	public void Pickup(GameObject go)
+	public void Pickup(Player p)
 	{
-		carrier = go;
+		carrier = p;
 		following = true;
-
+		p.flag = this;
+		p.carrying=true;
 	}
 
 	public void Reset()
@@ -32,5 +32,13 @@ public class Flag : MonoBehaviour {
 		following = false;
 		transform.position = initialPosit;
 		carrier = null;
+	}
+
+	public void OnTriggerEnter2D(Collider2D coll)
+	{
+		Player player = coll.GetComponent<Player>();
+		if (player) {
+			Pickup(player);
+		}
 	}
 }

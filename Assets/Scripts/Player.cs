@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
@@ -9,34 +10,22 @@ public class Player : MonoBehaviour {
 	public Vector3 initialPos;
 	GUIText score;
 
-	
-	public GameObject item1;
-	public GameObject item2;
-	public GameObject item3;
-	public GameObject item4;
+	public List<string> dropItems =
+	   new List<string> {
+	   	"Fire",
+	   	"SpawnPad",
+	   	"Turret"
+	};
 
+	public Flag flag;
+	public bool carrying=false;
 	float speed=4f;
-	bool carrying=false;
-	Flag flag;
-	bool safe=true;
 	GameObject spawnpoint;
 
 	// Use this for initialization
 	void Start () {
 		initialPos = transform.position;
 		score = GameObject.Find (team + "Score").GetComponent<GUIText> ();
-		if (!item1) {
-			item1 = new GameObject ();
-		}
-		if (!item2) {
-			item2 = new GameObject ();
-		}
-		if (!item3) {
-			item3 = new GameObject ();
-		}
-		if (!item4) {
-			item4 = new GameObject ();
-		}
 	}
 	
 	// Update is called once per frame
@@ -54,85 +43,31 @@ public class Player : MonoBehaviour {
 
 		pos += velocity * Time.deltaTime;
 		transform.position = pos;
-		string droppedItemName=null;
-		GameObject go=null;
+		string droppedItemName = null;
+		GameObject go = null;
 
-		if(Input.GetButtonDown("Item1"+controllerNum))
-		{
-			go= Instantiate(item1) as GameObject;
-			go.transform.position=transform.position;
-			droppedItemName=item1.name;
-		}
-		if(Input.GetButtonDown("Item2"+controllerNum))
-		{
-			go= Instantiate(item2) as GameObject;
-			go.transform.position=transform.position;
-			droppedItemName=item2.name;
-		}
-		if(Input.GetButtonDown("Item3"+controllerNum))
-		{
-			go= Instantiate(item3) as GameObject;
-			go.transform.position=transform.position;
-			droppedItemName=item3.name;
-		}
-		if(Input.GetButtonDown("Item4"+controllerNum))
-		{
-			go= Instantiate(item4) as GameObject;
-			go.transform.position=transform.position;
-			droppedItemName=item4.name;
-		}
+		dropItems.Each((item, indexFromZero) => {
+			int index = indexFromZero+1;
+			if (Input.GetButtonDown("Item"+index+controllerNum) ||
+			    (controllerNum == "1" && Input.GetKeyDown(index.ToString()))) {
+				go = Instantiate(Resources.Load(item)) as GameObject;
+				go.transform.position = transform.position;
+				droppedItemName = item;
+			}
+		});
 
-		if(go && droppedItemName.Equals(team+"SpawnPad"))
-		   {
-			if(spawnpoint) Destroy(spawnpoint);
-			SpawnPad sp=go.GetComponent<SpawnPad>();
-			sp.Owner=this;
-			spawnpoint=go;
+		if(go && droppedItemName == "SpawnPad") {
+			if (spawnpoint) 
+				Destroy(spawnpoint);
+			SpawnPad sp = go.GetComponent<SpawnPad>();
+			sp.owner = this;
+			spawnpoint = go;
 		}
-
-		Vector3 relativePos = Camera.main.WorldToViewportPoint (transform.position);
-
-		if (relativePos.x > 1f)
-			relativePos.x = 1f;
-		if (relativePos.y > 1f)
-			relativePos.y = 1f;
-		if (relativePos.x < 0f)
-			relativePos.x = 0f;
-		if (relativePos.y < 0f)
-			relativePos.y = 0f;
-		transform.position = Camera.main.ViewportToWorldPoint (relativePos);
 	}
 
-	void OnTriggerEnter(Collider col)
+	void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.CompareTag (team + "Side")) {
-			safe = true;
-		} else if (col.tag.EndsWith("Side")) {
-			safe = false;
-		}
-		if (col.CompareTag ("Player")) 
-		{
-			if(!safe && col.gameObject.GetComponent<Player>().team != team)
-				KillPlayer();
-		}
-		if (col.tag.EndsWith("Flag") && !col.tag.StartsWith(team)) {
-			carrying=true;
-			col.gameObject.GetComponent<Flag>().Pickup(this.gameObject);
-			flag=col.gameObject.GetComponent<Flag>();
-		}
-		if (col.CompareTag (team + "Flag") && carrying) {
-			carrying=false;
-			int sc = int.Parse(score.text);
-			sc+=1;
-			score.text=sc.ToString();
-			flag.Reset();
-			flag=null;
-		}
-		if (col.CompareTag ("SpawnPad") && 
-						!col.gameObject.GetComponent<SpawnPad> ().Team.Equals (team)) {
-			col.gameObject.GetComponent<SpawnPad>().Owner.InvalidateSpawn();
-			Destroy(col.gameObject);
-				}
+		//needs tackle mechanics
 	}
 
 	public void KillPlayer()

@@ -3,8 +3,8 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - RedFlag
-  - BlueFlag
+  - Edge
+  - Bomb
   - RedSide
   - BlueSide
   - SpawnPad

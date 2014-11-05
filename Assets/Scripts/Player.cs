@@ -8,7 +8,6 @@ public class Player : MonoBehaviour {
 	public string team;
 	public int number;
 	public Vector3 initialPos;
-	GUIText score;
 
 	public List<string> dropItems =
 	   new List<string> {
@@ -25,7 +24,6 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		initialPos = transform.position;
-		score = GameObject.Find (team + "Score").GetComponent<GUIText> ();
 	}
 	
 	// Update is called once per frame

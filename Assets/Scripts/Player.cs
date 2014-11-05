@@ -17,10 +17,9 @@ public class Player : MonoBehaviour {
 	   	"Turret"
 	};
 
+	public Flag flag;
+	public bool carrying=false;
 	float speed=4f;
-	bool carrying=false;
-	Flag flag;
-	bool safe=true;
 	GameObject spawnpoint;
 
 	// Use this for initialization
@@ -57,44 +56,18 @@ public class Player : MonoBehaviour {
 			}
 		});
 
-		if(go && droppedItemName.Equals("SpawnPad")) {
-			if(spawnpoint) Destroy(spawnpoint);
-			SpawnPad sp=go.GetComponent<SpawnPad>();
-			sp.Owner=this;
-			spawnpoint=go;
+		if(go && droppedItemName == "SpawnPad") {
+			if (spawnpoint) 
+				Destroy(spawnpoint);
+			SpawnPad sp = go.GetComponent<SpawnPad>();
+			sp.owner = this;
+			spawnpoint = go;
 		}
 	}
 
-	void OnTriggerEnter(Collider col)
+	void OnTriggerEnter2D(Collider2D col)
 	{
-		if (col.CompareTag (team + "Side")) {
-			safe = true;
-		} else if (col.tag.EndsWith("Side")) {
-			safe = false;
-		}
-		if (col.CompareTag ("Player")) 
-		{
-			if(!safe && col.gameObject.GetComponent<Player>().team != team)
-				KillPlayer();
-		}
-		if (col.tag.EndsWith("Flag") && !col.tag.StartsWith(team)) {
-			carrying=true;
-			col.gameObject.GetComponent<Flag>().Pickup(this.gameObject);
-			flag=col.gameObject.GetComponent<Flag>();
-		}
-		if (col.CompareTag (team + "Flag") && carrying) {
-			carrying=false;
-			int sc = int.Parse(score.text);
-			sc+=1;
-			score.text=sc.ToString();
-			flag.Reset();
-			flag=null;
-		}
-		if (col.CompareTag ("SpawnPad") && 
-						!col.gameObject.GetComponent<SpawnPad> ().Team.Equals (team)) {
-			col.gameObject.GetComponent<SpawnPad>().Owner.InvalidateSpawn();
-			Destroy(col.gameObject);
-				}
+		//needs tackle mechanics
 	}
 
 	public void KillPlayer()

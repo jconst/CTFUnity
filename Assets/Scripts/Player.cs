@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-	public string controllerNum;
 	public string team;
 	public int number;
 	public Vector3 initialPos;
@@ -14,12 +13,16 @@ public class Player : MonoBehaviour
 	public bool carrying = false;
 	public SpawnPad spawnpoint;
 
+	public Vector2 tackleDirection;
+	public Vector2 velocity;
+	public float tackleCurSpeed = 0f;
 	const float runSpeed = 4f;
 	const float tackleAveSpeed = 4.1f;
 	const float tackleDuration = 0.5f;
 	bool tackling = false;
 	float tackleStartTime;
-	Vector2 tackleDirection;
+
+	const string keyboardPlayer = "3";
 
 	public List<string> dropItems =
 	   new List<string> {
@@ -28,26 +31,9 @@ public class Player : MonoBehaviour
 	   	"Turret"
 	};
 
-	Vector2 velocity {
+	public string controllerNum {
 		get {
-			float tackleProg = (Time.time - tackleStartTime)/tackleDuration;
-			if (tackleProg >= 1f) {
-				tackling = false;
-			} 
-			if (tackling) {
-				float curve = tackleAveSpeed * (float)Math.Cos(tackleProg * Math.PI);
-				return tackleDirection * (tackleAveSpeed + curve);
-			}
-			Vector3 velocity = Vector3.zero;
-			velocity = new Vector2(Input.GetAxisRaw("HorizontalL" + controllerNum),
-								   Input.GetAxisRaw("VerticalL" + controllerNum));
-
-			//allow p1 to be controlled by keyboard for testing:
-			if (controllerNum == "1" && velocity.magnitude < 0.2f) {
-				velocity = new Vector2(Input.GetAxisRaw("Horizontal"),
-							           Input.GetAxisRaw("Vertical"));
-			}
-			return velocity.normalized * runSpeed;
+			return (number+1).ToString();
 		}
 	}
 
@@ -61,12 +47,32 @@ public class Player : MonoBehaviour
 		MoveStep();
 	}
 
-	void OnCollisionEnter2D(Collision2D coll)
-	{
-		//needs tackle mechanics
-	}
-
 	void MoveStep() {
+
+		float tackleProg = (Time.time - tackleStartTime)/tackleDuration;
+		float curve = (float)Math.Cos(tackleProg * Math.PI);
+		float speed = runSpeed;
+		if (tackleProg > 1f) {
+			tackling = false;
+			//ease up normal running speed as "standing up" after tackle
+			if (tackleProg < 1.5f) {
+				speed = runSpeed + (runSpeed * curve);
+			}
+		}
+		if (tackling) {
+			tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
+			velocity = tackleDirection * tackleCurSpeed;
+		} else {
+			velocity = new Vector2(Input.GetAxis("HorizontalL" + controllerNum),
+								   Input.GetAxis("VerticalL" + controllerNum));
+
+			//allow a player to be controlled by keyboard for testing:
+			if (controllerNum == keyboardPlayer && velocity.magnitude < 0.2f) {
+				velocity = new Vector2(Input.GetAxisRaw("Horizontal"),
+							           Input.GetAxisRaw("Vertical"));
+			}
+			velocity = velocity.normalized * speed;
+		}
 		transform.position += (Vector3)velocity * Time.deltaTime;
 	}
 
@@ -74,7 +80,7 @@ public class Player : MonoBehaviour
 		dropItems.Each((item, indexFromZero) => {
 			int index = indexFromZero+1;
 			if (Input.GetButtonDown("Item"+index+controllerNum) ||
-			    (controllerNum == "1" && Input.GetKeyDown(index.ToString()))) {
+			    (controllerNum == keyboardPlayer && Input.GetKeyDown(index.ToString()))) {
 				DropNewItem(item);
 			}
 		});
@@ -102,6 +108,20 @@ public class Player : MonoBehaviour
 		tackleDirection = force.normalized;
 		tackleStartTime = Time.time;
 		tackling = true;
+	}
+
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		Player p = coll.gameObject.GetComponent<Player>();
+		if (p && p.team != team && p.tackling) {
+		    if (tackling) {
+		    	if (p.tackleCurSpeed > tackleCurSpeed) {
+		    		KillPlayer();
+		    	}
+			} else {
+				KillPlayer();
+			}
+		}
 	}
 
 	public void KillPlayer()

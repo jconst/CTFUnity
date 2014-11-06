@@ -1,62 +1,89 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-	public string controllerNum;
 	public string team;
 	public int number;
 	public Vector3 initialPos;
 
+	public Flag flag;
+	public bool carrying = false;
+	public SpawnPad spawnpoint;
+
+	public Vector2 tackleDirection;
+	public Vector2 velocity;
+	public float tackleCurSpeed = 0f;
+	const float runSpeed = 4f;
+	const float tackleAveSpeed = 4.1f;
+	const float tackleDuration = 0.5f;
+	bool tackling = false;
+	float tackleStartTime;
+
+	const string keyboardPlayer = "3";
+
 	public List<string> dropItems =
 	   new List<string> {
 	   	"Fire",
-	   	"SpawnPad",
+	   	"SmokeBomb",
 	   	"Turret"
 	};
 
-	public Flag flag;
-	public bool carrying=false;
-	public SpawnPad spawnpoint;
-	float speed=4f;
+	public string controllerNum {
+		get {
+			return (number+1).ToString();
+		}
+	}
 
-	// Use this for initialization
 	void Start () {
 		initialPos = transform.position;
 	}
 	
-	// Update is called once per frame
 	void Update () {
+		CheckDrop();
+		CheckTackle();
 		MoveStep();
-		dropItems.Each((item, indexFromZero) => {
-			int index = indexFromZero+1;
-			if (Input.GetButtonDown("Item"+index+controllerNum) ||
-			    (controllerNum == "1" && Input.GetKeyDown(index.ToString()))) {
-				DropNewItem(item);
-			}
-		});
-	}
-
-	void OnTriggerEnter2D(Collider2D col)
-	{
-		//needs tackle mechanics
 	}
 
 	void MoveStep() {
-		Vector3 velocity = Vector3.zero;
-		Vector3 pos = transform.position;
-		velocity.x = Input.GetAxis ("Horizontal" + controllerNum)*speed;
-		velocity.y = Input.GetAxis ("Vertical" + controllerNum)*speed;
 
-		//allow p1 to be controlled by keyboard for testing:
-		if (controllerNum == "1" && velocity.magnitude == 0) {
-			velocity.x = Input.GetAxisRaw("Horizontal")*speed;
-			velocity.y = Input.GetAxisRaw("Vertical")*speed;
+		float tackleProg = (Time.time - tackleStartTime)/tackleDuration;
+		float curve = (float)Math.Cos(tackleProg * Math.PI);
+		float speed = runSpeed;
+		if (tackleProg > 1f) {
+			tackling = false;
+			//ease up normal running speed as "standing up" after tackle
+			if (tackleProg < 1.5f) {
+				speed = runSpeed + (runSpeed * curve);
+			}
 		}
+		if (tackling) {
+			tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
+			velocity = tackleDirection * tackleCurSpeed;
+		} else {
+			velocity = new Vector2(Input.GetAxis("HorizontalL" + controllerNum),
+								   Input.GetAxis("VerticalL" + controllerNum));
 
-		pos += velocity * Time.deltaTime;
-		transform.position = pos;
+			//allow a player to be controlled by keyboard for testing:
+			if (controllerNum == keyboardPlayer && velocity.magnitude < 0.2f) {
+				velocity = new Vector2(Input.GetAxisRaw("Horizontal"),
+							           Input.GetAxisRaw("Vertical"));
+			}
+			velocity = velocity.normalized * speed;
+		}
+		transform.position += (Vector3)velocity * Time.deltaTime;
+	}
+
+	void CheckDrop() {
+		dropItems.Each((item, indexFromZero) => {
+			int index = indexFromZero+1;
+			if (Input.GetButtonDown("Item"+index+controllerNum) ||
+			    (controllerNum == keyboardPlayer && Input.GetKeyDown(index.ToString()))) {
+				DropNewItem(item);
+			}
+		});
 	}
 
 	public void DropNewItem(string itemName)
@@ -65,6 +92,36 @@ public class Player : MonoBehaviour
 				                          			 transform.position,
 					                    			 Quaternion.identity)).GetComponent<DropItem>();
 		dropItem.WasDroppedByPlayer(this);
+	}
+
+	void CheckTackle() {
+		if (tackling)
+			return;
+		Vector2 tackleForce = new Vector2(Input.GetAxis ("HorizontalR" + controllerNum),
+										  Input.GetAxis ("VerticalR" + controllerNum));
+		if (tackleForce.magnitude >= 1f) {
+			Tackle(tackleForce);
+		}
+	}
+
+	void Tackle(Vector2 force) {
+		tackleDirection = force.normalized;
+		tackleStartTime = Time.time;
+		tackling = true;
+	}
+
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		Player p = coll.gameObject.GetComponent<Player>();
+		if (p && p.team != team && p.tackling) {
+		    if (tackling) {
+		    	if (p.tackleCurSpeed > tackleCurSpeed) {
+		    		KillPlayer();
+		    	}
+			} else {
+				KillPlayer();
+			}
+		}
 	}
 
 	public void KillPlayer()
@@ -78,7 +135,6 @@ public class Player : MonoBehaviour
 		if (carrying)
 			flag.Reset();
 		carrying = false;
-		speed = 4f;
 	}
 
 	public void InvalidateSpawn()

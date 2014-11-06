@@ -389,13 +389,13 @@ InputManager:
     axis: 0
     joyNum: 4
   - serializedVersion: 3
-    m_Name: poo
+    m_Name: start
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 0
+    positiveButton: joystick 1 button 7
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: joystick 1 button 9
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000

@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
 	public SpawnPad spawnpoint;
 
 	const float runSpeed = 4f;
-	const float tackleSpeed = 4f;
-	const float tackleDuration = 0.7f;
+	const float tackleAveSpeed = 4.1f;
+	const float tackleDuration = 0.5f;
 	bool tackling = false;
 	float tackleStartTime;
 	Vector2 tackleDirection;
@@ -35,19 +35,19 @@ public class Player : MonoBehaviour
 				tackling = false;
 			} 
 			if (tackling) {
-				float curve = tackleSpeed * (float)Math.Cos(tackleProg * Math.PI);
-				return tackleDirection * (tackleSpeed + curve);
+				float curve = tackleAveSpeed * (float)Math.Cos(tackleProg * Math.PI);
+				return tackleDirection * (tackleAveSpeed + curve);
 			}
 			Vector3 velocity = Vector3.zero;
-			velocity = new Vector2(Input.GetAxis ("HorizontalL" + controllerNum)*runSpeed,
-								   Input.GetAxis ("VerticalL" + controllerNum)*runSpeed);
+			velocity = new Vector2(Input.GetAxisRaw("HorizontalL" + controllerNum),
+								   Input.GetAxisRaw("VerticalL" + controllerNum));
 
 			//allow p1 to be controlled by keyboard for testing:
 			if (controllerNum == "1" && velocity.magnitude < 0.2f) {
-				return new Vector2(Input.GetAxisRaw("Horizontal")*runSpeed,
-							       Input.GetAxisRaw("Vertical")*runSpeed);
+				velocity = new Vector2(Input.GetAxisRaw("Horizontal"),
+							           Input.GetAxisRaw("Vertical"));
 			}
-			return velocity;
+			return velocity.normalized * runSpeed;
 		}
 	}
 
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 			return;
 		Vector2 tackleForce = new Vector2(Input.GetAxis ("HorizontalR" + controllerNum),
 										  Input.GetAxis ("VerticalR" + controllerNum));
-		if (tackleForce.magnitude > 0.5f) {
+		if (tackleForce.magnitude >= 1f) {
 			Tackle(tackleForce);
 		}
 	}

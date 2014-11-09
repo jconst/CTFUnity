@@ -99,6 +99,11 @@ public class Player : MonoBehaviour
 			return;
 		Vector2 tackleForce = new Vector2(Input.GetAxis ("HorizontalR" + controllerNum),
 										  Input.GetAxis ("VerticalR" + controllerNum));
+		//keyboard control for testing:
+		if (controllerNum == keyboardPlayer && tackleForce.magnitude < 0.2f) {
+			tackleForce = new Vector2(Input.GetAxisRaw("HorizontalTackle"),
+						              Input.GetAxisRaw("VerticalTackle"));
+		}
 		if (tackleForce.magnitude >= 1f) {
 			Tackle(tackleForce);
 		}

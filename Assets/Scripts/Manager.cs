@@ -34,7 +34,6 @@ public class Manager : MonoBehaviour
 
     void Start() {
         allPlayers = SpawnPlayers();
-        allPlayers.Each((p, i) => p.controllerNum = (i+1).ToString());
         AttachCamerasToPlayers(allPlayers);
     }
 

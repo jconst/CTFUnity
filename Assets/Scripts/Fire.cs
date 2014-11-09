@@ -7,31 +7,20 @@ public class Fire : DropItem {
 	private float turnChance = 0.1f;
 	private float speed = 4f;
 	private float radius = 1f;
-	float safetime=1f;
-	float time=0;
-	private float lifeTime = 6f;
 
-	// Use this for initialization
 	void Start () {
 		startPos = transform.position;
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		time += Time.deltaTime;
-		lifeTime -= Time.deltaTime;
+		UpdateTime();
 		if (lifeTime <= 0) {
 			Destroy (this.gameObject);
 		} else {
 			Move();		
 		}
 		if (time >= safetime)
-						gameObject.renderer.material.color = Color.yellow;
-		
-	}
-
-	void FixedUpdate () {
-
+			gameObject.renderer.material.color = Color.yellow;
 	}
 
 	void Move() {

@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 	public Vector2 velocity;
 	public float tackleCurSpeed = 0f;
 	public bool tackling = false;
-	const float runSpeed = 4f;
+	const float runSpeed = 4.5f;
 	const float tackleAveSpeed = 4.1f;
 	const float tackleDuration = 0.5f;
 	float tackleStartTime;

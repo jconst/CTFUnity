@@ -12,4 +12,12 @@ public class Bullet : MonoBehaviour
         transform.position += (Vector3)heading.normalized * speed * Time.deltaTime;
         Destroy(gameObject, 5f);
     }
+
+    void OnTriggerEnter2D(Collider2D coll) {
+        Player p = coll.gameObject.GetComponent<Player>();
+        if (p) {
+            p.KillPlayer();
+            Destroy(gameObject);
+        }
+    }
 }

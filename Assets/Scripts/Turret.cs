@@ -5,7 +5,6 @@ using System.Linq;
 
 public class Turret : DropItem
 {
-    public string team;
     public const float secondsBetweenShots = 1f;
     public float secondsSinceLastShot = 0f;    
     private float range = 6f;
@@ -33,7 +32,7 @@ public class Turret : DropItem
 
     Player ClosestEnemyPlayer() {
         List<Player> players = (GameObject.FindObjectsOfType(typeof(Player)) as Player[]).ToList();     
-        return players.Where(p => p.team != team)
+        return players.Where(p => p.team != owner.team)
                       .Aggregate((closestSoFar, cur) => HowFar(cur) < HowFar(closestSoFar) ? cur : closestSoFar);
     }
 

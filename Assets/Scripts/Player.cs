@@ -16,19 +16,20 @@ public class Player : MonoBehaviour
 	public Vector2 tackleDirection;
 	public Vector2 velocity;
 	public float tackleCurSpeed = 0f;
+	public bool tackling = false;
 	const float runSpeed = 4f;
 	const float tackleAveSpeed = 4.1f;
 	const float tackleDuration = 0.5f;
-	bool tackling = false;
 	float tackleStartTime;
 
 	const string keyboardPlayer = "3";
 
-	public List<string> dropItems =
-	   new List<string> {
+ 	private List<string> dropItems =
+	    new List<string> {
 	   	"Fire",
 	   	"SmokeBomb",
-	   	"Turret"
+	   	"Turret",
+	   	"Shockwave"
 	};
 
 	public string controllerNum {
@@ -88,9 +89,9 @@ public class Player : MonoBehaviour
 
 	public void DropNewItem(string itemName)
 	{
-		DropItem dropItem = ((GameObject)Instantiate(Resources.Load(itemName),
-				                          			 transform.position,
-					                    			 Quaternion.identity)).GetComponent<DropItem>();
+		GameObject go = (GameObject)Instantiate(Resources.Load(itemName));
+		go.transform.position = transform.position;
+		DropItem dropItem = go.GetComponent<DropItem>();
 		dropItem.WasDroppedByPlayer(this);
 	}
 

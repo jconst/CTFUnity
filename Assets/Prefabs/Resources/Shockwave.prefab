@@ -11,11 +11,11 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
-  - 50: {fileID: 5000000}
-  - 61: {fileID: 6100000}
+  - 58: {fileID: 5800000}
+  - 120: {fileID: 12000000}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: Shockwave
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,9 +26,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.89295578, y: -3.07525945, z: 0}
-  m_LocalScale: {x: .5, y: .5, z: .00999999978}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalPosition: {x: 2.66818523, y: 1.62698412, z: 0}
+  m_LocalScale: {x: .200000003, y: .00999999978, z: .200000003}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -38,13 +38,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 831d723471df44044b4da710762c361d, type: 2}
+  - {fileID: 2100000, guid: 165a35a394eee4804b2c37969767544b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -58,32 +58,17 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!50 &5000000
-Rigidbody2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 1
-  m_FixedAngle: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
---- !u!61 &6100000
-BoxCollider2D:
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!58 &5800000
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
+  m_IsTrigger: 1
+  m_Radius: 1
   m_Center: {x: 0, y: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -93,23 +78,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1f378bf1f17a2c4c9b1f1f9f70fe666, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fa13ae0010e24e7aa093425091e196b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 
-  number: 0
-  initialPos: {x: 0, y: 0, z: 0}
-  flag: {fileID: 0}
-  carrying: 0
-  spawnpoint: {fileID: 0}
-  tackleDirection: {x: 0, y: 0}
-  velocity: {x: 0, y: 0}
-  tackleCurSpeed: 0
-  tackling: 0
-  dropItems:
-  - Fire
-  - SpawnPad
-  - Turret
+  owner: {fileID: 0}
+  manaCost: 0
+  time: 0
+  lifeTime: 6
+  safetime: 1
+--- !u!120 &12000000
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 165a35a394eee4804b2c37969767544b, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions: []
+  m_Parameters:
+    startWidth: .100000001
+    endWidth: .100000001
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 2831007322
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 2831007322
+  m_UseWorldSpace: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

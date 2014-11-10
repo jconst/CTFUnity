@@ -96,7 +96,10 @@ public class Player : MonoBehaviour
 	public void DropNewItem(string itemName)
 	{
 		GameObject go = (GameObject)Instantiate(Resources.Load(itemName));
-		go.transform.position = transform.position;
+		Vector3 newPos = transform.position;
+		newPos.z = go.transform.position.z;
+		go.transform.position = newPos;
+
 		DropItem dropItem = go.GetComponent<DropItem>();
 		dropItem.WasDroppedByPlayer(this);
 	}

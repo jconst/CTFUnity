@@ -21,7 +21,7 @@ public class Turret : DropItem
 
     void Shoot(Vector2 toTarget) {
         Vector2 heading = toTarget.normalized;
-        Vector2 bulletStart = (Vector2)transform.position + (heading * transform.lossyScale.y);
+        Vector3 bulletStart = transform.position + (Vector3)(heading * transform.lossyScale.y) + (-1 * Vector3.forward);
         GameObject bulletGO = Instantiate(Resources.Load("Bullet"),
                                           bulletStart,
                                           transform.rotation) as GameObject;

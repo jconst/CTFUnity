@@ -46,6 +46,9 @@ public class Player : MonoBehaviour
 		CheckDrop();
 		CheckTackle();
 		MoveStep();
+		if (Input.GetButtonDown("Item1"+controllerNum)) {
+			Debug.Log("pressed");
+		}
 	}
 
 	void MoveStep() {
@@ -138,8 +141,9 @@ public class Player : MonoBehaviour
 			spawnpoint=null;
 		}
 		else transform.position = initialPos;
-		if (carrying)
-			flag.Reset();
+		if (carrying) {
+			flag.Drop();
+		}
 		carrying = false;
 	}
 

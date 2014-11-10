@@ -65,7 +65,12 @@ public class Flag : MonoBehaviour
 		int sc = int.Parse (side.text);
 		sc += 1;
 		side.text = sc.ToString ();
-		}
+	}
+
+	public void Drop()
+	{
+		following = false;
+	}
 
 	public void Reset()
 	{
@@ -78,11 +83,11 @@ public class Flag : MonoBehaviour
 	{
 		Player player = coll.GetComponent<Player>();
 		if (player) {
-						Pickup (player);
-				} 
+			Pickup (player);
+		} 
 		else if (coll.tag.Contains ("Side")) {
 			if(coll.tag.Contains("Blue"))
-			   {
+			{
 				blueTimer=true;
 			}
 			if(coll.tag.Contains("Red"))
@@ -91,6 +96,7 @@ public class Flag : MonoBehaviour
 			}
 		}
 	}
+
 	public void OnTriggerExit2D(Collider2D coll)
 	{
 		if (coll.tag.Contains ("Side")) {
@@ -106,5 +112,4 @@ public class Flag : MonoBehaviour
 			}
 		}
 	}
-
 }

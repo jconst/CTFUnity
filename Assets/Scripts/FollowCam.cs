@@ -5,7 +5,7 @@ public class FollowCam : MonoBehaviour
 {
     static public FollowCam S;
 
-    public GameObject poi;
+    [HideInInspector] public GameObject poi;
     private float camZ;
     private Vector2 minXY = new Vector2(-100, -100);
     // private float easing = 1f;
@@ -18,6 +18,9 @@ public class FollowCam : MonoBehaviour
 
     void Update ()
     {
+        if (poi == null) {
+            return;
+        }
         Vector3 dest = poi.transform.position;
 
         dest.x = Mathf.Max(minXY.x, dest.x);

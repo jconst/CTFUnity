@@ -34,6 +34,7 @@ public class Manager : MonoBehaviour
 
     void Start() {
         allPlayers = SpawnPlayers();
+        CreateBackgroundCamera();
         AttachCamerasToPlayers(allPlayers);
     }
 
@@ -81,6 +82,20 @@ public class Manager : MonoBehaviour
         float max = (float)allPlayers.Count;
         float colSize = (float)Math.Ceiling(Math.Sqrt(max));
         float scale = 1f/colSize;
-        return new Rect((float)Math.Floor(scale*num)/colSize, scale*(n%colSize), scale, scale);
+        Rect rect = new Rect((float)Math.Floor(scale*num)/colSize, scale*(n%colSize), scale, scale);
+
+        float padding = 0.01f;
+        rect.xMax -= padding;
+        rect.yMax -= padding;
+        return rect;
+    }
+
+    void CreateBackgroundCamera() {
+        GameObject cameraGO = Instantiate(Resources.Load("PlayerCamera"),
+                                          new Vector3(0f,0f,-10f), 
+                                          Quaternion.Euler(180, 0, 0)) as GameObject;
+        Camera camera = cameraGO.GetComponent<Camera>();
+        camera.rect = new Rect(0, 0, 1, 1);
+        camera.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 1f);
     }
 }

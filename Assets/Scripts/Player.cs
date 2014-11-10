@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 	const float tackleDuration = 0.5f;
 	float tackleStartTime;
 
-	const string keyboardPlayer = "3";
+	const string keyboardPlayer = "2";
 
  	private List<string> dropItems =
 	    new List<string> {
@@ -74,6 +74,9 @@ public class Player : MonoBehaviour
 			if (controllerNum == keyboardPlayer && velocity.magnitude < 0.2f) {
 				velocity = new Vector2(Input.GetAxisRaw("Horizontal"),
 							           Input.GetAxisRaw("Vertical"));
+			}
+			if (carrying) {
+				speed *= 0.85f;
 			}
 			velocity = velocity.normalized * speed;
 		}

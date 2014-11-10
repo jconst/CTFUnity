@@ -20,8 +20,8 @@ public class Manager : MonoBehaviour
 
     public Dictionary<string, int> teamSizes =
        new Dictionary<string, int> {
-        {"Blue", 2},
-        {"Red", 2}
+        {"Blue", 1},
+        {"Red", 1}
     };
 
     public Dictionary<string, Vector2> spawnLocations =

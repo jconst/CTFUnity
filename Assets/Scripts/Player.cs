@@ -46,9 +46,6 @@ public class Player : MonoBehaviour
 		CheckDrop();
 		CheckTackle();
 		MoveStep();
-		if (Input.GetButtonDown("Item1"+controllerNum)) {
-			Debug.Log("pressed");
-		}
 	}
 
 	void MoveStep() {

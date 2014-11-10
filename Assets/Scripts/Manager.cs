@@ -20,22 +20,42 @@ public class Manager : MonoBehaviour
 
     public Dictionary<string, int> teamSizes =
        new Dictionary<string, int> {
-        {"Blue", 1},
-        {"Red", 1}
+        {"Blue", 3},
+        {"Red", 3}
     };
 
     public Dictionary<string, Vector2> spawnLocations =
        new Dictionary<string, Vector2> {
        {"Blue", new Vector2(-5f, -3f)},
        {"Red", new Vector2(3.5f, 5f)}
-    }; 
+    };
+
+    public Dictionary<string, int> teamScores;
+    public Dictionary<string, GUIText> teamScoreText;
 
     public List<Player> allPlayers;
 
+    static public Manager S {
+        get {
+            return GameObject.FindObjectOfType(typeof(Manager)) as Manager;
+        }
+    } 
+
+    // -- SETUP --
+
     void Start() {
+        teamScores = InitScores(teams);
         allPlayers = SpawnPlayers();
         CreateBackgroundCamera();
         AttachCamerasToPlayers(allPlayers);
+    }
+
+    Dictionary<string, int> InitScores(List<string> teamList) {
+        return teamList.ToDictionary(t => t, t => 0);
+    }
+
+    Dictionary<string, GUIText> InitScoreText(List<string> teamList) {
+        return teamList.ToDictionary(t => t, t => new GUIText());
     }
 
     List<Player> SpawnPlayers() {
@@ -97,5 +117,14 @@ public class Manager : MonoBehaviour
         Camera camera = cameraGO.GetComponent<Camera>();
         camera.rect = new Rect(0, 0, 1, 1);
         camera.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 1f);
+    }
+
+    // -- GAME EVENTS --
+    public void DidScore(Player scorer, Flag flag) {
+        teamScores[scorer.team]++;
+        flag.Reset();
+        (GameObject.FindObjectsOfType(typeof(Player)) as Player[])
+                   .ToList()
+                   .ForEach(p => p.KillPlayer());
     }
 }

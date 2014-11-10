@@ -1,115 +1,76 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Flag : MonoBehaviour
 {
 	Player carrier;
 	Vector3 initialPosit;
-	GUIText redscore;
-	GUIText bluescore;
 
-
-	bool following=false;
-	float redCount=0;
-	float blueCount=0;
-	bool redTimer=false;
-	bool blueTimer=false;
-	float timeLimit=5f;
+	const float timeLimit=5f;
+	float countdown = timeLimit;
 
 	// Use this for initialization
 	void Start () {
 		initialPosit = transform.position;
-		redscore = GameObject.Find ("RedScore").GetComponent<GUIText> ();
-		bluescore = GameObject.Find ("BlueScore").GetComponent<GUIText> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if (following) {
+		if (carrier) {
 			transform.position = carrier.transform.position;
 		}
-		if (redTimer) 
+		if (countdown < 0) 
 		{
-			redCount+=Time.deltaTime;
-		}
-		if (blueTimer) 
-		{
-			blueCount+=Time.deltaTime;
-		}
-		if (blueCount >= timeLimit) 
-		{
-			Score (redscore);
-			blueCount=0;
-			blueTimer=false;
-			Reset();
-		}
-		if (redCount >= timeLimit) 
-		{
-			Score (bluescore);
-			redTimer=false;
-			redCount=0;
-			Reset();
+			Score();
 		}
 	}
 
 	public void Pickup(Player p)
 	{
 		carrier = p;
-		following = true;
 		p.flag = this;
 		p.carrying=true;
 	}
 
-	void Score(GUIText side)
+	void Score()
 	{
-		int sc = int.Parse (side.text);
-		sc += 1;
-		side.text = sc.ToString ();
+		Manager.S.DidScore(carrier, this);
 	}
 
 	public void Drop()
 	{
-		following = false;
+		carrier = null;
+		countdown = timeLimit;
 	}
 
 	public void Reset()
 	{
-		following = false;
 		transform.position = initialPosit;
 		carrier = null;
+		countdown = timeLimit;
 	}
 
 	public void OnTriggerEnter2D(Collider2D coll)
 	{
 		Player player = coll.GetComponent<Player>();
 		if (player) {
-			Pickup (player);
-		} 
-		else if (coll.tag.Contains ("Side")) {
-			if(coll.tag.Contains("Blue"))
-			{
-				blueTimer=true;
-			}
-			if(coll.tag.Contains("Red"))
-			{
-				redTimer=true;
-			}
+			Pickup(player);
 		}
 	}
 
-	public void OnTriggerExit2D(Collider2D coll)
-	{
-		if (coll.tag.Contains ("Side")) {
-			if(coll.tag.Contains("Blue"))
-			{
-				blueTimer=false;
-				blueCount=0;
-			}
-			if(coll.tag.Contains("Red"))
-			{
-				redTimer=false;
-				redCount=0;
-			}
+	public void OnTriggerStay2D(Collider2D coll){
+		ScoreZone zone = coll.GetComponent<ScoreZone>();
+		if (zone) {
+			countdown -= Time.deltaTime;
+		}
+	}
+
+	public void OnTriggerExit2D(Collider2D coll){
+		ScoreZone zone = coll.GetComponent<ScoreZone>();
+		if (zone) {
+			countdown = timeLimit;
 		}
 	}
 }

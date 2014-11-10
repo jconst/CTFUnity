@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"carr",
+				"carrying"
+			],
+			[
+				"Vect",
+				"Vector3	x, y, z"
+			],
+			[
+				"start",
+				"startTime"
+			],
+			[
 				"tack",
 				"tackleCurSpeed"
 			],
@@ -52,10 +64,6 @@
 				"Vector3	x, y, z"
 			],
 			[
-				"Vect",
-				"Vector2	x, y"
-			],
-			[
 				"Find",
 				"FindObjectsOfType	type"
 			],
@@ -86,10 +94,6 @@
 			[
 				"proj",
 				"projDelta"
-			],
-			[
-				"start",
-				"StartAiming"
 			],
 			[
 				"veloci",
@@ -510,10 +514,6 @@
 			[
 				"pth",
 				"pthread"
-			],
-			[
-				"disk",
-				"diskListLock"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "Assets/Scripts/Fire.cs",
 			"settings":
 			{
-				"buffer_size": 1537,
+				"buffer_size": 1330,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,7 +531,7 @@
 			"file": "Assets/Scripts/FollowCam.cs",
 			"settings":
 			{
-				"buffer_size": 643,
+				"buffer_size": 718,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +539,7 @@
 			"file": "Assets/Scripts/Turret.cs",
 			"settings":
 			{
-				"buffer_size": 1569,
+				"buffer_size": 1551,
 				"line_ending": "Unix"
 			}
 		},
@@ -547,7 +547,7 @@
 			"file": "Assets/Scripts/Manager.cs",
 			"settings":
 			{
-				"buffer_size": 2759,
+				"buffer_size": 3349,
 				"line_ending": "Unix"
 			}
 		},
@@ -555,7 +555,7 @@
 			"file": "Assets/Scripts/Bullet.cs",
 			"settings":
 			{
-				"buffer_size": 359,
+				"buffer_size": 558,
 				"line_ending": "Unix"
 			}
 		},
@@ -563,7 +563,7 @@
 			"file": "Assets/Scripts/Flag.cs",
 			"settings":
 			{
-				"buffer_size": 1871,
+				"buffer_size": 1910,
 				"line_ending": "Unix"
 			}
 		},
@@ -579,7 +579,7 @@
 			"file": "Assets/Scripts/Player.cs",
 			"settings":
 			{
-				"buffer_size": 3406,
+				"buffer_size": 3719,
 				"line_ending": "Unix"
 			}
 		},
@@ -587,7 +587,23 @@
 			"file": "Assets/Scripts/DropItem.cs",
 			"settings":
 			{
-				"buffer_size": 276,
+				"buffer_size": 464,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Shockwave.cs",
+			"settings":
+			{
+				"buffer_size": 1515,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/SmokeBomb.cs",
+			"settings":
+			{
+				"buffer_size": 659,
 				"line_ending": "Unix"
 			}
 		}
@@ -595,9 +611,13 @@
 	"build_system": "Packages/Unity3D Build System/Unity.sublime-build",
 	"command_palette":
 	{
-		"height": 207.0,
+		"height": 87.0,
 		"selected_items":
 		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
 			[
 				"format",
 				"SublimeAStyleFormatter: Format Current File"
@@ -609,10 +629,6 @@
 			[
 				"pack",
 				"Package Control: List Packages"
-			],
-			[
-				"insta",
-				"Package Control: Install Package"
 			],
 			[
 				"form",
@@ -643,7 +659,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 674.0
+		"width": 593.0
 	},
 	"console":
 	{
@@ -660,6 +676,8 @@
 	},
 	"file_history":
 	[
+		"/Users/josephconstan/Code/Unity/CTFUnity/ProjectSettings/InputManager.asset",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/_Scene1Natasja.unity",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Player.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Manager.cs",
 		"/Users/josephconstan/.bash_aliases",
@@ -785,9 +803,7 @@
 		"/Users/josephconstan/Code/jconst/app/js/filters.js",
 		"/Users/josephconstan/Code/jconst/app/index-async.html",
 		"/Users/josephconstan/Code/jconst/app/json/contact.json",
-		"/Users/josephconstan/Code/jconst/seelio.json",
-		"/Users/josephconstan/Code/jconst/app/js/app.js",
-		"/Users/josephconstan/Code/jconst-bootstrap/templates/index.html"
+		"/Users/josephconstan/Code/jconst/seelio.json"
 	],
 	"find":
 	{
@@ -795,7 +811,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"",
@@ -811,6 +827,16 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"3",
+			"InitEdge",
+			"Debug.Log",
+			"Debug",
+			"DrawEdge",
+			"InitLine",
+			"lossy",
+			"x",
+			"float",
+			"=",
 			"Raw",
 			"tackleSpeed",
 			"tackleForce",
@@ -928,22 +954,12 @@
 			"\"username\" in session",
 			"logged_in",
 			"upload_file_to_folder",
-			"redirect",
-			"redirect_url",
-			"'id'",
-			"\"id\"",
-			"?id=",
-			"id=",
-			"NOTE_D3",
-			"setCursor",
-			"LCD_HOME",
-			"LIGHT_TIME",
-			"<td"
+			"redirect"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
 			"==",
@@ -1084,7 +1100,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 10,
 			"sheets":
 			[
 				{
@@ -1092,15 +1108,15 @@
 					"file": "Assets/Scripts/Fire.cs",
 					"settings":
 					{
-						"buffer_size": 1537,
+						"buffer_size": 1330,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								74,
-								74
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1122,15 +1138,15 @@
 					"file": "Assets/Scripts/FollowCam.cs",
 					"settings":
 					{
-						"buffer_size": 643,
+						"buffer_size": 718,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								220,
-								220
+								437,
+								437
 							]
 						],
 						"settings":
@@ -1153,15 +1169,15 @@
 					"file": "Assets/Scripts/Turret.cs",
 					"settings":
 					{
-						"buffer_size": 1569,
+						"buffer_size": 1551,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								129,
-								129
+								1317,
+								1317
 							]
 						],
 						"settings":
@@ -1174,7 +1190,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 58.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1184,15 +1200,15 @@
 					"file": "Assets/Scripts/Manager.cs",
 					"settings":
 					{
-						"buffer_size": 2759,
+						"buffer_size": 3349,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								811,
-								811
+								2302,
+								2333
 							]
 						],
 						"settings":
@@ -1205,7 +1221,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 832.0,
+						"translation.y": 890.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1215,15 +1231,15 @@
 					"file": "Assets/Scripts/Bullet.cs",
 					"settings":
 					{
-						"buffer_size": 359,
+						"buffer_size": 558,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								359,
-								359
+								558,
+								558
 							]
 						],
 						"settings":
@@ -1231,7 +1247,9 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1244,15 +1262,15 @@
 					"file": "Assets/Scripts/Flag.cs",
 					"settings":
 					{
-						"buffer_size": 1871,
+						"buffer_size": 1910,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								711,
-								711
+								1237,
+								1237
 							]
 						],
 						"settings":
@@ -1264,7 +1282,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 359.0,
+						"translation.y": 1052.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1290,7 +1308,9 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1303,15 +1323,15 @@
 					"file": "Assets/Scripts/Player.cs",
 					"settings":
 					{
-						"buffer_size": 3406,
+						"buffer_size": 3719,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								350,
-								350
+								1802,
+								1802
 							]
 						],
 						"settings":
@@ -1323,7 +1343,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 720.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1333,15 +1353,77 @@
 					"file": "Assets/Scripts/DropItem.cs",
 					"settings":
 					{
-						"buffer_size": 276,
+						"buffer_size": 464,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								275,
-								275
+								421,
+								421
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Assets/Scripts/Shockwave.cs",
+					"settings":
+					{
+						"buffer_size": 1515,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								182,
+								182
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 98.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "Assets/Scripts/SmokeBomb.cs",
+					"settings":
+					{
+						"buffer_size": 659,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								147,
+								147
 							]
 						],
 						"settings":
@@ -1413,7 +1495,7 @@
 	},
 	"replace":
 	{
-		"height": 64.0
+		"height": 194.0
 	},
 	"save_all_on_build": true,
 	"select_file":

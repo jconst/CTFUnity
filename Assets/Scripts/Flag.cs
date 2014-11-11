@@ -62,7 +62,7 @@ public class Flag : MonoBehaviour
 
 	public void OnTriggerStay2D(Collider2D coll){
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
-		if (zone) {
+		if (zone && carrier && carrier.team != zone.team) {
 			countdown -= Time.deltaTime;
 		}
 	}

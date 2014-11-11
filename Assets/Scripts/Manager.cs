@@ -6,8 +6,9 @@ using System;
 
 public class Manager : MonoBehaviour
 {
+    // -- CONSTANTS --
     public List<string> teams =
-       new List<string> {
+             new List<string> {
         "Blue",
         "Red"
     };
@@ -20,8 +21,8 @@ public class Manager : MonoBehaviour
 
     public Dictionary<string, int> teamSizes =
        new Dictionary<string, int> {
-        {"Blue", 3},
-        {"Red", 3}
+        {"Blue", 2},
+        {"Red", 2}
     };
 
     public Dictionary<string, Vector2> spawnLocations =
@@ -30,9 +31,9 @@ public class Manager : MonoBehaviour
        {"Red", new Vector2(3.5f, 5f)}
     };
 
+    // -- VARIABLES --
     public Dictionary<string, int> teamScores;
     public Dictionary<string, GUIText> teamScoreText;
-
     public List<Player> allPlayers;
 
     static public Manager S {
@@ -45,9 +46,11 @@ public class Manager : MonoBehaviour
 
     void Start() {
         teamScores = InitScores(teams);
+        teamScoreText = InitScoreText(teams);
         allPlayers = SpawnPlayers();
         CreateBackgroundCamera();
         AttachCamerasToPlayers(allPlayers);
+        CreateOverlayCamera();
     }
 
     Dictionary<string, int> InitScores(List<string> teamList) {
@@ -55,7 +58,20 @@ public class Manager : MonoBehaviour
     }
 
     Dictionary<string, GUIText> InitScoreText(List<string> teamList) {
-        return teamList.ToDictionary(t => t, t => new GUIText());
+        GameObject scoreBoard = GameObject.FindWithTag("ScoreBoard");
+        Debug.Log(scoreBoard.transform);
+        return teamList.ToDictionary(t => t, t => {
+            GameObject go = Instantiate(Resources.Load("ScoreText")) as GameObject;
+            GUIText gt = go.GetComponent<GUIText>();
+            float width = 1f / teamList.Count();
+            float index = (float)teamList.IndexOf(t);
+            go.transform.parent = scoreBoard.transform;
+            go.transform.localScale = new Vector2(width, 1);
+            go.transform.localPosition = new Vector3(index*width - 0.25f, 0.1f, 1);
+            gt.color = teamColors[t];
+            gt.fontSize = (int)(Screen.height * 0.04);
+            return gt;
+        });
     }
 
     List<Player> SpawnPlayers() {
@@ -111,7 +127,7 @@ public class Manager : MonoBehaviour
     }
 
     void CreateBackgroundCamera() {
-        GameObject cameraGO = Instantiate(Resources.Load("PlayerCamera"),
+        GameObject cameraGO = Instantiate(Resources.Load("UICamera"),
                                           new Vector3(0f,0f,-10f), 
                                           Quaternion.Euler(180, 0, 0)) as GameObject;
         Camera camera = cameraGO.GetComponent<Camera>();
@@ -119,12 +135,20 @@ public class Manager : MonoBehaviour
         camera.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 1f);
     }
 
+    void CreateOverlayCamera() {
+        GameObject cameraGO = Instantiate(Resources.Load("UICamera"),
+                                          new Vector3(0f,0f,-10f), 
+                                          Quaternion.Euler(180, 0, 0)) as GameObject;
+        Camera camera = cameraGO.GetComponent<Camera>();
+        camera.rect = new Rect(0, 0, 1, 1);
+        camera.clearFlags = CameraClearFlags.Nothing;
+    }
+
     // -- GAME EVENTS --
+
     public void DidScore(Player scorer, Flag flag) {
         teamScores[scorer.team]++;
         flag.Reset();
-        (GameObject.FindObjectsOfType(typeof(Player)) as Player[])
-                   .ToList()
-                   .ForEach(p => p.KillPlayer());
+        allPlayers.ForEach(p => p.KillPlayer());
     }
 }

@@ -59,7 +59,6 @@ public class Manager : MonoBehaviour
 
     Dictionary<string, GUIText> InitScoreText(List<string> teamList) {
         GameObject scoreBoard = GameObject.FindWithTag("ScoreBoard");
-        Debug.Log(scoreBoard.transform);
         return teamList.ToDictionary(t => t, t => {
             GameObject go = Instantiate(Resources.Load("ScoreText")) as GameObject;
             GUIText gt = go.GetComponent<GUIText>();

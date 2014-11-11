@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
 			}
 			velocity = velocity.normalized * speed;
 		}
-		transform.position += (Vector3)velocity * Time.deltaTime;
+		rigidbody2D.velocity = velocity;
 	}
 
 	void CheckDrop() {

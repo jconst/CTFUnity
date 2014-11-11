@@ -8,6 +8,7 @@ public class Turret : DropItem
     public const float secondsBetweenShots = 1f;
     public float secondsSinceLastShot = 0f;    
     private float range = 6f;
+    private int numShots = 10;
 
     void Update() {
         Vector2 toTarget = ClosestEnemyPlayer().transform.position - transform.position;
@@ -28,6 +29,9 @@ public class Turret : DropItem
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         bullet.heading = heading;
         secondsSinceLastShot = 0f;
+        if (--numShots <= 0) {
+            Destroy(gameObject);
+        }
     }
 
     Player ClosestEnemyPlayer() {

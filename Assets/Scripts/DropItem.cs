@@ -11,7 +11,7 @@ public class DropItem : MonoBehaviour
     public float lifeTime = 6f;
     public float safetime = 1f;
 
-    public void WasDroppedByPlayer(Player player) {
+    public virtual void WasDroppedByPlayer(Player player) {
         owner = player;
     }
 

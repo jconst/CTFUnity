@@ -7,18 +7,20 @@ using System;
 public class Shockwave : DropItem
 {
     const float burstDuration = 0.5f;
-    int numEdgePoints = 200;
+    const int numEdgePoints = 200;
+    const float maxScale = 5f;
 
     LineRenderer line;
     List<Vector3> points;
     Vector3 startScale;
+    Color startColor;
     float startTime;
-    float maxScale = 4f;
 
     void Start() {
         line = GetComponent <LineRenderer>();
         line.SetVertexCount(numEdgePoints);
         startTime = Time.time;
+        startColor = line.material.color;
         DrawEdge();
         Destroy(gameObject, burstDuration);
     }
@@ -36,8 +38,9 @@ public class Shockwave : DropItem
 
     void Update() {
         float prog = (Time.time - startTime)/burstDuration;
-        float scaleFactor = maxScale * (1f+prog);
+        float scaleFactor = maxScale * (0.2f+prog);
         transform.localScale = Vector3.Scale(startScale.normalized, new Vector3(scaleFactor, 1, scaleFactor));
+        line.material.color = Color.Lerp(startColor, Color.clear, prog);
     }
 
     void OnTriggerEnter2D(Collider2D coll) {
@@ -51,7 +54,10 @@ public class Shockwave : DropItem
     void HitEdge(Collider2D coll) {
         Player p = coll.GetComponent<Player>();
         if (p && p.team != owner.team && !p.tackling) {
-            p.KillPlayer();
+            Vector2 toPlayer = p.transform.position - transform.position;
+            toPlayer = toPlayer.normalized * (maxScale - toPlayer.magnitude);
+            toPlayer *= 8f;
+            p.rigidbody2D.AddForce(toPlayer, ForceMode2D.Impulse);
         }
     }
 }

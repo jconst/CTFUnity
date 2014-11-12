@@ -37,6 +37,7 @@ public class Manager : MonoBehaviour
     public List<Player> allPlayers;
     public List<Camera> playerCameras;
     public bool splitScreen = false;
+    public Camera mainCamera;
 
     static public Manager S {
         get {
@@ -153,6 +154,16 @@ public class Manager : MonoBehaviour
             int score = teamScores[kvp.Key];
             gt.text = score.ToString();
         });
+        fitAllPlayersInCamera();
+    }
+
+    void fitAllPlayersInCamera() {
+        float maxX = allPlayers.Max(p => p.transform.position.x) + 1f;
+        float maxY = allPlayers.Max(p => p.transform.position.y) + 1f;
+        float minX = allPlayers.Min(p => p.transform.position.x) - 1f;
+        float minY = allPlayers.Min(p => p.transform.position.y) - 1f;
+        mainCamera.orthographicSize = Mathf.Max(maxX - minX, maxY - minY) / 2f;
+        mainCamera.transform.position = new Vector3(Mathf.Lerp(minX, maxX, 0.5f), Mathf.Lerp(minY, maxY, 0.5f), -10);
     }
 
     // -- GAME EVENTS --

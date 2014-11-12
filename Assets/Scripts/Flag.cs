@@ -8,7 +8,7 @@ public class Flag : MonoBehaviour
 	Player carrier;
 	Vector3 initialPosit;
 
-	const float timeLimit=5f;
+	const float timeLimit=4f;
 	float countdown = timeLimit;
 
 	// Use this for initialization

@@ -35,6 +35,8 @@ public class Manager : MonoBehaviour
     public Dictionary<string, int> teamScores;
     public Dictionary<string, GUIText> teamScoreText;
     public List<Player> allPlayers;
+    public List<Camera> playerCameras;
+    public bool splitScreen = false;
 
     static public Manager S {
         get {
@@ -48,8 +50,8 @@ public class Manager : MonoBehaviour
         teamScores = InitScores(teams);
         teamScoreText = InitScoreText(teams);
         allPlayers = SpawnPlayers();
-        CreateBackgroundCamera();
-        AttachCamerasToPlayers(allPlayers);
+        // CreateBackgroundCamera();
+        playerCameras = AttachCamerasToPlayers(allPlayers);
         CreateOverlayCamera();
     }
 
@@ -141,6 +143,16 @@ public class Manager : MonoBehaviour
         Camera camera = cameraGO.GetComponent<Camera>();
         camera.rect = new Rect(0, 0, 1, 1);
         camera.clearFlags = CameraClearFlags.Nothing;
+    }
+
+    // -- UPDATE --
+    public void Update() {
+        playerCameras.ForEach(c => c.enabled = splitScreen);
+        teamScoreText.ToList().ForEach(kvp => {
+            GUIText gt = kvp.Value;
+            int score = teamScores[kvp.Key];
+            gt.text = score.ToString();
+        });
     }
 
     // -- GAME EVENTS --

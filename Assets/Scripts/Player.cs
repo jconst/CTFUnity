@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 	const float runSpeed = 5f;
 	const float tackleAveSpeed = 5.5f;
 	const float tackleDuration = 0.55f;
-	const float tackleCooldown = 0.85f;
+	const float tackleCooldown = 0.8f;
 
 	public Vector2 tackleDirection;
 	float tackleStartTime;
@@ -152,7 +152,8 @@ public class Player : MonoBehaviour
 				flag.Drop(this);
 			}
 		}
-		tackleInterrupted = true;
+		if (tackling)
+			tackleInterrupted = true;
 	}
 
 	public void KillPlayer()

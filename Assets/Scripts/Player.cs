@@ -8,21 +8,22 @@ public class Player : MonoBehaviour
 	public string team;
 	public int number;
 	public Vector3 initialPos;
+	public Vector2 lastInputVelocity;
 
 	public Flag flag;
-	public bool carrying = false;
 	public SpawnPad spawnpoint;
 
-	public Vector2 tackleDirection;
-	public Vector2 velocity;
-	public float tackleCurSpeed = 0f;
-	public bool tackling = false;
-	const float runSpeed = 4.5f;
-	const float tackleAveSpeed = 4.1f;
+	const float runSpeed = 5f;
+	const float tackleAveSpeed = 5f;
 	const float tackleDuration = 0.5f;
-	float tackleStartTime;
+	const float tackleCooldown = 0.85f;
 
-	const string keyboardPlayer = "2";
+	public Vector2 tackleDirection;
+	float tackleStartTime;
+	public bool tackling = false;
+	private bool tackleInterrupted = false;
+
+	const string keyboardPlayer = "3";
 
  	private List<string> dropItems =
 	    new List<string> {
@@ -35,6 +36,12 @@ public class Player : MonoBehaviour
 	public string controllerNum {
 		get {
 			return (number+1).ToString();
+		}
+	}
+
+	public bool carrying {
+		get {
+			return flag != null;
 		}
 	}
 
@@ -53,19 +60,26 @@ public class Player : MonoBehaviour
 		float tackleProg = (Time.time - tackleStartTime)/tackleDuration;
 		float curve = (float)Math.Cos(tackleProg * Math.PI);
 		float speed = runSpeed;
+
+		if (tackleInterrupted && rigidbody2D.velocity.magnitude < 0.2f) {
+			//unset tackleInterrupted after knockback is done
+			tackleInterrupted = false;
+		}
 		if (tackleProg > 1f) {
 			tackling = false;
 			//ease up normal running speed as "standing up" after tackle
 			if (tackleProg < 1.5f) {
 				speed = runSpeed + (runSpeed * curve);
 			}
-		}
-		if (tackling) {
-			tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
-			velocity = tackleDirection * tackleCurSpeed;
-		} else {
-			velocity = new Vector2(Input.GetAxis("HorizontalL" + controllerNum),
-								   Input.GetAxis("VerticalL" + controllerNum));
+		} 
+		if (tackling && !tackleInterrupted) {
+			float tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
+			rigidbody2D.velocity = tackleDirection * tackleCurSpeed;
+		} 
+		//Moving normally:
+		if (!tackling && !tackleInterrupted) {
+			Vector2 velocity = new Vector2(Input.GetAxis("HorizontalL" + controllerNum),
+						        		   Input.GetAxis("VerticalL" + controllerNum));
 
 			//allow a player to be controlled by keyboard for testing:
 			if (controllerNum == keyboardPlayer && velocity.magnitude < 0.2f) {
@@ -73,11 +87,14 @@ public class Player : MonoBehaviour
 							           Input.GetAxisRaw("Vertical"));
 			}
 			if (carrying) {
-				speed *= 0.85f;
+				speed *= 0.9f;
 			}
-			velocity = velocity.normalized * speed;
+			if (velocity.magnitude > 0.2f ||
+				lastInputVelocity.magnitude > 0.1f) {
+				rigidbody2D.velocity = velocity.normalized * speed;
+			}
+			lastInputVelocity = velocity;
 		}
-		rigidbody2D.velocity = velocity;
 	}
 
 	void CheckDrop() {
@@ -102,7 +119,8 @@ public class Player : MonoBehaviour
 	}
 
 	void CheckTackle() {
-		if (tackling)
+		float timeSinceTackle = Time.time - tackleStartTime;
+		if (tackling || timeSinceTackle < tackleCooldown)
 			return;
 		Vector2 tackleForce = new Vector2(Input.GetAxis ("HorizontalR" + controllerNum),
 										  Input.GetAxis ("VerticalR" + controllerNum));
@@ -120,20 +138,21 @@ public class Player : MonoBehaviour
 		tackleDirection = force.normalized;
 		tackleStartTime = Time.time;
 		tackling = true;
+		tackleInterrupted = false;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
 		Player p = coll.gameObject.GetComponent<Player>();
 		if (p && p.team != team && p.tackling) {
-		    if (tackling) {
-		    	if (p.tackleCurSpeed > tackleCurSpeed) {
-		    		KillPlayer();
-		    	}
-			} else {
+			if (!tackling) {
 				KillPlayer();
 			}
+		    if (tackling && carrying) {
+				flag.Drop(this);
+			}
 		}
+		tackleInterrupted = true;
 	}
 
 	public void KillPlayer()
@@ -145,9 +164,9 @@ public class Player : MonoBehaviour
 		}
 		else transform.position = initialPos;
 		if (carrying) {
-			flag.Drop();
+			flag.Drop(this);
 		}
-		carrying = false;
+		flag = null;
 	}
 
 	public void InvalidateSpawn()

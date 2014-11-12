@@ -19,7 +19,11 @@ public class Flag : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		if (carrier) {
-			transform.position = carrier.transform.position;
+			if (!carrier.carrying) {
+				carrier = null;
+			} else {
+				transform.position = carrier.transform.position;
+			}
 		}
 		if (countdown < 0) 
 		{
@@ -31,7 +35,6 @@ public class Flag : MonoBehaviour
 	{
 		carrier = p;
 		p.flag = this;
-		p.carrying=true;
 	}
 
 	void Score()
@@ -39,8 +42,10 @@ public class Flag : MonoBehaviour
 		Manager.S.DidScore(carrier, this);
 	}
 
-	public void Drop()
+	public void Drop(Player p)
 	{
+		Debug.Log("Drop");
+		p.flag = null;
 		carrier = null;
 		countdown = timeLimit;
 	}
@@ -52,15 +57,11 @@ public class Flag : MonoBehaviour
 		countdown = timeLimit;
 	}
 
-	public void OnTriggerEnter2D(Collider2D coll)
-	{
-		Player player = coll.GetComponent<Player>();
-		if (player) {
-			Pickup(player);
-		}
+	public void OnTriggerEnter2D(Collider2D coll) {
+		CheckPickup(coll);
 	}
 
-	public void OnTriggerStay2D(Collider2D coll){
+	public void OnTriggerStay2D(Collider2D coll) {
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
 		if (zone && carrier && carrier.team != zone.team) {
 			countdown -= Time.deltaTime;
@@ -71,6 +72,13 @@ public class Flag : MonoBehaviour
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
 		if (zone) {
 			countdown = timeLimit;
+		}
+	}
+
+	void CheckPickup(Collider2D coll) {
+		Player player = coll.GetComponent<Player>();
+		if (carrier == null && player) {
+			Pickup(player);
 		}
 	}
 }

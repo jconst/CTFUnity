@@ -40,7 +40,7 @@ public class Manager : MonoBehaviour
         get {
             return GameObject.FindObjectOfType(typeof(Manager)) as Manager;
         }
-    } 
+    }
 
     // -- SETUP --
 

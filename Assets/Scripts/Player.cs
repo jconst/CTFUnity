@@ -167,6 +167,7 @@ public class Player : MonoBehaviour
 			flag.Drop(this);
 		}
 		flag = null;
+		rigidbody2D.velocity = Vector2.zero;
 	}
 
 	public void InvalidateSpawn()

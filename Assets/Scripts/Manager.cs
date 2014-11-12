@@ -27,8 +27,8 @@ public class Manager : MonoBehaviour
 
     public Dictionary<string, Vector2> spawnLocations =
        new Dictionary<string, Vector2> {
-       {"Blue", new Vector2(-5f, -3f)},
-       {"Red", new Vector2(3.5f, 5f)}
+       {"Blue", new Vector2(10f, -5f)},
+       {"Red", new Vector2(-10f, 3f)}
     };
 
     // -- VARIABLES --
@@ -85,7 +85,7 @@ public class Manager : MonoBehaviour
     }
 
     Player SpawnPlayer(string team, int index) {
-        Vector2 posOffset = new Vector2(index, -index);
+        Vector2 posOffset = new Vector2(index, index);
         GameObject playerGO = Instantiate(Resources.Load("Player"),
                                           spawnLocations[team]+posOffset, 
                                           Quaternion.identity) as GameObject;

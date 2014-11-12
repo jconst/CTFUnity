@@ -124,8 +124,8 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions: []
   m_Parameters:
-    startWidth: .300000012
-    endWidth: .300000012
+    startWidth: .400000006
+    endWidth: .400000006
     m_StartColor:
       serializedVersion: 2
       rgba: 2831007322

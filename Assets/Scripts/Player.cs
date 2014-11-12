@@ -100,6 +100,12 @@ public class Player : MonoBehaviour
 	public void DropNewItem(string itemName)
 	{
 		GameObject go = (GameObject)Instantiate(Resources.Load(itemName));
+		float cost = go.GetComponent<DropItem> ().manaCost;
+		if(!Manager.S.SubManaCost(this, cost))
+		{
+			Destroy(go);
+			return;
+		}
 		Vector3 newPos = transform.position;
 		newPos.z = go.transform.position.z;
 		go.transform.position = newPos;

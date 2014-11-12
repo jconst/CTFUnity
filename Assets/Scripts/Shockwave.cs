@@ -6,14 +6,14 @@ using System;
 
 public class Shockwave : DropItem
 {
-    const float burstDuration = 1f;
+    const float burstDuration = 0.5f;
     int numEdgePoints = 200;
 
     LineRenderer line;
     List<Vector3> points;
     Vector3 startScale;
     float startTime;
-    float maxScale = 3f;
+    float maxScale = 4f;
 
     void Start() {
         line = GetComponent <LineRenderer>();
@@ -36,7 +36,7 @@ public class Shockwave : DropItem
 
     void Update() {
         float prog = (Time.time - startTime)/burstDuration;
-        float scaleFactor = maxScale * (0.2f+prog);
+        float scaleFactor = maxScale * (1f+prog);
         transform.localScale = Vector3.Scale(startScale.normalized, new Vector3(scaleFactor, 1, scaleFactor));
     }
 

@@ -16,14 +16,12 @@ public class Player : MonoBehaviour
 	const float runSpeed = 5f;
 	const float tackleAveSpeed = 5.5f;
 	const float tackleDuration = 0.55f;
-	const float tackleCooldown = 0.8f;
+	const float tackleCooldown = 0.85f;
 
 	public Vector2 tackleDirection;
 	float tackleStartTime;
 	public bool tackling = false;
 	private bool tackleInterrupted = false;
-
-	const string keyboardPlayer = "3";
 
  	private List<string> dropItems =
 	    new List<string> {
@@ -78,14 +76,7 @@ public class Player : MonoBehaviour
 		} 
 		//Moving normally:
 		if (!tackling && !tackleInterrupted) {
-			Vector2 velocity = new Vector2(Input.GetAxis("HorizontalL" + controllerNum),
-						        		   Input.GetAxis("VerticalL" + controllerNum));
-
-			//allow a player to be controlled by keyboard for testing:
-			if (controllerNum == keyboardPlayer && velocity.magnitude < 0.2f) {
-				velocity = new Vector2(Input.GetAxisRaw("Horizontal"),
-							           Input.GetAxisRaw("Vertical"));
-			}
+			Vector2 velocity = InputControl.S.RunVelocity(controllerNum);
 			if (carrying) {
 				speed *= 0.9f;
 			}
@@ -100,8 +91,7 @@ public class Player : MonoBehaviour
 	void CheckDrop() {
 		dropItems.Each((item, indexFromZero) => {
 			int index = indexFromZero+1;
-			if (Input.GetButtonDown("Item"+index+controllerNum) ||
-			    (controllerNum == keyboardPlayer && Input.GetKeyDown(index.ToString()))) {
+			if (InputControl.S.ItemButtonDown(controllerNum, index)) {
 				DropNewItem(item);
 			}
 		});
@@ -122,13 +112,7 @@ public class Player : MonoBehaviour
 		float timeSinceTackle = Time.time - tackleStartTime;
 		if (tackling || timeSinceTackle < tackleCooldown)
 			return;
-		Vector2 tackleForce = new Vector2(Input.GetAxis ("HorizontalR" + controllerNum),
-										  Input.GetAxis ("VerticalR" + controllerNum));
-		//keyboard control for testing:
-		if (controllerNum == keyboardPlayer && tackleForce.magnitude < 0.2f) {
-			tackleForce = new Vector2(Input.GetAxisRaw("HorizontalTackle"),
-						              Input.GetAxisRaw("VerticalTackle"));
-		}
+		Vector2 tackleForce = InputControl.S.TackleVelocity(controllerNum);
 		if (tackleForce.magnitude >= 1f) {
 			Tackle(tackleForce);
 		}

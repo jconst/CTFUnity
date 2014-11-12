@@ -25,10 +25,10 @@ public class Player : MonoBehaviour
 
  	private List<string> dropItems =
 	    new List<string> {
-	   	"Fire",
-	   	"SmokeBomb",
 	   	"Turret",
-	   	"Shockwave"
+	   	"SmokeBomb",
+	   	"Shockwave",
+	   	"SpawnPad"
 	};
 
 	public string controllerNum {
@@ -147,7 +147,8 @@ public class Player : MonoBehaviour
 			Destroy(spawnpoint.gameObject);
 			spawnpoint=null;
 		}
-		else transform.position = initialPos;
+		else 
+			transform.position = initialPos;
 		if (carrying) {
 			flag.Drop(this);
 		}

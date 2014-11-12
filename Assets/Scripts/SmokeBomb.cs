@@ -27,4 +27,11 @@ public class SmokeBomb : DropItem {
 			gameObject.renderer.material.color = color;
 		}
     }
+
+    void OnTriggerEnter2D(Collider2D coll){
+        Bullet b = coll.GetComponent<Bullet>();
+        if (b) {
+            Destroy(b);
+        }
+    }
 }

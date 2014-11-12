@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 	public Vector2 tackleDirection;
 	float tackleStartTime;
 	public bool tackling = false;
-	private bool tackleInterrupted = false;
+	public bool hasKnockback = false;
 
  	private List<string> dropItems =
 	    new List<string> {
@@ -59,9 +59,9 @@ public class Player : MonoBehaviour
 		float curve = (float)Math.Cos(tackleProg * Math.PI);
 		float speed = runSpeed;
 
-		if (tackleInterrupted && rigidbody2D.velocity.magnitude < 0.2f) {
-			//unset tackleInterrupted after knockback is done
-			tackleInterrupted = false;
+		if (hasKnockback && rigidbody2D.velocity.magnitude < 0.2f) {
+			//unset hasKnockback after we've stopped moving
+			hasKnockback = false;
 		}
 		if (tackleProg > 1f) {
 			tackling = false;
@@ -69,13 +69,13 @@ public class Player : MonoBehaviour
 			if (tackleProg < 1.5f) {
 				speed = runSpeed + (runSpeed * curve);
 			}
-		} 
-		if (tackling && !tackleInterrupted) {
+		}
+		if (tackling && !hasKnockback) {
 			float tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
 			rigidbody2D.velocity = tackleDirection * tackleCurSpeed;
 		} 
 		//Moving normally:
-		if (!tackling && !tackleInterrupted) {
+		if (!tackling && !hasKnockback) {
 			Vector2 velocity = InputControl.S.RunVelocity(controllerNum);
 			if (carrying) {
 				speed *= 0.9f;
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
 		tackleDirection = force.normalized;
 		tackleStartTime = Time.time;
 		tackling = true;
-		tackleInterrupted = false;
+		hasKnockback = false;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll)
@@ -139,11 +139,11 @@ public class Player : MonoBehaviour
 				KillPlayer();
 			}
 		    if (tackling && carrying) {
-				flag.Drop(this);
+				flag.Drop();
 			}
 		}
 		if (tackling)
-			tackleInterrupted = true;
+			hasKnockback = true;
 	}
 
 	public void KillPlayer()
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
 		else 
 			transform.position = initialPos;
 		if (carrying) {
-			flag.Drop(this);
+			flag.Drop();
 		}
 		flag = null;
 		rigidbody2D.velocity = Vector2.zero;

@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  manaCost: 0
+  manaCost: 1
   time: 0
   lifeTime: 6
   safetime: 1

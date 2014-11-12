@@ -65,7 +65,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 10
   m_AngularDrag: .0500000007
   m_GravityScale: 1
@@ -99,12 +99,12 @@ MonoBehaviour:
   team: 
   number: 0
   initialPos: {x: 0, y: 0, z: 0}
+  lastInputVelocity: {x: 0, y: 0}
   flag: {fileID: 0}
   spawnpoint: {fileID: 0}
   tackleDirection: {x: 0, y: 0}
-  lastInputVelocity: {x: 0, y: 0}
-  tackleCurSpeed: 0
   tackling: 0
+  hasKnockback: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

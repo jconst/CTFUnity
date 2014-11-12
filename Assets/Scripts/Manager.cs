@@ -21,8 +21,8 @@ public class Manager : MonoBehaviour
 
     public Dictionary<string, int> teamSizes =
        new Dictionary<string, int> {
-        {"Blue", 2},
-        {"Red", 2}
+        {"Blue", 1},
+        {"Red", 1}
     };
 
     public Dictionary<string, Vector2> spawnLocations =
@@ -202,8 +202,16 @@ public class Manager : MonoBehaviour
         float maxY = allPlayers.Max(p => p.transform.position.y) + 1f;
         float minX = allPlayers.Min(p => p.transform.position.x) - 1f;
         float minY = allPlayers.Min(p => p.transform.position.y) - 1f;
-        mainCamera.orthographicSize = Mathf.Max(maxX - minX, maxY - minY) / 2f;
-        mainCamera.transform.position = new Vector3(Mathf.Lerp(minX, maxX, 0.5f), Mathf.Lerp(minY, maxY, 0.5f), -10);
+
+        float lastSize = mainCamera.orthographicSize;
+        float newSize = Mathf.Max(maxX - minX, maxY - minY) / 2f;
+        float minSize = 6f;
+        float adjustedNewSize = Mathf.Max(newSize, minSize);
+        mainCamera.orthographicSize = Mathf.Lerp(lastSize, adjustedNewSize, 0.05f);
+
+        Vector3 lastPos = mainCamera.transform.position;
+        Vector3 newPos = new Vector3(Mathf.Lerp(minX, maxX, 0.5f), Mathf.Lerp(minY, maxY, 0.5f), -10);
+        mainCamera.transform.position = Vector3.Lerp(lastPos, newPos, 0.03f);
     }
 	
 	// -- GAME EVENTS --
@@ -217,8 +225,8 @@ public class Manager : MonoBehaviour
 	public bool SubManaCost(Player dropper, float cost)
 	{
 		if (teamManas [dropper.team] < cost)
-						return false;
+			return false;
 		teamManas [dropper.team] -= cost;
 		return true;
-		}
+	}
 }

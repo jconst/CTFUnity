@@ -41,8 +41,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  manaCost: 0
-  team: 
+  manaCost: 5
+  time: 0
+  lifeTime: 6
+  safetime: 1
   secondsSinceLastShot: 0
 --- !u!212 &21200000
 SpriteRenderer:

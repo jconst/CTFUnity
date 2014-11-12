@@ -96,6 +96,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b739cb4e64b7a45a3bdd23b961f4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  manaCost: 1
+  time: 0
+  lifeTime: 6
+  safetime: 1
   heading: {x: 0, y: 1}
 --- !u!1001 &100100000
 Prefab:

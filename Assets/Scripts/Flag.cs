@@ -8,7 +8,7 @@ public class Flag : MonoBehaviour
 	Player carrier;
 	Vector3 initialPosit;
 
-	const float timeLimit=3f;
+	const float timeLimit = 3f;
 	float countdown = timeLimit;
 
 	// Use this for initialization
@@ -18,7 +18,7 @@ public class Flag : MonoBehaviour
 
 	// Update is called once per frame
 	void Update () {
-		if (carrier) {
+		if (carrier != null) {
 			if (!carrier.carrying) {
 				carrier = null;
 			} else {
@@ -29,6 +29,7 @@ public class Flag : MonoBehaviour
 		{
 			Score();
 		}
+		rigidbody2D.isKinematic = (carrier != null);
 	}
 
 	public void Pickup(Player p)
@@ -42,10 +43,10 @@ public class Flag : MonoBehaviour
 		Manager.S.DidScore(carrier, this);
 	}
 
-	public void Drop(Player p)
+	public void Drop()
 	{
-		Debug.Log("Drop");
-		p.flag = null;
+		if (carrier)
+			carrier.flag = null;
 		carrier = null;
 		countdown = timeLimit;
 	}
@@ -57,26 +58,26 @@ public class Flag : MonoBehaviour
 		countdown = timeLimit;
 	}
 
-	public void OnTriggerEnter2D(Collider2D coll) {
+	public void OnCollisionEnter2D(Collision2D coll) {
 		CheckPickup(coll);
 	}
 
-	public void OnTriggerStay2D(Collider2D coll) {
-		ScoreZone zone = coll.GetComponent<ScoreZone>();
+	public void OnCollisionStay2D(Collision2D coll) {
+		ScoreZone zone = coll.gameObject.GetComponent<ScoreZone>();
 		if (zone && carrier && carrier.team != zone.team) {
 			countdown -= Time.deltaTime;
 		}
 	}
 
-	public void OnTriggerExit2D(Collider2D coll){
-		ScoreZone zone = coll.GetComponent<ScoreZone>();
+	public void OnCollisionExit2D(Collision2D coll){
+		ScoreZone zone = coll.gameObject.GetComponent<ScoreZone>();
 		if (zone) {
 			countdown = timeLimit;
 		}
 	}
 
-	void CheckPickup(Collider2D coll) {
-		Player player = coll.GetComponent<Player>();
+	void CheckPickup(Collision2D coll) {
+		Player player = coll.gameObject.GetComponent<Player>();
 		if (carrier == null && player) {
 			Pickup(player);
 		}

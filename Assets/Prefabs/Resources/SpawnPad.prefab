@@ -97,6 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  manaCost: 3
+  time: 0
+  lifeTime: 6
+  safetime: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

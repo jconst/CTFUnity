@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
 	public SpawnPad spawnpoint;
 
 	const float runSpeed = 5f;
-	const float tackleAveSpeed = 5f;
-	const float tackleDuration = 0.5f;
+	const float tackleAveSpeed = 5.5f;
+	const float tackleDuration = 0.55f;
 	const float tackleCooldown = 0.85f;
 
 	public Vector2 tackleDirection;

@@ -57,12 +57,12 @@ public class Shockwave : DropItem
             p.rigidbody2D.AddForce(ForceForColl(coll), ForceMode2D.Impulse);
             p.hasKnockback = true;
         }
-        Flag f = coll.GetComponent<Flag>();
-        if (f) {
-            f.Drop();
-            Debug.Log(ForceForColl(coll));
-            f.rigidbody2D.AddForce(ForceForColl(coll), ForceMode2D.Impulse);
-        }
+        // Flag f = coll.GetComponent<Flag>();
+        // if (f) {
+        //     f.Drop();
+        //     Debug.Log(ForceForColl(coll));
+        //     f.rigidbody2D.AddForce(ForceForColl(coll), ForceMode2D.Impulse);
+        // }
     }
 
     Vector2 ForceForColl(Collider2D coll) {

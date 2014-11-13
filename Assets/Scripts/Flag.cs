@@ -29,7 +29,6 @@ public class Flag : MonoBehaviour
 		{
 			Score();
 		}
-		rigidbody2D.isKinematic = (carrier != null);
 	}
 
 	public void Pickup(Player p)
@@ -58,26 +57,26 @@ public class Flag : MonoBehaviour
 		countdown = timeLimit;
 	}
 
-	public void OnCollisionEnter2D(Collision2D coll) {
+	public void OnTriggerEnter2D(Collider2D coll) {
 		CheckPickup(coll);
 	}
 
-	public void OnCollisionStay2D(Collision2D coll) {
-		ScoreZone zone = coll.gameObject.GetComponent<ScoreZone>();
+	public void OnTriggerStay2D(Collider2D coll) {
+		ScoreZone zone = coll.GetComponent<ScoreZone>();
 		if (zone && carrier && carrier.team != zone.team) {
 			countdown -= Time.deltaTime;
 		}
 	}
 
-	public void OnCollisionExit2D(Collision2D coll){
-		ScoreZone zone = coll.gameObject.GetComponent<ScoreZone>();
+	public void OnTriggerExit2D(Collider2D coll){
+		ScoreZone zone = coll.GetComponent<ScoreZone>();
 		if (zone) {
 			countdown = timeLimit;
 		}
 	}
 
-	void CheckPickup(Collision2D coll) {
-		Player player = coll.gameObject.GetComponent<Player>();
+	void CheckPickup(Collider2D coll) {
+		Player player = coll.GetComponent<Player>();
 		if (carrier == null && player) {
 			Pickup(player);
 		}

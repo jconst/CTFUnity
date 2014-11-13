@@ -27,8 +27,8 @@ public class Manager : MonoBehaviour
 
     public Dictionary<string, Vector2> spawnLocations =
        new Dictionary<string, Vector2> {
-       {"Blue", new Vector2(10f, -5f)},
-       {"Red", new Vector2(-10f, 3f)}
+       {"Blue", new Vector2(6f, -3.5f)},
+       {"Red", new Vector2(-6f, 1.5f)}
     };
 
     // -- VARIABLES --

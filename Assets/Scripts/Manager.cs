@@ -31,6 +31,11 @@ public class Manager : MonoBehaviour
        {"Red", new Vector2(-6f, 1.5f)}
     };
 
+    const int countdownLength = 3;
+    const bool splitScreen = false;
+    const float manaTime = 10f;
+    const float cameraEasing = 0.01f;
+
     // -- VARIABLES --
 	public Dictionary<string, int> teamScores;
 	public Dictionary<string, float> teamManas;
@@ -38,15 +43,21 @@ public class Manager : MonoBehaviour
 	public Dictionary<string, GUIText> teamManaText;
     public List<Player> allPlayers;
     public List<Camera> playerCameras;
-    public bool splitScreen = false;
     public Camera mainCamera;
-	public float DeltaMana=1f;
-	public float ManaTime=10f;
+    public float roundStartTime = 0f;
 	private float timePassed=0;
+
+    public GUIText countdownGUIText;
 
     static public Manager S {
         get {
             return GameObject.FindObjectOfType(typeof(Manager)) as Manager;
+        }
+    }
+
+    public bool countingDown {
+        get {
+            return (countdownLength - (Time.time - roundStartTime)) > -1;
         }
     }
 
@@ -59,8 +70,11 @@ public class Manager : MonoBehaviour
 		teamManaText = InitManaText (teams);
         allPlayers = SpawnPlayers();
         // CreateBackgroundCamera();
-        playerCameras = AttachCamerasToPlayers(allPlayers);
+        // playerCameras = AttachCamerasToPlayers(allPlayers);
         CreateOverlayCamera();
+
+        InitCountdown();
+        StartNewRound();
     }
 
     Dictionary<string, int> InitScores(List<string> teamList) {
@@ -172,8 +186,14 @@ public class Manager : MonoBehaviour
         camera.clearFlags = CameraClearFlags.Nothing;
     }
 	
+    void InitCountdown()
+    {
+        GameObject countdownParent = GameObject.FindWithTag("Countdown");
+        countdownGUIText = countdownParent.GetComponentInChildren<GUIText>();
+    }
 
     // -- UPDATE --
+
     public void Update() {
         playerCameras.ForEach(c => c.enabled = splitScreen);
         teamScoreText.ToList().ForEach(kvp => {
@@ -182,20 +202,24 @@ public class Manager : MonoBehaviour
             gt.text = score.ToString();
         });
 		timePassed += Time.deltaTime;
-		if (timePassed >= ManaTime) {
+		if (timePassed >= manaTime) {
 			teams.ForEach(team => {
 				teamManas[team]+=1f;
 				teamManas[team]=Mathf.Min(teamManas[team], 10f);
 			});
 			timePassed=0;
-
 		}
 		teamManaText.ToList().ForEach(kvp => {
 			GUIText gt = kvp.Value;
 			gt.text = teamManas[kvp.Key].ToString();
 		});
-		fitAllPlayersInCamera();
-	}
+        if (countingDown) {
+            int countRemaining = countdownLength - (int)Mathf.Floor(Time.time - roundStartTime);
+            countdownGUIText.text = countRemaining > 0 ? countRemaining.ToString() : "Start!";
+        } else {
+    		fitAllPlayersInCamera();
+	    }
+    }
 
     void fitAllPlayersInCamera() {
         float maxX = allPlayers.Max(p => p.transform.position.x) + 1f;
@@ -207,7 +231,7 @@ public class Manager : MonoBehaviour
         float newSize = Mathf.Max(maxX - minX, maxY - minY) / 2f;
         float minSize = 6f;
         float adjustedNewSize = Mathf.Max(newSize, minSize);
-        mainCamera.orthographicSize = Mathf.Lerp(lastSize, adjustedNewSize, 0.05f);
+        mainCamera.orthographicSize = Mathf.Lerp(lastSize, adjustedNewSize, cameraEasing);
 
         Vector3 lastPos = mainCamera.transform.position;
         Vector3 newPos = new Vector3(Mathf.Lerp(minX, maxX, 0.5f), Mathf.Lerp(minY, maxY, 0.5f), -10);
@@ -215,6 +239,23 @@ public class Manager : MonoBehaviour
     }
 	
 	// -- GAME EVENTS --
+
+    public void StartNewRound()
+    {
+        StartCoroutine(NewRoundCoroutine());
+    }
+
+    public IEnumerator NewRoundCoroutine()
+    {
+        roundStartTime = Time.time;
+        allPlayers.ForEach(p => p.frozen = true);
+
+        yield return new WaitForSeconds(countdownLength+1);
+        allPlayers.ForEach(p => p.frozen = false);
+
+        GameObject countdownParent = GameObject.FindWithTag("Countdown");
+        Destroy(countdownParent);
+    }
 
     public void DidScore(Player scorer, Flag flag) {
         teamScores[scorer.team]++;

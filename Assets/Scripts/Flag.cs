@@ -39,7 +39,7 @@ public class Flag : MonoBehaviour
 
 	void Score()
 	{
-		Manager.S.DidScore(carrier, this);
+		Manager.S.DidScore(carrier);
 	}
 
 	public void Drop()

@@ -56,7 +56,7 @@ public class Fire : DropItem {
 		Player player = coll.GetComponent<Player>();
 
 		if (player && time >= safetime) {
-			player.KillPlayer();
+			player.Die();
 		}
 	}
 }

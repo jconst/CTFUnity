@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 	const float tackleAveSpeed = 5.5f;
 	const float tackleDuration = 0.55f;
 	const float tackleCooldown = 0.85f;
+	const float respawnTime = 1f;
 
 	public Vector2 tackleDirection;
 	float tackleStartTime;
@@ -44,10 +45,6 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	void Start () {
-		initialPos = transform.position;
-	}
-	
 	void Update () {
 		CheckDrop();
 		CheckTackle();
@@ -140,7 +137,7 @@ public class Player : MonoBehaviour
 		Player p = coll.gameObject.GetComponent<Player>();
 		if (p && p.team != team && p.tackling) {
 			if (!tackling) {
-				KillPlayer();
+				Die();
 			}
 		    if (tackling && carrying) {
 				flag.Drop();
@@ -149,11 +146,26 @@ public class Player : MonoBehaviour
 		if (tackling)
 			hasKnockback = true;
 	}
-
-	public void KillPlayer()
+	
+	public void Die()
 	{
+		StartCoroutine(DieCoroutine());
+	}
+
+	public IEnumerator DieCoroutine()
+	{
+		renderer.enabled = false;
+		collider2D.enabled = false;
+		yield return new WaitForSeconds(respawnTime);
+		Reset();
+	}
+
+	public void Reset()
+	{
+		renderer.enabled = true;
+		collider2D.enabled = true;
 		if (spawnpoint) {
-			transform.position=spawnpoint.transform.position;
+			transform.position = spawnpoint.transform.position;
 			Destroy(spawnpoint.gameObject);
 			spawnpoint=null;
 		}

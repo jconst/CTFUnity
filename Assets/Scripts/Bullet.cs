@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D coll) {
         Player p = coll.gameObject.GetComponent<Player>();
         if (p) {
-            p.KillPlayer();
+            p.Die();
             Destroy(gameObject);
         }
     }

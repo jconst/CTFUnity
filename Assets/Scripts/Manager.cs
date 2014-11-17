@@ -35,6 +35,7 @@ public class Manager : MonoBehaviour
     const bool splitScreen = false;
     const float manaTime = 10f;
     const float cameraEasing = 0.01f;
+    const float maxCameraSize = 14f;
 
     // -- VARIABLES --
 	public Dictionary<string, int> teamScores;
@@ -73,7 +74,6 @@ public class Manager : MonoBehaviour
         // playerCameras = AttachCamerasToPlayers(allPlayers);
         CreateOverlayCamera();
 
-        InitCountdown();
         StartNewRound();
     }
 
@@ -126,11 +126,11 @@ public class Manager : MonoBehaviour
     }
 
     Player SpawnPlayer(string team, int index) {
-        Vector2 posOffset = new Vector2(index, index);
-        GameObject playerGO = Instantiate(Resources.Load("Player"),
-                                          spawnLocations[team]+posOffset, 
-                                          Quaternion.identity) as GameObject;
+        GameObject playerGO = Instantiate(Resources.Load("Player")) as GameObject;
         Player player = playerGO.GetComponent<Player>();
+
+        Vector3 initialPos = spawnLocations[team] + (new Vector2(index, index));
+        playerGO.transform.position = player.initialPos = initialPos;
         player.team = team;
         player.number = index;
         player.renderer.material.color = teamColors[team];
@@ -185,12 +185,6 @@ public class Manager : MonoBehaviour
         camera.rect = new Rect(0, 0, 1, 1);
         camera.clearFlags = CameraClearFlags.Nothing;
     }
-	
-    void InitCountdown()
-    {
-        GameObject countdownParent = GameObject.FindWithTag("Countdown");
-        countdownGUIText = countdownParent.GetComponentInChildren<GUIText>();
-    }
 
     // -- UPDATE --
 
@@ -216,9 +210,8 @@ public class Manager : MonoBehaviour
         if (countingDown) {
             int countRemaining = countdownLength - (int)Mathf.Floor(Time.time - roundStartTime);
             countdownGUIText.text = countRemaining > 0 ? countRemaining.ToString() : "Start!";
-        } else {
-    		fitAllPlayersInCamera();
-	    }
+        }
+		fitAllPlayersInCamera();
     }
 
     void fitAllPlayersInCamera() {
@@ -227,11 +220,15 @@ public class Manager : MonoBehaviour
         float minX = allPlayers.Min(p => p.transform.position.x) - 1f;
         float minY = allPlayers.Min(p => p.transform.position.y) - 1f;
 
-        float lastSize = mainCamera.orthographicSize;
-        float newSize = Mathf.Max(maxX - minX, maxY - minY) / 2f;
-        float minSize = 6f;
-        float adjustedNewSize = Mathf.Max(newSize, minSize);
-        mainCamera.orthographicSize = Mathf.Lerp(lastSize, adjustedNewSize, cameraEasing);
+        float adjustedNewSize;
+        if (countingDown) {
+            adjustedNewSize = maxCameraSize;
+        } else {
+            float newSize = Mathf.Max(maxX - minX, maxY - minY) / 2f;
+            float minSize = 6f;
+            adjustedNewSize = Mathf.Max(newSize, minSize);
+        }
+        mainCamera.orthographicSize = Mathf.Lerp(mainCamera.orthographicSize, adjustedNewSize, cameraEasing);
 
         Vector3 lastPos = mainCamera.transform.position;
         Vector3 newPos = new Vector3(Mathf.Lerp(minX, maxX, 0.5f), Mathf.Lerp(minY, maxY, 0.5f), -10);
@@ -248,19 +245,25 @@ public class Manager : MonoBehaviour
     public IEnumerator NewRoundCoroutine()
     {
         roundStartTime = Time.time;
-        allPlayers.ForEach(p => p.frozen = true);
+        allPlayers.ForEach(p => {
+            p.Reset();
+            p.frozen = true;
+        });
+        Flag flag = GameObject.FindObjectOfType(typeof(Flag)) as Flag;
+        flag.Reset();
+
+        GameObject countdownParent = Instantiate(Resources.Load("Countdown")) as GameObject;
+        countdownGUIText = countdownParent.GetComponentInChildren<GUIText>();
 
         yield return new WaitForSeconds(countdownLength+1);
         allPlayers.ForEach(p => p.frozen = false);
 
-        GameObject countdownParent = GameObject.FindWithTag("Countdown");
         Destroy(countdownParent);
     }
 
-    public void DidScore(Player scorer, Flag flag) {
+    public void DidScore(Player scorer) {
         teamScores[scorer.team]++;
-        flag.Reset();
-        allPlayers.ForEach(p => p.KillPlayer());
+        StartNewRound();
     }
 
 	public bool SubManaCost(Player dropper, float cost)

@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"Force",
+				"ForceForColl"
+			],
+			[
+				"min",
+				"minSize"
+			],
+			[
+				"new",
+				"newSize"
+			],
+			[
+				"last",
+				"lastPos"
+			],
+			[
+				"start",
+				"startColor"
+			],
+			[
+				"ma",
+				"maxScale"
+			],
+			[
+				"contro",
+				"controllerNum"
+			],
+			[
+				"plat",
+				"platformString"
+			],
+			[
+				"pla",
+				"platformString"
+			],
+			[
+				"teamSc",
+				"teamScores"
+			],
+			[
+				"teamS",
+				"teamScoreText"
+			],
+			[
 				"tac",
 				"tackleInterrupted"
 			],
@@ -60,16 +104,8 @@
 				"OnTriggerStay	other"
 			],
 			[
-				"new",
-				"newPos"
-			],
-			[
 				"Vect",
 				"Vector3	x, y, z"
-			],
-			[
-				"start",
-				"startTime"
 			],
 			[
 				"Controll",
@@ -478,42 +514,6 @@
 			[
 				"digital",
 				"digitalWrite	Arduino digitalWrite"
-			],
-			[
-				"http_bui",
-				"http_build_query"
-			],
-			[
-				"for",
-				"foreach	foreach …"
-			],
-			[
-				"con",
-				"contents"
-			],
-			[
-				"asc",
-				"ascii_uppercase"
-			],
-			[
-				"att",
-				"attempts"
-			],
-			[
-				"arra",
-				"array"
-			],
-			[
-				"padd",
-				"padding-bottom"
-			],
-			[
-				"bott",
-				"padding-bottom"
-			],
-			[
-				"background",
-				"background-size"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "Assets/Scripts/Manager.cs",
 			"settings":
 			{
-				"buffer_size": 5276,
+				"buffer_size": 8066,
 				"line_ending": "Unix"
 			}
 		},
@@ -531,7 +531,15 @@
 			"file": "Assets/Scripts/Flag.cs",
 			"settings":
 			{
-				"buffer_size": 1474,
+				"buffer_size": 1477,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Shockwave.cs",
+			"settings":
+			{
+				"buffer_size": 2234,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,23 +547,39 @@
 			"file": "Assets/Scripts/Player.cs",
 			"settings":
 			{
-				"buffer_size": 4320,
+				"buffer_size": 3684,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "Assets/Scripts/ScoreZone.cs",
+			"file": "Assets/Scripts/DropItem.cs",
 			"settings":
 			{
-				"buffer_size": 166,
+				"buffer_size": 472,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "Assets/Scripts/Turret.cs",
+			"file": "Assets/Scripts/InputControl.cs",
 			"settings":
 			{
-				"buffer_size": 1681,
+				"buffer_size": 2135,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/SmokeBomb.cs",
+			"settings":
+			{
+				"buffer_size": 809,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/SpawnPad.cs",
+			"settings":
+			{
+				"buffer_size": 548,
 				"line_ending": "Unix"
 			}
 		}
@@ -628,11 +652,12 @@
 	},
 	"file_history":
 	[
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Turret.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/ScoreZone.cs",
 		"/Users/josephconstan/.bash_aliases",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Bullet.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Fire.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/FollowCam.cs",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Turret.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SmokeBomb.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Shockwave.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/DropItem.cs",
@@ -754,8 +779,7 @@
 		"/Users/josephconstan/Code/jconst/app/index.html",
 		"/Users/josephconstan/Code/jconst/app/json/projects.json",
 		"/Users/josephconstan/Code/jconst/app/css/app.css",
-		"/Users/josephconstan/Code/JCStockGraph/Example/Podfile",
-		"/Users/josephconstan/Code/jconst/app/js/seelio.js"
+		"/Users/josephconstan/Code/JCStockGraph/Example/Podfile"
 	],
 	"find":
 	{
@@ -779,6 +803,22 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"OnTrigger",
+			"IsKinematic",
+			"isKinematic",
+			"flag",
+			"toPlayer",
+			"p.flag",
+			"Drop(",
+			"Drop()",
+			"Drop",
+			"tackleInterrupted",
+			"2",
+			"last",
+			"2",
+			"maxScale",
+			"index",
+			":",
 			"tackleCurSpeed",
 			"carrying",
 			"flag",
@@ -890,28 +930,12 @@
 			"level",
 			"0",
 			"WorldToScreenPoint",
-			"pixelRect",
-			"destPlatform",
-			"destPlatform.transform.position",
-			"CheckPos",
-			"Debug.Log",
-			"List",
-			"Vector2",
-			"List",
-			"Length",
-			"AddRange",
-			"06D51899-51C2-40B2-99D3-E59871BBFA36",
-			"Debug",
-			"Reset",
-			"unfinishedSounds",
-			"snd",
-			"unfinishedSounds",
-			"background"
+			"pixelRect"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			"==",
@@ -1060,15 +1084,15 @@
 					"file": "Assets/Scripts/Manager.cs",
 					"settings":
 					{
-						"buffer_size": 5276,
+						"buffer_size": 8066,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1042,
-								1042
+								696,
+								696
 							]
 						],
 						"settings":
@@ -1081,7 +1105,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1890.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1091,15 +1115,23 @@
 					"file": "Assets/Scripts/Flag.cs",
 					"settings":
 					{
-						"buffer_size": 1474,
+						"buffer_size": 1477,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								741,
-								741
+								939,
+								939
+							],
+							[
+								1013,
+								1013
+							],
+							[
+								1206,
+								1206
 							]
 						],
 						"settings":
@@ -1111,25 +1143,56 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 373.0,
+						"translation.y": 584.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "Assets/Scripts/Player.cs",
+					"file": "Assets/Scripts/Shockwave.cs",
 					"settings":
 					{
-						"buffer_size": 4320,
+						"buffer_size": 2234,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2210,
-								2210
+								1862,
+								1862
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 404.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Assets/Scripts/Player.cs",
+					"settings":
+					{
+						"buffer_size": 3684,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3559,
+								3559
 							]
 						],
 						"settings":
@@ -1141,25 +1204,85 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1156.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "Assets/Scripts/ScoreZone.cs",
+					"buffer": 4,
+					"file": "Assets/Scripts/DropItem.cs",
 					"settings":
 					{
-						"buffer_size": 166,
+						"buffer_size": 472,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								166,
-								166
+								294,
+								294
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Assets/Scripts/InputControl.cs",
+					"settings":
+					{
+						"buffer_size": 2135,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								372,
+								372
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 310.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Assets/Scripts/SmokeBomb.cs",
+					"settings":
+					{
+						"buffer_size": 809,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								790,
+								790
 							]
 						],
 						"settings":
@@ -1176,19 +1299,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "Assets/Scripts/Turret.cs",
+					"buffer": 7,
+					"file": "Assets/Scripts/SpawnPad.cs",
 					"settings":
 					{
-						"buffer_size": 1681,
+						"buffer_size": 548,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1229,
-								1229
+								548,
+								548
 							]
 						],
 						"settings":
@@ -1201,7 +1324,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 112.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

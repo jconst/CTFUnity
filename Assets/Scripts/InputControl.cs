@@ -15,7 +15,7 @@ public class InputControl
         }
     }
 
-    const string keyboardPlayer = "2";
+    const string keyboardPlayer = "1";
 
     string platformString {
         get {

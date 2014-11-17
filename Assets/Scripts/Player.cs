@@ -156,6 +156,8 @@ public class Player : MonoBehaviour
 	{
 		renderer.enabled = false;
 		collider2D.enabled = false;
+		particleSystem.startColor = Manager.S.teamColors[team];
+		particleSystem.Play();
 		yield return new WaitForSeconds(respawnTime);
 		Reset();
 	}

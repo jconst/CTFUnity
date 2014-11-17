@@ -27,15 +27,13 @@ public class Manager : MonoBehaviour
 
     public Dictionary<string, Vector2> spawnLocations =
        new Dictionary<string, Vector2> {
-       {"Blue", new Vector2(6f, -3.5f)},
-       {"Red", new Vector2(-6f, 1.5f)}
+       {"Blue", new Vector2(5f, -1f)},
+       {"Red", new Vector2(-5f, 1f)}
     };
 
     const int countdownLength = 3;
     const bool splitScreen = false;
     const float manaTime = 10f;
-    const float cameraEasing = 0.01f;
-    const float maxCameraSize = 14f;
 
     // -- VARIABLES --
 	public Dictionary<string, int> teamScores;
@@ -44,7 +42,6 @@ public class Manager : MonoBehaviour
 	public Dictionary<string, GUIText> teamManaText;
     public List<Player> allPlayers;
     public List<Camera> playerCameras;
-    public Camera mainCamera;
     public float roundStartTime = 0f;
 	private float timePassed=0;
 
@@ -211,28 +208,6 @@ public class Manager : MonoBehaviour
             int countRemaining = countdownLength - (int)Mathf.Floor(Time.time - roundStartTime);
             countdownGUIText.text = countRemaining > 0 ? countRemaining.ToString() : "Start!";
         }
-		fitAllPlayersInCamera();
-    }
-
-    void fitAllPlayersInCamera() {
-        float maxX = allPlayers.Max(p => p.transform.position.x) + 1f;
-        float maxY = allPlayers.Max(p => p.transform.position.y) + 1f;
-        float minX = allPlayers.Min(p => p.transform.position.x) - 1f;
-        float minY = allPlayers.Min(p => p.transform.position.y) - 1f;
-
-        float adjustedNewSize;
-        if (countingDown) {
-            adjustedNewSize = maxCameraSize;
-        } else {
-            float newSize = Mathf.Max(maxX - minX, maxY - minY) / 2f;
-            float minSize = 6f;
-            adjustedNewSize = Mathf.Max(newSize, minSize);
-        }
-        mainCamera.orthographicSize = Mathf.Lerp(mainCamera.orthographicSize, adjustedNewSize, cameraEasing);
-
-        Vector3 lastPos = mainCamera.transform.position;
-        Vector3 newPos = new Vector3(Mathf.Lerp(minX, maxX, 0.5f), Mathf.Lerp(minY, maxY, 0.5f), -10);
-        mainCamera.transform.position = Vector3.Lerp(lastPos, newPos, 0.03f);
     }
 	
 	// -- GAME EVENTS --

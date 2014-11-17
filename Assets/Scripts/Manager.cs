@@ -91,11 +91,11 @@ public class Manager : MonoBehaviour
 		return teamList.ToDictionary(t => t, t => {
 			GameObject go = Instantiate(Resources.Load("ManaText")) as GameObject;
 			GUIText gt = go.GetComponent<GUIText>();
-			float width = 1.2f / teamList.Count();
+			float width = 1.4f / teamList.Count();
 			float index = (float)teamList.IndexOf(t);
 			go.transform.parent = scoreBoard.transform;
 			go.transform.localScale = new Vector2(width, 1);
-			go.transform.localPosition = new Vector3(index*width - 0.32f, 0, 1);
+			go.transform.localPosition = new Vector3(index*width - 0.35f, 0, 1);
 			gt.color = teamColors[t];
 			gt.fontSize = (int)(Screen.height * 0.03);
 			return gt;

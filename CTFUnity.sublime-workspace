@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"StartCor",
+				"StartCoroutine	MonoBehaviour.*(routine)"
+			],
+			[
 				"Force",
 				"ForceForColl"
 			],
@@ -510,55 +514,11 @@
 			[
 				"butt",
 				"buttonPin"
-			],
-			[
-				"digital",
-				"digitalWrite	Arduino digitalWrite"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "Assets/Scripts/Manager.cs",
-			"settings":
-			{
-				"buffer_size": 8066,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Assets/Scripts/Flag.cs",
-			"settings":
-			{
-				"buffer_size": 1477,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Assets/Scripts/Shockwave.cs",
-			"settings":
-			{
-				"buffer_size": 2234,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Assets/Scripts/Player.cs",
-			"settings":
-			{
-				"buffer_size": 3684,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Assets/Scripts/DropItem.cs",
-			"settings":
-			{
-				"buffer_size": 472,
-				"line_ending": "Unix"
-			}
-		},
 		{
 			"file": "Assets/Scripts/InputControl.cs",
 			"settings":
@@ -568,18 +528,18 @@
 			}
 		},
 		{
-			"file": "Assets/Scripts/SmokeBomb.cs",
+			"file": "Assets/Scripts/Manager.cs",
 			"settings":
 			{
-				"buffer_size": 809,
+				"buffer_size": 8334,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "Assets/Scripts/SpawnPad.cs",
+			"file": "Assets/Scripts/Player.cs",
 			"settings":
 			{
-				"buffer_size": 548,
+				"buffer_size": 3739,
 				"line_ending": "Unix"
 			}
 		}
@@ -587,12 +547,28 @@
 	"build_system": "Packages/Unity3D Build System/Unity.sublime-build",
 	"command_palette":
 	{
-		"height": 87.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"list ",
+				"Package Control: List Packages"
+			],
+			[
 				"insta",
 				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Preferences: Browse Packages"
 			],
 			[
 				"format",
@@ -609,10 +585,6 @@
 			[
 				"form",
 				"CodeFormatter: Format Code"
-			],
-			[
-				"pac",
-				"Package Control: Install Package"
 			],
 			[
 				"br",
@@ -635,11 +607,15 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 593.0
+		"width": 1191.0
 	},
 	"console":
 	{
-		"height": 244.0
+		"height": 244.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
 	},
 	"distraction_free":
 	{
@@ -650,21 +626,30 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Users/josephconstan/Code/Unity/CTFUnity",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts"
+	],
 	"file_history":
 	[
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SpawnPad.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SmokeBomb.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/DropItem.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Player.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Shockwave.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Flag.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Manager.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/InputControl.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Turret.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/ScoreZone.cs",
 		"/Users/josephconstan/.bash_aliases",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Bullet.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Fire.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/FollowCam.cs",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SmokeBomb.cs",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Shockwave.cs",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/DropItem.cs",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SpawnPad.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/ProjectSettings/InputManager.asset",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/_Scene1Natasja.unity",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Player.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Manager.cs",
 		"/Users/josephconstan/Code/Unity/MissionDemolition/Assets/Editor/SnapToGrid.cs",
 		"/Users/josephconstan/Code/Unity/MissionDemolition/Assets/Scripts/FollowCam.cs",
@@ -776,14 +761,11 @@
 		"/Users/josephconstan/Code/twilio-client-server/secrets.txt",
 		"/Users/josephconstan/Documents/School/Old/eecs388/HW2/crackvigenere.py",
 		"/Users/josephconstan/.bash_profile",
-		"/Users/josephconstan/Code/jconst/app/index.html",
-		"/Users/josephconstan/Code/jconst/app/json/projects.json",
-		"/Users/josephconstan/Code/jconst/app/css/app.css",
-		"/Users/josephconstan/Code/JCStockGraph/Example/Podfile"
+		"/Users/josephconstan/Code/jconst/app/index.html"
 	],
 	"find":
 	{
-		"height": 64.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -1076,173 +1058,13 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Assets/Scripts/Manager.cs",
-					"settings":
-					{
-						"buffer_size": 8066,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								696,
-								696
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "Assets/Scripts/Flag.cs",
-					"settings":
-					{
-						"buffer_size": 1477,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								939,
-								939
-							],
-							[
-								1013,
-								1013
-							],
-							[
-								1206,
-								1206
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 584.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "Assets/Scripts/Shockwave.cs",
-					"settings":
-					{
-						"buffer_size": 2234,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1862,
-								1862
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 404.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "Assets/Scripts/Player.cs",
-					"settings":
-					{
-						"buffer_size": 3684,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3559,
-								3559
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "Assets/Scripts/DropItem.cs",
-					"settings":
-					{
-						"buffer_size": 472,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								294,
-								294
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "Assets/Scripts/InputControl.cs",
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 2135,
@@ -1252,81 +1074,80 @@
 						"selection":
 						[
 							[
-								372,
-								372
+								396,
+								396
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 310.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "Assets/Scripts/SmokeBomb.cs",
-					"settings":
-					{
-						"buffer_size": 809,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								790,
-								790
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "Assets/Scripts/SpawnPad.cs",
-					"settings":
-					{
-						"buffer_size": 548,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								548,
-								548
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"syntax": "Packages/C#/C#.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 99.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Assets/Scripts/Manager.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8334,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7404,
+								7407
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3585.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Assets/Scripts/Player.cs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3739,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1023,
+								1023
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 123.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1334,7 +1155,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 38.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -1375,6 +1196,10 @@
 	{
 		"height": 212.0
 	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
 	"output.sftp":
 	{
 		"height": 350.0
@@ -1383,9 +1208,10 @@
 	{
 		"height": 124.0
 	},
+	"project": "CTFUnity.sublime-project",
 	"replace":
 	{
-		"height": 194.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1404,10 +1230,25 @@
 		],
 		"width": 0.0
 	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
 	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 181.0,
-	"status_bar_visible": true
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
 }

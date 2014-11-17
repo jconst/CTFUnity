@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 	public int number;
 	public Vector3 initialPos;
 	public Vector2 lastInputVelocity;
+	public bool frozen = false;
 
 	public Flag flag;
 	public SpawnPad spawnpoint;
@@ -53,7 +54,10 @@ public class Player : MonoBehaviour
 		MoveStep();
 	}
 
-	void MoveStep() {
+	void MoveStep()
+	{
+		if (frozen)
+			return;
 
 		float tackleProg = (Time.time - tackleStartTime)/tackleDuration;
 		float curve = (float)Math.Cos(tackleProg * Math.PI);

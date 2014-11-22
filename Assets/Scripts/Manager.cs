@@ -15,7 +15,7 @@ public class Manager : MonoBehaviour
 
     public Dictionary<string, Color> teamColors =
        new Dictionary<string, Color> {
-        {"Blue", Color.blue},
+        {"Blue", new Color(58f/255f, 112f/255f, 225f/255f, 1f)},
         {"Red", Color.red}
     };
 
@@ -67,8 +67,6 @@ public class Manager : MonoBehaviour
         teamScoreText = InitScoreText(teams);
 		teamManaText = InitManaText (teams);
         allPlayers = SpawnPlayers();
-        // CreateBackgroundCamera();
-        // playerCameras = AttachCamerasToPlayers(allPlayers);
         CreateOverlayCamera();
 
         StartNewRound();
@@ -135,45 +133,6 @@ public class Manager : MonoBehaviour
         return player;
     }
     
-    List<Camera> AttachCamerasToPlayers(List<Player> players) {
-        return players.Select(p => AttachNewCameraToPlayer(p)).ToList();
-    }
-
-    Camera AttachNewCameraToPlayer(Player p) {
-        Vector3 spawnLoc = p.transform.position;
-        spawnLoc.z = -10f;
-        GameObject cameraGO = Instantiate(Resources.Load("PlayerCamera"),
-                                          spawnLoc, 
-                                          Quaternion.identity) as GameObject;
-        FollowCam fc = cameraGO.GetComponent<FollowCam>();
-        fc.poi = p.gameObject;
-        Camera camera = cameraGO.GetComponent<Camera>();
-        camera.rect = CameraRectForPlayerNum(p.number);
-        return camera;
-    }
-
-    Rect CameraRectForPlayerNum(int num) {
-        float n = (float)num;
-        float max = (float)allPlayers.Count;
-        float colSize = (float)Math.Ceiling(Math.Sqrt(max));
-        float scale = 1f/colSize;
-        Rect rect = new Rect((float)Math.Floor(scale*num)/colSize, scale*(n%colSize), scale, scale);
-
-        float padding = 0.01f;
-        rect.xMax -= padding;
-        rect.yMax -= padding;
-        return rect;
-    }
-
-    void CreateBackgroundCamera() {
-        GameObject cameraGO = Instantiate(Resources.Load("UICamera"),
-                                          new Vector3(0f,0f,-10f), 
-                                          Quaternion.Euler(180, 0, 0)) as GameObject;
-        Camera camera = cameraGO.GetComponent<Camera>();
-        camera.rect = new Rect(0, 0, 1, 1);
-        camera.backgroundColor = new Color(0.1f, 0.1f, 0.1f, 1f);
-    }
-
     void CreateOverlayCamera() {
         GameObject cameraGO = Instantiate(Resources.Load("UICamera"),
                                           new Vector3(0f,0f,-10f), 

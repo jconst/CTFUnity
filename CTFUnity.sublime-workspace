@@ -4,20 +4,52 @@
 		"selected_items":
 		[
 			[
+				"min",
+				"minCameraSize"
+			],
+			[
+				"max",
+				"maxCameraSize"
+			],
+			[
+				"pla",
+				"player"
+			],
+			[
+				"player",
+				"playerGO"
+			],
+			[
+				"Find",
+				"FindObjectOfType	type"
+			],
+			[
+				"coun",
+				"countdownParent"
+			],
+			[
+				"cou",
+				"countRemaining"
+			],
+			[
+				"GetCom",
+				"GetComponentInChildren	type"
+			],
+			[
+				"par",
+				"parentGO"
+			],
+			[
+				"new",
+				"newRoundStartTime"
+			],
+			[
 				"StartCor",
 				"StartCoroutine	MonoBehaviour.*(routine)"
 			],
 			[
 				"Force",
 				"ForceForColl"
-			],
-			[
-				"min",
-				"minSize"
-			],
-			[
-				"new",
-				"newSize"
 			],
 			[
 				"last",
@@ -37,10 +69,6 @@
 			],
 			[
 				"plat",
-				"platformString"
-			],
-			[
-				"pla",
 				"platformString"
 			],
 			[
@@ -146,10 +174,6 @@
 			[
 				"size",
 				"sizeOfTeam"
-			],
-			[
-				"Find",
-				"FindObjectsOfType	type"
 			],
 			[
 				"Cl",
@@ -324,10 +348,6 @@
 				"compBlock"
 			],
 			[
-				"max",
-				"maxHealth"
-			],
-			[
 				"weap",
 				"Weapon"
 			],
@@ -346,10 +366,6 @@
 			[
 				"Ea",
 				"EagleMapTex"
-			],
-			[
-				"GetCom",
-				"GetComponent	type"
 			],
 			[
 				"tri",
@@ -498,22 +514,6 @@
 			[
 				"hearts",
 				"heartsOrigin"
-			],
-			[
-				"An",
-				"AngleForVector"
-			],
-			[
-				"Atta",
-				"AttackWithWeaponName"
-			],
-			[
-				"Fi",
-				"FixedUpdate"
-			],
-			[
-				"butt",
-				"buttonPin"
 			]
 		]
 	},
@@ -531,7 +531,15 @@
 			"file": "Assets/Scripts/Manager.cs",
 			"settings":
 			{
-				"buffer_size": 8334,
+				"buffer_size": 8258,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Flag.cs",
+			"settings":
+			{
+				"buffer_size": 1471,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +547,15 @@
 			"file": "Assets/Scripts/Player.cs",
 			"settings":
 			{
-				"buffer_size": 3739,
+				"buffer_size": 4062,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/MainCamera.cs",
+			"settings":
+			{
+				"buffer_size": 1325,
 				"line_ending": "Unix"
 			}
 		}
@@ -611,11 +627,7 @@
 	},
 	"console":
 	{
-		"height": 244.0,
-		"history":
-		[
-			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
-		]
+		"height": 244.0
 	},
 	"distraction_free":
 	{
@@ -626,14 +638,10 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/Users/josephconstan/Code/Unity/CTFUnity",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts"
-	],
 	"file_history":
 	[
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Fire.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Bullet.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SpawnPad.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SmokeBomb.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/DropItem.cs",
@@ -645,8 +653,6 @@
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Turret.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/ScoreZone.cs",
 		"/Users/josephconstan/.bash_aliases",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Bullet.cs",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Fire.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/FollowCam.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/ProjectSettings/InputManager.asset",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/_Scene1Natasja.unity",
@@ -769,7 +775,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"",
@@ -785,6 +791,16 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"mainCamera",
+			"mainC",
+			"DidScore",
+			"true",
+			"KillPlayer",
+			"0.5f",
+			"ManaTime",
+			"DeltaMana",
+			"public",
+			"newRoundStartTime",
 			"OnTrigger",
 			"IsKinematic",
 			"isKinematic",
@@ -902,17 +918,7 @@
 			"{",
 			"}",
 			"{",
-			";",
-			"}",
-			";",
-			"{",
-			"}",
-			"{",
-			";",
-			"level",
-			"0",
-			"WorldToScreenPoint",
-			"pixelRect"
+			";"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -920,6 +926,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"Die",
 			"==",
 			"protected new void Update",
 			"protected new void FixedUpdate",
@@ -1046,8 +1053,7 @@
 			"Order",
 			"info",
 			"state.instrReg",
-			"state.mem[state.pc] >> 22",
-			"std::list"
+			"state.mem[state.pc] >> 22"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1064,7 +1070,6 @@
 				{
 					"buffer": 0,
 					"file": "Assets/Scripts/InputControl.cs",
-					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 2135,
@@ -1074,80 +1079,145 @@
 						"selection":
 						[
 							[
-								396,
-								396
+								372,
+								372
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C#/C#.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 99.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
 					"file": "Assets/Scripts/Manager.cs",
-					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8334,
+						"buffer_size": 8258,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7404,
-								7407
+								276,
+								276
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C#/C#.tmLanguage",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3585.0,
+						"translation.y": 80.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "Assets/Scripts/Player.cs",
-					"semi_transient": false,
+					"file": "Assets/Scripts/Flag.cs",
 					"settings":
 					{
-						"buffer_size": 3739,
+						"buffer_size": 1471,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1023,
-								1023
+								687,
+								687
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C#/C#.tmLanguage",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 123.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Assets/Scripts/Player.cs",
+					"settings":
+					{
+						"buffer_size": 4062,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3559,
+								3559
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Assets/Scripts/MainCamera.cs",
+					"settings":
+					{
+						"buffer_size": 1325,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								213,
+								213
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
 					"type": "text"
 				}
 			]
@@ -1208,7 +1278,6 @@
 	{
 		"height": 124.0
 	},
-	"project": "CTFUnity.sublime-project",
 	"replace":
 	{
 		"height": 48.0
@@ -1230,25 +1299,10 @@
 		],
 		"width": 0.0
 	},
-	"select_symbol":
-	{
-		"height": 0.0,
-		"selected_items":
-		[
-		],
-		"width": 0.0
-	},
-	"selected_group": 0,
-	"settings":
-	{
-	},
 	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 181.0,
-	"status_bar_visible": true,
-	"template_settings":
-	{
-	}
+	"status_bar_visible": true
 }

@@ -15,11 +15,12 @@ public class MainCamera : MonoBehaviour
 
     void fitAllPlayersInCamera() {
         List<Player> allPlayers = Manager.S.allPlayers;
+        const float padding = 0.2f;
 
-        float maxX = allPlayers.Max(p => p.transform.position.x) + 1f;
-        float maxY = allPlayers.Max(p => p.transform.position.y) + 1f;
-        float minX = allPlayers.Min(p => p.transform.position.x) - 1f;
-        float minY = allPlayers.Min(p => p.transform.position.y) - 1f;
+        float maxX = allPlayers.Max(p => p.transform.position.x) + padding;
+        float maxY = allPlayers.Max(p => p.transform.position.y) + padding;
+        float minX = allPlayers.Min(p => p.transform.position.x) - padding;
+        float minY = allPlayers.Min(p => p.transform.position.y) - padding;
 
         float adjustedNewSize;
         if (Manager.S.countingDown) {

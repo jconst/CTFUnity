@@ -31,7 +31,7 @@ public class Manager : MonoBehaviour
        {"Red", new Vector2(-5f, 1f)}
     };
 
-    public const float manaTime = 10f;
+    public float manaTime = 10f;
     const int countdownLength = 3;
 
     // -- VARIABLES --
@@ -196,12 +196,4 @@ public class Manager : MonoBehaviour
         teamScores[scorer.team]++;
         StartNewRound();
     }
-
-	public bool SubManaCost(Player dropper, float cost)
-	{
-		if (teamManas [dropper.team] < cost)
-			return false;
-		teamManas [dropper.team] -= cost;
-		return true;
-	}
 }

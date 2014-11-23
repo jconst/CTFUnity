@@ -10,6 +10,8 @@ public class Boost : DropItem
     const float shadowStartAlpha = 0.7f;
     float timeUntilShadowDrop = 0f;
 
+    bool deactivated = false;
+
     public override bool TryDrop(Player p) {
         base.TryDrop(p);
 
@@ -17,10 +19,8 @@ public class Boost : DropItem
             return false;
         }
 
-        manaCost = 3;
         lifeTime = 4f;
         lifeTime += 1f; //to account for fadeout
-        owner.currentBoost = 2f;
         return true;
     }
 
@@ -28,10 +28,11 @@ public class Boost : DropItem
         base.Update();
 
         if (lifeTime < 1) {
-            Deactivate();
+            if (!deactivated)
+                Deactivate();
             return;
         }
-
+        owner.currentBoost = 2f;
         transform.position = owner.transform.position;
 
         timeUntilShadowDrop -= Time.deltaTime;
@@ -61,5 +62,6 @@ public class Boost : DropItem
 
     void Deactivate() {
         owner.currentBoost = 1f;
+        deactivated = true;
     }
 }

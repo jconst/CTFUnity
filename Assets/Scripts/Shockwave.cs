@@ -6,7 +6,6 @@ using System;
 
 public class Shockwave : DropItem
 {
-    const float burstDuration = 0.5f;
     const int numEdgePoints = 200;
     const float maxScale = 5f;
 
@@ -17,12 +16,13 @@ public class Shockwave : DropItem
     float startTime;
 
     void Start() {
+        lifeTime = 0.5f;
         line = GetComponent <LineRenderer>();
         line.SetVertexCount(numEdgePoints);
         startTime = Time.time;
         startColor = line.material.color;
         DrawEdge();
-        Destroy(gameObject, burstDuration);
+        Destroy(gameObject, lifeTime);
     }
 
     void DrawEdge() {
@@ -36,8 +36,9 @@ public class Shockwave : DropItem
         });
     }
 
-    void Update() {
-        float prog = (Time.time - startTime)/burstDuration;
+    new void Update() {
+        base.Update();
+        float prog = (Time.time - startTime)/lifeTime;
         float scaleFactor = maxScale * (0.2f+prog);
         transform.localScale = Vector3.Scale(startScale.normalized, new Vector3(scaleFactor, 1, scaleFactor));
         line.material.color = Color.Lerp(startColor, Color.clear, prog);

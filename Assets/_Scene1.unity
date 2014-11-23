@@ -2531,7 +2531,6 @@ MonoBehaviour:
   - Blue
   - Red
   allPlayers: []
-  playerCameras: []
   roundStartTime: 0
   countdownGUIText: {fileID: 0}
 --- !u!4 &1564047625

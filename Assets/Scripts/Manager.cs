@@ -31,9 +31,8 @@ public class Manager : MonoBehaviour
        {"Red", new Vector2(-5f, 1f)}
     };
 
+    public const float manaTime = 10f;
     const int countdownLength = 3;
-    const bool splitScreen = false;
-    const float manaTime = 10f;
 
     // -- VARIABLES --
 	public Dictionary<string, int> teamScores;
@@ -41,7 +40,6 @@ public class Manager : MonoBehaviour
 	public Dictionary<string, GUIText> teamScoreText;
 	public Dictionary<string, GUIText> teamManaText;
     public List<Player> allPlayers;
-    public List<Camera> playerCameras;
     public float roundStartTime = 0f;
 	private float timePassed=0;
 
@@ -132,7 +130,7 @@ public class Manager : MonoBehaviour
 
         return player;
     }
-    
+
     void CreateOverlayCamera() {
         GameObject cameraGO = Instantiate(Resources.Load("UICamera"),
                                           new Vector3(0f,0f,-10f), 
@@ -145,7 +143,6 @@ public class Manager : MonoBehaviour
     // -- UPDATE --
 
     public void Update() {
-        playerCameras.ForEach(c => c.enabled = splitScreen);
         teamScoreText.ToList().ForEach(kvp => {
             GUIText gt = kvp.Value;
             int score = teamScores[kvp.Key];
@@ -154,8 +151,8 @@ public class Manager : MonoBehaviour
 		timePassed += Time.deltaTime;
 		if (timePassed >= manaTime) {
 			teams.ForEach(team => {
-				teamManas[team]+=1f;
-				teamManas[team]=Mathf.Min(teamManas[team], 10f);
+				teamManas[team] += 1f;
+				teamManas[team] = Mathf.Min(teamManas[team], 10f);
 			});
 			timePassed=0;
 		}

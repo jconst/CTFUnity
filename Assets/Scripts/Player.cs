@@ -24,13 +24,14 @@ public class Player : MonoBehaviour
 	float tackleStartTime;
 	public bool tackling = false;
 	public bool hasKnockback = false;
+	public float currentBoost = 1f;
 
  	private List<string> dropItems =
 	    new List<string> {
 	   	"Turret",
 	   	"SmokeBomb",
 	   	"Shockwave",
-	   	"SpawnPad"
+	   	"Boost"
 	};
 
 	public string controllerNum {
@@ -56,36 +57,37 @@ public class Player : MonoBehaviour
 		if (frozen)
 			return;
 
-		float tackleProg = (Time.time - tackleStartTime)/tackleDuration;
-		float curve = (float)Math.Cos(tackleProg * Math.PI);
-		float speed = runSpeed;
-
-		if (hasKnockback && rigidbody2D.velocity.magnitude < 0.2f) {
-			//unset hasKnockback after we've stopped moving
-			hasKnockback = false;
-		}
-		if (tackleProg > 1f) {
-			tackling = false;
-			//ease up normal running speed as "standing up" after tackle
-			if (tackleProg < 1.5f) {
-				speed = runSpeed + (runSpeed * curve);
+		if (hasKnockback) {
+			if (rigidbody2D.velocity.magnitude < 0.2f) {
+				//unset hasKnockback after we've stopped moving
+				hasKnockback = false;
 			}
 		}
-		if (tackling && !hasKnockback) {
-			float tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
-			rigidbody2D.velocity = tackleDirection * tackleCurSpeed;
-		} 
-		//Moving normally:
-		if (!tackling && !hasKnockback) {
-			Vector2 velocity = InputControl.S.RunVelocity(controllerNum);
-			if (carrying) {
-				speed *= 0.9f;
+		else {
+			float tackleProg = (Time.time - tackleStartTime)/tackleDuration;
+			float curve = (float)Math.Cos(tackleProg * Math.PI);
+			float speed = runSpeed;
+			if (tackleProg > 1f) {
+				tackling = false;
+				if (tackleProg < 1.5f) {
+					//ease up normal running speed as "standing up" after tackle
+					speed = runSpeed + (runSpeed * curve);
+				}
 			}
-			if (velocity.magnitude > 0.2f ||
-				lastInputVelocity.magnitude > 0.1f) {
-				rigidbody2D.velocity = velocity.normalized * speed;
+			if (tackling) {
+				float tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
+				rigidbody2D.velocity = tackleDirection * tackleCurSpeed;
+			} 
+			else {
+				Vector2 velocity = InputControl.S.RunVelocity(controllerNum);
+				speed *= (carrying ? 0.9f : 1f);
+				if (velocity.magnitude > 0.2f ||
+					lastInputVelocity.magnitude > 0.1f) {
+					rigidbody2D.velocity = velocity.normalized * speed;
+				}
+				lastInputVelocity = velocity;
 			}
-			lastInputVelocity = velocity;
+			rigidbody2D.velocity *= currentBoost;
 		}
 	}
 
@@ -101,18 +103,16 @@ public class Player : MonoBehaviour
 	public void DropNewItem(string itemName)
 	{
 		GameObject go = (GameObject)Instantiate(Resources.Load(itemName));
-		float cost = go.GetComponent<DropItem> ().manaCost;
-		if(!Manager.S.SubManaCost(this, cost))
-		{
-			Destroy(go);
-			return;
-		}
 		Vector3 newPos = transform.position;
 		newPos.z = go.transform.position.z;
 		go.transform.position = newPos;
 
 		DropItem dropItem = go.GetComponent<DropItem>();
-		dropItem.WasDroppedByPlayer(this);
+		if (!dropItem.TryDrop(this) ||
+			!Manager.S.SubManaCost(this, dropItem.manaCost)) {
+			Destroy(go);
+			return;
+		}
 	}
 
 	void CheckTackle() {

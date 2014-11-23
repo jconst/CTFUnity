@@ -5,19 +5,16 @@ public class SmokeBomb : DropItem {
 	private float speed = 1f;
     private float fadeoutStartTime = 2f;
 
-	void Update() {
-		UpdateTime();
-		BlowUp();
-	}
-
-	new void WasDroppedByPlayer(Player p) {
-        base.WasDroppedByPlayer(p);
+    void Start() {
+        lifeTime = 6f;
     }
 
+	new void Update() {
+        base.Update();
+		BlowUp();
+	}
+    
     void BlowUp() {
-    	if (lifeTime <= 0) {
-			Destroy(gameObject);
-		}
 		transform.localScale += Vector3.one * speed * Time.deltaTime;
 
 		if (lifeTime <= fadeoutStartTime) {

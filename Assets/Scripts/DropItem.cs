@@ -8,11 +8,18 @@ public class DropItem : MonoBehaviour
     public Player owner;
     public float manaCost;
     public float time = 0;
-    public float lifeTime = 6f;
-    public float safetime = 1f;
+    public float lifeTime = 3600f;
 
-    public virtual void WasDroppedByPlayer(Player player) {
+    public virtual bool TryDrop(Player player) {
         owner = player;
+        return true;
+    }
+
+    public void Update() {
+        UpdateTime();
+        if (lifeTime <= 0) {
+            Destroy (this.gameObject);
+        }
     }
 
     public void UpdateTime() {

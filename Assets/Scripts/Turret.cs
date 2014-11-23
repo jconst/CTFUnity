@@ -10,7 +10,8 @@ public class Turret : DropItem
     private float range = 6f;
     private int numShots = 10;
 
-    void Update() {
+    new void Update() {
+        base.Update();
         Vector2 toTarget = ClosestEnemyPlayer().transform.position - transform.position;
         transform.rotation = toTarget.ToQuaternion();
         secondsSinceLastShot += Time.deltaTime;

@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 	public Vector3 initialPos;
 	public Vector2 lastInputVelocity;
 	public bool frozen = false;
+	public bool canGrabFlag = true;
+	public InputControl inputCtrl;
 
 	public Flag flag;
 	public SpawnPad spawnpoint;
@@ -29,21 +31,19 @@ public class Player : MonoBehaviour
  	private List<string> dropItems =
 	    new List<string> {
 	   	"Turret",
-	   	"SmokeBomb",
+	   	"Decoy",
 	   	"Shockwave",
 	   	"Boost"
 	};
-
-	public string controllerNum {
-		get {
-			return (number+1).ToString();
-		}
-	}
 
 	public bool carrying {
 		get {
 			return flag != null;
 		}
+	}
+
+	void Awake() {
+		inputCtrl = InputControl.S;
 	}
 
 	void Update () {
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 				rigidbody2D.velocity = tackleDirection * tackleCurSpeed;
 			} 
 			else {
-				Vector2 velocity = InputControl.S.RunVelocity(controllerNum);
+				Vector2 velocity = inputCtrl.RunVelocity(number);
 				speed *= (carrying ? 0.9f : 1f);
 				if (velocity.magnitude > 0.2f ||
 					lastInputVelocity.magnitude > 0.1f) {
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 	void CheckDrop() {
 		dropItems.Each((item, indexFromZero) => {
 			int index = indexFromZero+1;
-			if (InputControl.S.ItemButtonDown(controllerNum, index)) {
+			if (inputCtrl.ItemButtonDown(number, index)) {
 				DropNewItem(item);
 			}
 		});
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
 		float timeSinceTackle = Time.time - tackleStartTime;
 		if (tackling || timeSinceTackle < tackleCooldown)
 			return;
-		Vector2 tackleForce = InputControl.S.TackleVelocity(controllerNum);
+		Vector2 tackleForce = inputCtrl.TackleVelocity(number);
 		if (tackleForce.magnitude >= 1f) {
 			Tackle(tackleForce);
 		}

@@ -8,7 +8,7 @@ public class Turret : DropItem
     public const float secondsBetweenShots = 1f;
     public float secondsSinceLastShot = 0f;    
     private float range = 6f;
-    private int numShots = 10;
+    private int numShots = 6;
 
     new void Update() {
         base.Update();

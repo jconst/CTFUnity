@@ -39,6 +39,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9177015054b5247e1976661ed4670d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  manaCost: 3
+  time: 0
+  lifeTime: 3600
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

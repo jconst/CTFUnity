@@ -18,12 +18,16 @@ public class DropItem : MonoBehaviour
     public void Update() {
         UpdateTime();
         if (lifeTime <= 0) {
-            Destroy (this.gameObject);
+            Deactivate();
         }
     }
 
     public void UpdateTime() {
     	time += Time.deltaTime;
 		lifeTime -= Time.deltaTime;
+    }
+
+    public virtual void Deactivate() {
+        Destroy (this.gameObject);
     }
 }

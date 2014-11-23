@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
 			return;
 
 		if (hasKnockback) {
-			if (rigidbody2D.velocity.magnitude < 0.2f) {
+			if (rigidbody2D.velocity.magnitude < 0.1f) {
 				//unset hasKnockback after we've stopped moving
 				hasKnockback = false;
 			}

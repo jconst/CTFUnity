@@ -17,9 +17,6 @@ public class InputControl
 
     const int keyboardPlayer = 1;
 
-    public bool decoy = false;
-    public Vector2 decoyDirection;
-
     string platformString {
         get {
             return (Application.platform == RuntimePlatform.OSXEditor ||

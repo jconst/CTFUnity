@@ -211,7 +211,7 @@ public class Player : MonoBehaviour
 		rigidbody2D.velocity = Vector2.zero;
 		itemNo = -1;
 		if (itemIcon)
-						Destroy (itemIcon);
+			Destroy (itemIcon);
 	}
 
 	public void InvalidateSpawn()

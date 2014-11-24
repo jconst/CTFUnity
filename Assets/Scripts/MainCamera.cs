@@ -23,7 +23,7 @@ public class MainCamera : MonoBehaviour
         float minY = allPlayers.Min(p => p.transform.position.y) - padding;
 
         float adjustedNewSize;
-        if (Manager.S.countingDown) {
+        if (!Manager.S.roundStarted) {
             adjustedNewSize = maxCameraSize;
         } else {
             float newSize = Mathf.Max(maxX - minX, maxY - minY) / 2f;

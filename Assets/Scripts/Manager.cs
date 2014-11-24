@@ -40,21 +40,16 @@ public class Manager : MonoBehaviour
 	public Dictionary<string, GUIText> teamScoreText;
 	public Dictionary<string, ManaBar> teamManaBars;
     public List<Player> allPlayers;
-    public float roundStartTime = 0f;
-	private float timePassed=0;
+    private float timePassed=0;
+    public bool roundStarted = false;
 	public bool itemPickups = false;
 
     public GUIText countdownGUIText;
+    public GUITexture countdownBackground;
 
     static public Manager S {
         get {
             return GameObject.FindObjectOfType(typeof(Manager)) as Manager;
-        }
-    }
-
-    public bool countingDown {
-        get {
-            return (countdownLength - (Time.time - roundStartTime)) > -1;
         }
     }
 
@@ -74,8 +69,9 @@ public class Manager : MonoBehaviour
 			teamManaBars = InitManaBars (teams);
         allPlayers = SpawnPlayers();
         CreateOverlayCamera();
+        CreateCountdown();
 
-        StartNewRound();
+        StartNewRound(true, null);
     }
 
     Dictionary<string, int> InitScores(List<string> teamList) {
@@ -102,7 +98,6 @@ public class Manager : MonoBehaviour
     }
 
 	Dictionary<string, ManaBar> InitManaBars(List<string> teamList) {
-		GameObject scoreBoard = GameObject.FindWithTag("ScoreBoard");
 		return teamList.ToDictionary(t => t, t => {
 			GameObject go = Instantiate(Resources.Load("ManaText")) as GameObject;
 			ManaBar mb = go.GetComponent<ManaBar>();
@@ -147,6 +142,12 @@ public class Manager : MonoBehaviour
         camera.clearFlags = CameraClearFlags.Nothing;
     }
 
+    void CreateCountdown() {
+        GameObject countdownParent = Instantiate(Resources.Load("Countdown")) as GameObject;
+        countdownGUIText = countdownParent.GetComponentInChildren<GUIText>();
+        countdownBackground = countdownParent.GetComponentInChildren<GUITexture>();
+    }
+
     // -- UPDATE --
 
     public void Update() {
@@ -157,34 +158,24 @@ public class Manager : MonoBehaviour
         });
 		timePassed += Time.deltaTime;
 		if (!itemPickups) {
-						if (timePassed >= manaTime) {
-								teams.ForEach (team => {
-										teamManas [team] += 1;
-										teamManas [team] = Mathf.Min (teamManas [team], 3);
-								});
-								timePassed = 0;
-						}
-						teamManaBars.ToList ().ForEach (kvp => {
-								ManaBar gt = kvp.Value;
-								gt.currMana = teamManas [kvp.Key];
-						});
-				}
-        if (countingDown) {
-            int countRemaining = countdownLength - (int)Mathf.Floor(Time.time - roundStartTime);
-            countdownGUIText.text = countRemaining > 0 ? countRemaining.ToString() : "Start!";
-        }
+    		if (timePassed >= manaTime) {
+				teams.ForEach (team => {
+					teamManas [team] += 1;
+					teamManas [team] = Mathf.Min (teamManas [team], 3);
+				});
+				timePassed = 0;
+    		}
+    		teamManaBars.ToList ().ForEach (kvp => {
+				ManaBar gt = kvp.Value;
+				gt.currMana = teamManas [kvp.Key];
+    		});
+		}
     }
-	
+
 	// -- GAME EVENTS --
-
-    public void StartNewRound()
+    public void StartNewRound(bool showRules, string teamScored)
     {
-        StartCoroutine(NewRoundCoroutine());
-    }
-
-    public IEnumerator NewRoundCoroutine()
-    {
-        roundStartTime = Time.time;
+        roundStarted = false;
         allPlayers.ForEach(p => {
             p.Reset();
             p.frozen = true;
@@ -192,17 +183,43 @@ public class Manager : MonoBehaviour
         Flag flag = GameObject.FindObjectOfType(typeof(Flag)) as Flag;
         flag.Reset();
 
-        GameObject countdownParent = Instantiate(Resources.Load("Countdown")) as GameObject;
-        countdownGUIText = countdownParent.GetComponentInChildren<GUIText>();
+        StartCoroutine(CountdownCoroutine(showRules, teamScored));
+    }
 
-        yield return new WaitForSeconds(countdownLength+1);
+    public IEnumerator CountdownCoroutine(bool showRules, string teamScored)
+    {
+        countdownGUIText.enabled = countdownBackground.enabled = true;
+
+        if (showRules) {
+            countdownGUIText.text = "Hold the bomb in\nyour enemy's base!";
+            yield return new WaitForSeconds(2);
+
+            countdownGUIText.text = "First to 5 points wins!";
+            yield return new WaitForSeconds(1.5f);
+        }
+
+        if (teamScored != null) {
+            countdownGUIText.text = teamScored + " team scored!";
+            yield return new WaitForSeconds(1);
+        }
+
+        for(int i=countdownLength; i > 0; i--) {
+            countdownGUIText.text = i.ToString();
+            yield return new WaitForSeconds(0.7f);
+        }
+
+        countdownGUIText.text = "Start!\n\n\n";
         allPlayers.ForEach(p => p.frozen = false);
+        roundStarted = true;
+        countdownBackground.enabled = false;
 
-        Destroy(countdownParent);
+        yield return new WaitForSeconds(1);
+        countdownGUIText.enabled = false;
+        countdownGUIText.text = null;
     }
 
     public void DidScore(Player scorer) {
         teamScores[scorer.team]++;
-        StartNewRound();
+        StartNewRound(false, scorer.team);
     }
 }

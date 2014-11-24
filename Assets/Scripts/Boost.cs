@@ -27,9 +27,7 @@ public class Boost : DropItem
     public new void Update() {
         base.Update();
 
-        if (lifeTime < 1) {
-            if (!deactivated)
-                Deactivate();
+        if (deactivated) {
             return;
         }
         owner.currentBoost = 2f;
@@ -60,8 +58,9 @@ public class Boost : DropItem
         Destroy(shadow);
     }
 
-    void Deactivate() {
+    public override void Deactivate() {
         owner.currentBoost = 1f;
         deactivated = true;
+        Destroy(gameObject, 1f);
     }
 }

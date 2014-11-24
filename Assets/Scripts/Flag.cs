@@ -33,8 +33,10 @@ public class Flag : MonoBehaviour
 
 	public void Pickup(Player p)
 	{
-		carrier = p;
-		p.flag = this;
+		if (p.canGrabFlag) {
+			carrier = p;
+			p.flag = this;
+		}
 	}
 
 	void Score()

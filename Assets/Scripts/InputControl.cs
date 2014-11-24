@@ -15,7 +15,7 @@ public class InputControl
         }
     }
 
-    const string keyboardPlayer = "1";
+    const int keyboardPlayer = 1;
 
     string platformString {
         get {
@@ -27,31 +27,38 @@ public class InputControl
         }
     }
 
-    public Vector2 RunVelocity(string controllerNum) {
-        Vector2 velocity = new Vector2(Input.GetAxis("HorizontalL" + controllerNum),
-                                       Input.GetAxis("VerticalL" + controllerNum));
+    public string CtrlForPlayer(int playerNum) {
+        return (playerNum+1).ToString();
+    }
+
+    public virtual Vector2 RunVelocity(int playerNum)
+    {
+        Vector2 velocity = new Vector2(Input.GetAxis("HorizontalL" + CtrlForPlayer(playerNum)),
+                                       Input.GetAxis("VerticalL" + CtrlForPlayer(playerNum)));
 
         //allow a player to be controlled by keyboard for testing:
-        if (controllerNum == keyboardPlayer && velocity.magnitude < 0.2f) {
+        if (playerNum == keyboardPlayer && velocity.magnitude < 0.2f) {
             velocity = new Vector2(Input.GetAxisRaw("Horizontal"),
                                    Input.GetAxisRaw("Vertical"));
         }
         return velocity;
     }
 
-    public Vector2 TackleVelocity(string controllerNum) {
-        Vector2 tackleForce = new Vector2(Input.GetAxis ("HorizontalR" + controllerNum + platformString),
-                                          Input.GetAxis ("VerticalR" + controllerNum + platformString));
+    public virtual Vector2 TackleVelocity(int playerNum)
+    {
+        Vector2 tackleForce = new Vector2(Input.GetAxis ("HorizontalR" + CtrlForPlayer(playerNum) + platformString),
+                                          Input.GetAxis ("VerticalR" + CtrlForPlayer(playerNum) + platformString));
         //keyboard control for testing:
-        if (controllerNum == keyboardPlayer && tackleForce.magnitude < 0.2f) {
+        if (playerNum == keyboardPlayer && tackleForce.magnitude < 0.2f) {
             tackleForce = new Vector2(Input.GetAxisRaw("HorizontalTackle"),
                                       Input.GetAxisRaw("VerticalTackle"));
         }
         return tackleForce;
     }
 
-    public bool ItemButtonDown(string controllerNum, int itemNum) {
-        return Input.GetButtonDown("Item"+itemNum+controllerNum) ||
-               (controllerNum == keyboardPlayer && Input.GetKeyDown(itemNum.ToString()));
+    public virtual bool ItemButtonDown(int playerNum, int itemNum)
+    {
+        return Input.GetButtonDown("Item"+itemNum+CtrlForPlayer(playerNum)) ||
+               (playerNum == keyboardPlayer && Input.GetKeyDown(itemNum.ToString()));
     }
 }

@@ -36,9 +36,9 @@ public class Manager : MonoBehaviour
 
     // -- VARIABLES --
 	public Dictionary<string, int> teamScores;
-	public Dictionary<string, float> teamManas;
+	public Dictionary<string, int> teamManas;
 	public Dictionary<string, GUIText> teamScoreText;
-	public Dictionary<string, GUIText> teamManaText;
+	public Dictionary<string, ManaBar> teamManaBars;
     public List<Player> allPlayers;
     public float roundStartTime = 0f;
 	private float timePassed=0;
@@ -63,7 +63,7 @@ public class Manager : MonoBehaviour
         teamScores = InitScores(teams);
 		teamManas = InitManas(teams);
         teamScoreText = InitScoreText(teams);
-		teamManaText = InitManaText (teams);
+		teamManaBars = InitManaBars (teams);
         allPlayers = SpawnPlayers();
         CreateOverlayCamera();
 
@@ -73,8 +73,8 @@ public class Manager : MonoBehaviour
     Dictionary<string, int> InitScores(List<string> teamList) {
         return teamList.ToDictionary(t => t, t => 0);
     }
-	Dictionary<string, float> InitManas(List<string> teamList) {
-		return teamList.ToDictionary(t => t, t => 0f);
+	Dictionary<string, int> InitManas(List<string> teamList) {
+		return teamList.ToDictionary(t => t, t => 0);
 	}
 	
 	Dictionary<string, GUIText> InitScoreText(List<string> teamList) {
@@ -93,19 +93,17 @@ public class Manager : MonoBehaviour
         });
     }
 
-	Dictionary<string, GUIText> InitManaText(List<string> teamList) {
+	Dictionary<string, ManaBar> InitManaBars(List<string> teamList) {
 		GameObject scoreBoard = GameObject.FindWithTag("ScoreBoard");
 		return teamList.ToDictionary(t => t, t => {
 			GameObject go = Instantiate(Resources.Load("ManaText")) as GameObject;
-			GUIText gt = go.GetComponent<GUIText>();
-			float width = 1.4f / teamList.Count();
+			ManaBar mb = go.GetComponent<ManaBar>();
+			mb.team=t;
+			GUIText gt= go.GetComponent<GUIText>();
 			float index = (float)teamList.IndexOf(t);
-			go.transform.parent = scoreBoard.transform;
-			go.transform.localScale = new Vector2(width, 1);
-			go.transform.localPosition = new Vector3(index*width - 0.35f, 0, 1);
+			go.transform.position = new Vector3(Mathf.Abs(index - 0.04f), 0.3f, 1);
 			gt.color = teamColors[t];
-			gt.fontSize = (int)(Screen.height * 0.03);
-			return gt;
+			return mb;
 		});
 	}
 	
@@ -151,14 +149,14 @@ public class Manager : MonoBehaviour
 		timePassed += Time.deltaTime;
 		if (timePassed >= manaTime) {
 			teams.ForEach(team => {
-				teamManas[team] += 1f;
-				teamManas[team] = Mathf.Min(teamManas[team], 10f);
+				teamManas[team] += 1;
+				teamManas[team] = Mathf.Min(teamManas[team], 3);
 			});
 			timePassed=0;
 		}
-		teamManaText.ToList().ForEach(kvp => {
-			GUIText gt = kvp.Value;
-			gt.text = teamManas[kvp.Key].ToString();
+		teamManaBars.ToList().ForEach(kvp => {
+			ManaBar gt = kvp.Value;
+			gt.currMana = teamManas[kvp.Key];
 		});
         if (countingDown) {
             int countRemaining = countdownLength - (int)Mathf.Floor(Time.time - roundStartTime);

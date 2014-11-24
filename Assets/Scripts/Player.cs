@@ -108,8 +108,8 @@ public class Player : MonoBehaviour
 		go.transform.position = newPos;
 
 		DropItem dropItem = go.GetComponent<DropItem>();
-		if (Manager.S.teamManas[team] >= dropItem.manaCost && dropItem.TryDrop(this)) {
-			Manager.S.teamManas[team] -= dropItem.manaCost;
+		if (Manager.S.teamManas[team] >= 1 && dropItem.TryDrop(this)) {
+			Manager.S.teamManas[team] -= 1;
 		} else { 
 			Destroy(go);
 		}

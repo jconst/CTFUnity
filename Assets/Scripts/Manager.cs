@@ -33,6 +33,7 @@ public class Manager : MonoBehaviour
 
     public float manaTime = 10f;
     const int countdownLength = 3;
+    const int pointLimit = 5;
 
     // -- VARIABLES --
 	public Dictionary<string, int> teamScores;
@@ -194,7 +195,7 @@ public class Manager : MonoBehaviour
             countdownGUIText.text = "Hold the bomb in\nyour enemy's base!";
             yield return new WaitForSeconds(2);
 
-            countdownGUIText.text = "First to 5 points wins!";
+            countdownGUIText.text = "First to " + pointLimit + " points wins!";
             yield return new WaitForSeconds(1.5f);
         }
 
@@ -219,7 +220,17 @@ public class Manager : MonoBehaviour
     }
 
     public void DidScore(Player scorer) {
-        teamScores[scorer.team]++;
-        StartNewRound(false, scorer.team);
+        if (++teamScores[scorer.team] >= pointLimit) {
+            StartCoroutine(WinGame(scorer.team));
+        } else {
+            StartNewRound(false, scorer.team);
+        }
+    }
+
+    private IEnumerator WinGame(string team) {
+        countdownGUIText.enabled = countdownBackground.enabled = true;
+        countdownGUIText.text = team + " team wins!";
+        yield return new WaitForSeconds(2);
+        Application.LoadLevel(0);
     }
 }

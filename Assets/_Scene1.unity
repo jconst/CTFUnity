@@ -3140,7 +3140,7 @@ MonoBehaviour:
   manaTime: 10
   allPlayers: []
   roundStarted: 0
-  itemPickups: 1
+  itemPickups: 0
   countdownGUIText: {fileID: 0}
   countdownBackground: {fileID: 0}
 --- !u!4 &1564047625

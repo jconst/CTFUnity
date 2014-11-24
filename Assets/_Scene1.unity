@@ -494,7 +494,7 @@ GUITexture:
   m_GameObject: {fileID: 451276273}
   m_Enabled: 1
   m_Texture: {fileID: 2800000, guid: ed5e5321a136910498595a9c6688e824, type: 3}
-  m_Color: {r: .5, g: .5, b: .5, a: .5}
+  m_Color: {r: .203921571, g: .20784314, b: .20784314, a: .5}
   m_PixelInset:
     serializedVersion: 2
     x: -64
@@ -1358,7 +1358,7 @@ GUITexture:
   m_GameObject: {fileID: 806454465}
   m_Enabled: 1
   m_Texture: {fileID: 2800000, guid: ed5e5321a136910498595a9c6688e824, type: 3}
-  m_Color: {r: .5, g: .5, b: .5, a: .5}
+  m_Color: {r: .203921571, g: .20784314, b: .20784314, a: .5}
   m_PixelInset:
     serializedVersion: 2
     x: -64
@@ -2067,6 +2067,7 @@ MonoBehaviour:
   manaTime: 10
   allPlayers: []
   roundStartTime: 0
+  itemPickups: 1
   countdownGUIText: {fileID: 0}
 --- !u!4 &1564047625
 Transform:

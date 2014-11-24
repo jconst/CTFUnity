@@ -42,6 +42,7 @@ public class Manager : MonoBehaviour
     public List<Player> allPlayers;
     public float roundStartTime = 0f;
 	private float timePassed=0;
+	public bool itemPickups = false;
 
     public GUIText countdownGUIText;
 
@@ -63,7 +64,14 @@ public class Manager : MonoBehaviour
         teamScores = InitScores(teams);
 		teamManas = InitManas(teams);
         teamScoreText = InitScoreText(teams);
-		teamManaBars = InitManaBars (teams);
+		if (itemPickups) {
+			foreach(GameObject go in GameObject.FindGameObjectsWithTag("ItemSpawn"))
+			{
+				go.GetComponent<ItemSpawn>().activ=itemPickups;
+			}
+				}
+		else
+			teamManaBars = InitManaBars (teams);
         allPlayers = SpawnPlayers();
         CreateOverlayCamera();
 
@@ -125,6 +133,7 @@ public class Manager : MonoBehaviour
         player.team = team;
         player.number = index;
         player.renderer.material.color = teamColors[team];
+		player.pickups = itemPickups;
 
         return player;
     }
@@ -147,17 +156,19 @@ public class Manager : MonoBehaviour
             gt.text = score.ToString();
         });
 		timePassed += Time.deltaTime;
-		if (timePassed >= manaTime) {
-			teams.ForEach(team => {
-				teamManas[team] += 1;
-				teamManas[team] = Mathf.Min(teamManas[team], 3);
-			});
-			timePassed=0;
-		}
-		teamManaBars.ToList().ForEach(kvp => {
-			ManaBar gt = kvp.Value;
-			gt.currMana = teamManas[kvp.Key];
-		});
+		if (!itemPickups) {
+						if (timePassed >= manaTime) {
+								teams.ForEach (team => {
+										teamManas [team] += 1;
+										teamManas [team] = Mathf.Min (teamManas [team], 3);
+								});
+								timePassed = 0;
+						}
+						teamManaBars.ToList ().ForEach (kvp => {
+								ManaBar gt = kvp.Value;
+								gt.currMana = teamManas [kvp.Key];
+						});
+				}
         if (countingDown) {
             int countRemaining = countdownLength - (int)Mathf.Floor(Time.time - roundStartTime);
             countdownGUIText.text = countRemaining > 0 ? countRemaining.ToString() : "Start!";

@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
 	public bool hasKnockback = false;
 	public float currentBoost = 1f;
 
+	public bool pickups;
+	public GameObject itemIcon;
+	public int itemNo=-1;
+
  	private List<string> dropItems =
 	    new List<string> {
 	   	"Turret",
@@ -92,12 +96,22 @@ public class Player : MonoBehaviour
 	}
 
 	void CheckDrop() {
-		dropItems.Each((item, indexFromZero) => {
-			int index = indexFromZero+1;
-			if (inputCtrl.ItemButtonDown(number, index)) {
-				DropNewItem(item);
-			}
-		});
+		if (!pickups) {
+			dropItems.Each ((item, indexFromZero) => {
+				int index = indexFromZero + 1;
+				if (inputCtrl.ItemButtonDown (number, index)) {
+						DropNewItem (item);
+				}
+			});
+		} else {
+			dropItems.Each ((item, indexFromZero) => {
+				int index = indexFromZero + 1;
+				if (inputCtrl.ItemButtonDown (number, index)&&itemNo!=-1) {
+					DropNewItem (dropItems[itemNo-1]);
+					itemNo=-1;
+				}
+			});
+		}
 	}
 
 	public void DropNewItem(string itemName)
@@ -108,11 +122,15 @@ public class Player : MonoBehaviour
 		go.transform.position = newPos;
 
 		DropItem dropItem = go.GetComponent<DropItem>();
-		if (Manager.S.teamManas[team] >= 1 && dropItem.TryDrop(this)) {
-			Manager.S.teamManas[team] -= 1;
-		} else { 
-			Destroy(go);
-		}
+		if (!pickups) {
+						if (Manager.S.teamManas [team] >= 1 && dropItem.TryDrop (this)) {
+								Manager.S.teamManas [team] -= 1;
+						} else { 
+								Destroy (go);
+						}
+				} else if(dropItem.TryDrop(this))
+						Destroy (itemIcon);
+
 	}
 
 	void CheckTackle() {
@@ -145,7 +163,20 @@ public class Player : MonoBehaviour
 		}
 		if (tackling)
 			hasKnockback = true;
+
 	}
+
+	void OnTriggerEnter2D(Collider2D coll)
+	{
+		if (coll.CompareTag ("ItemPickup") && itemNo == -1) {
+			coll.gameObject.GetComponent<ItemPickup>().Pickup(this);
+			itemIcon.transform.parent=
+				GameObject.Find (team+"ManaBkg").transform;
+			itemIcon.transform.localScale=new Vector3(1f, -0.2105f,1f);
+			itemIcon.transform.localPosition=
+				new Vector3(0f, (number%2)-1.5f, 1);
+				}
+		}
 	
 	public void Die()
 	{
@@ -178,6 +209,9 @@ public class Player : MonoBehaviour
 		}
 		flag = null;
 		rigidbody2D.velocity = Vector2.zero;
+		itemNo = -1;
+		if (itemIcon)
+						Destroy (itemIcon);
 	}
 
 	public void InvalidateSpawn()

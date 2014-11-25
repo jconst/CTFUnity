@@ -17,10 +17,13 @@ public class ItemSpawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (activ && !spawned)
+		if (!spawned)
 						time += Time.deltaTime;
-		if (time > spawnTime)
+		if (time > spawnTime) {
+			if(activ)
 						SpawnPickup (Random.Range (1, 5));
+			else SpawnPickup(5);
+				}
 	
 	}
 

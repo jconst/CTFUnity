@@ -172,14 +172,17 @@ public class Player : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D coll)
 	{
 		if (coll.CompareTag ("ItemPickup") && itemNo == -1) {
-			coll.gameObject.GetComponent<ItemPickup>().Pickup(this);
-			itemIcon.transform.parent=
-				GameObject.Find (team+"ManaBkg").transform;
-			itemIcon.transform.localScale=new Vector3(1f, -0.2105f,1f);
-			itemIcon.transform.localPosition=
-				new Vector3(0f, (number%2)-1.5f, 1);
+						coll.gameObject.GetComponent<ItemPickup> ().Pickup (this);
+						if (pickups) {
+								itemIcon.transform.parent =
+				GameObject.Find (team + "ManaBkg").transform;
+								itemIcon.transform.localScale = new Vector3 (1f, -0.2105f, 1f);
+								itemIcon.transform.localPosition =
+				new Vector3 (0f, (number % 2) - 1.5f, 1);
+						}
+				}
 		}
-	}
+
 	
 	public void Die()
 	{

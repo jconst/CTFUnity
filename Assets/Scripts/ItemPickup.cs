@@ -20,9 +20,12 @@ public class ItemPickup : MonoBehaviour {
 	public void Pickup(Player p)
 	{
 		isp.spawned = false;
-		p.itemIcon = Instantiate (Resources.Load("InvIcon")) as GameObject;
-		p.itemIcon.GetComponent<GUITexture> ().texture = tex;
-		p.itemNo = number;
+		if (number != 5) {
+						p.itemIcon = Instantiate (Resources.Load ("InvIcon")) as GameObject;
+						p.itemIcon.GetComponent<GUITexture> ().texture = tex;
+						p.itemNo = number;
+				} else
+						Manager.S.teamManas [p.team] = Mathf.Min (3, Manager.S.teamManas [p.team] + 1);
 		Destroy (this.gameObject);
 
 	}

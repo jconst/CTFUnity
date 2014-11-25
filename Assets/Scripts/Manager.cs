@@ -121,6 +121,9 @@ public class Manager : MonoBehaviour
     }
 
     Player SpawnPlayer(string team, int index) {
+		if(PlayerOptions.playerColors[index] != "") {
+			team = PlayerOptions.playerColors[index];
+		}
         GameObject playerGO = Instantiate(Resources.Load("Player")) as GameObject;
         Player player = playerGO.GetComponent<Player>();
 

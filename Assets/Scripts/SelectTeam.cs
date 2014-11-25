@@ -3,15 +3,9 @@ using System.Collections;
 
 public class SelectTeam : MonoBehaviour {
 
-	public static int numPlayers = 0;
-	public static int ready = 0;
-	public static string p1Color = "";
-	public static string p2Color = "";
-	public static string p3Color = "";
-	public static string p4Color = "";
-
 	float timePassed = 0;
 	float blinkTime = 0.75f;
+	bool canPressStart = false;
 
 	// Use this for initialization
 	void Start () {
@@ -39,64 +33,64 @@ public class SelectTeam : MonoBehaviour {
 			GameObject p = GameObject.FindGameObjectWithTag("player1");
 			if(!p.renderer.enabled) {
 				p.renderer.enabled = true;
-				numPlayers++;
+				PlayerOptions.numPlayers++;
 			}
 			if(p.transform.position.x < 0 || p.transform.position.x > 0) {
 				if(p.transform.position.x < 0) {
-					p1Color = "red";
+					PlayerOptions.playerColors[0] = "Red";
 				} else {
-					p1Color = "blue";
+					PlayerOptions.playerColors[0] = "Blue";
 				}
 				p.renderer.material.color = Color.grey;
-				ready++;
+				PlayerOptions.ready++;
 			}
 		}
-		if( Input.GetButtonDown("Item21") ) {
+		if( Input.GetButtonDown("Item12") ) {
 			GameObject p = GameObject.FindGameObjectWithTag("player2");
 			if(!p.renderer.enabled) {
 				p.renderer.enabled = true;
-				numPlayers++;
+				PlayerOptions.numPlayers++;
 			}
 			if(p.transform.position.x < 0 || p.transform.position.x > 0) {
 				if(p.transform.position.x < 0) {
-					p2Color = "red";
+					PlayerOptions.playerColors[1] = "Red";
 				} else {
-					p2Color = "blue";
+					PlayerOptions.playerColors[1] = "Blue";
 				}
 				p.renderer.material.color = Color.grey;
-				ready++;
+				PlayerOptions.ready++;
 			}
 		}
-		if( Input.GetButtonDown("Item31") ) {
+		if( Input.GetButtonDown("Item13") ) {
 			GameObject p = GameObject.FindGameObjectWithTag("player3");
 			if(!p.renderer.enabled) {
 				p.renderer.enabled = true;
-				numPlayers++;
+				PlayerOptions.numPlayers++;
 			}
 			if(p.transform.position.x < 0 || p.transform.position.x > 0) {
 				if(p.transform.position.x < 0) {
-					p3Color = "red";
+					PlayerOptions.playerColors[2] = "Red";
 				} else {
-					p3Color = "blue";
+					PlayerOptions.playerColors[2] = "Blue";
 				}
 				p.renderer.material.color = Color.grey;
-				ready++;
+				PlayerOptions.ready++;
 			}
 		}
-		if( Input.GetButtonDown("Item41") ) {
+		if( Input.GetButtonDown("Item14") ) {
 			GameObject p = GameObject.FindGameObjectWithTag("player4");
 			if(!p.renderer.enabled) {
 				p.renderer.enabled = true;
-				numPlayers++;
+				PlayerOptions.numPlayers++;
 			}
 			if(p.transform.position.x < 0 || p.transform.position.x > 0) {
 				if(p.transform.position.x < 0) {
-					p4Color = "red";
+					PlayerOptions.playerColors[3] = "Red";
 				} else {
-					p4Color = "blue";
+					PlayerOptions.playerColors[3] = "Blue";
 				}
 				p.renderer.material.color = Color.grey;
-				ready++;
+				PlayerOptions.ready++;
 			}
 		}
 
@@ -104,14 +98,14 @@ public class SelectTeam : MonoBehaviour {
 		// p1
 		if(Input.GetAxis("HorizontalL1") > 0.5) {
 			GameObject p = GameObject.FindGameObjectWithTag("player1");
-			if(p.renderer.enabled && p1Color == "") {
+			if(p.renderer.enabled && PlayerOptions.playerColors[0] == "") {
 				Vector3 i = p.transform.position;
 				i.x = 3;
 				p.transform.position = i;
 			}
 		} else if(Input.GetAxis("HorizontalL1") < -0.5) {
 			GameObject p = GameObject.FindGameObjectWithTag("player1");
-			if(p.renderer.enabled && p1Color == "") {
+			if(p.renderer.enabled && PlayerOptions.playerColors[0] == "") {
 				Vector3 i = p.transform.position;
 				i.x = -3;
 				p.transform.position = i;
@@ -120,14 +114,14 @@ public class SelectTeam : MonoBehaviour {
 		// p2
 		if(Input.GetAxis("HorizontalL2") > 0.5) {
 			GameObject p = GameObject.FindGameObjectWithTag("player2");
-			if(p.renderer.enabled && p2Color == "") {
+			if(p.renderer.enabled && PlayerOptions.playerColors[1] == "") {
 				Vector3 i = p.transform.position;
 				i.x = 3;
 				p.transform.position = i;
 			}
 		} else if(Input.GetAxis("HorizontalL2") < -0.5) {
 			GameObject p = GameObject.FindGameObjectWithTag("player2");
-			if(p.renderer.enabled && p2Color == "") {
+			if(p.renderer.enabled && PlayerOptions.playerColors[1] == "") {
 				Vector3 i = p.transform.position;
 				i.x = -3;
 				p.transform.position = i;
@@ -136,14 +130,14 @@ public class SelectTeam : MonoBehaviour {
 		// p3
 		if(Input.GetAxis("HorizontalL3") > 0.5) {
 			GameObject p = GameObject.FindGameObjectWithTag("player3");
-			if(p.renderer.enabled && p3Color == "") {
+			if(p.renderer.enabled && PlayerOptions.playerColors[2] == "") {
 				Vector3 i = p.transform.position;
 				i.x = 3;
 				p.transform.position = i;
 			}
 		} else if(Input.GetAxis("HorizontalL3") < -0.5) {
 			GameObject p = GameObject.FindGameObjectWithTag("player3");
-			if(p.renderer.enabled && p3Color == "") {
+			if(p.renderer.enabled && PlayerOptions.playerColors[2] == "") {
 				Vector3 i = p.transform.position;
 				i.x = -3;
 				p.transform.position = i;
@@ -152,14 +146,14 @@ public class SelectTeam : MonoBehaviour {
 		// p4
 		if(Input.GetAxis("HorizontalL4") > 0.5) {
 			GameObject p = GameObject.FindGameObjectWithTag("player4");
-			if(p.renderer.enabled && p4Color == "") {
+			if(p.renderer.enabled && PlayerOptions.playerColors[3] == "") {
 				Vector3 i = p.transform.position;
 				i.x = 3;
 				p.transform.position = i;
 			}
 		} else if(Input.GetAxis("HorizontalL4") < -0.5) {
 			GameObject p = GameObject.FindGameObjectWithTag("player4");
-			if(p.renderer.enabled && p4Color == "") {
+			if(p.renderer.enabled && PlayerOptions.playerColors[3] == "") {
 				Vector3 i = p.transform.position;
 				i.x = -3;
 				p.transform.position = i;
@@ -167,7 +161,8 @@ public class SelectTeam : MonoBehaviour {
 		}
 
 		// Blink Press Start when teams are ready
-		if(numPlayers >= 2 && (ready == numPlayers) ) {
+		if(PlayerOptions.numPlayers >= 2 && (PlayerOptions.ready == PlayerOptions.numPlayers) ) {
+			canPressStart = true;
 			timePassed += Time.deltaTime;
 			
 			if(timePassed > blinkTime) {
@@ -185,8 +180,8 @@ public class SelectTeam : MonoBehaviour {
 		}
 
 		// Press Start Handler
-		if(Input.GetButtonDown("start")) {
-			print ("poop");
+		if(Input.GetButtonDown("start") && canPressStart) {
+			Application.LoadLevel("_Scene1");
 		}
 
 	}

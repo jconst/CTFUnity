@@ -30,7 +30,7 @@ public class StartScreen : MonoBehaviour {
 		}
 
 		if(Input.GetButtonDown("start")) {
-			print ("poop");
+			Application.LoadLevel("_SelectTeam");
 		}
 
 	}

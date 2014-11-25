@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: blueZoneMat
+  m_Name: Red
   m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -25,4 +25,4 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .183553204, g: .354827642, b: .713235259, a: .215686277}
+        second: {r: .854901969, g: .152941182, b: .192156866, a: 0}

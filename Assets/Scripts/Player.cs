@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 	public bool tackling = false;
 	public bool hasKnockback = false;
 	public float currentBoost = 1f;
+	public bool dead;
 
 	public bool pickups;
 	public GameObject itemIcon;
@@ -51,6 +52,8 @@ public class Player : MonoBehaviour
 	}
 
 	void Update () {
+		if (dead)
+			return;
 		CheckDrop();
 		CheckTackle();
 		MoveStep();
@@ -123,13 +126,13 @@ public class Player : MonoBehaviour
 
 		DropItem dropItem = go.GetComponent<DropItem>();
 		if (!pickups) {
-						if (Manager.S.teamManas [team] >= 1 && dropItem.TryDrop (this)) {
-								Manager.S.teamManas [team] -= 1;
-						} else { 
-								Destroy (go);
-						}
-				} else if(dropItem.TryDrop(this))
-						Destroy (itemIcon);
+			if (Manager.S.teamManas [team] >= 1 && dropItem.TryDrop (this)) {
+					Manager.S.teamManas [team] -= 1;
+			} else { 
+					Destroy (go);
+			}
+		} else if(dropItem.TryDrop(this))
+				Destroy (itemIcon);
 
 	}
 
@@ -179,6 +182,7 @@ public class Player : MonoBehaviour
 						}
 				}
 		}
+
 	
 	public void Die()
 	{
@@ -187,8 +191,13 @@ public class Player : MonoBehaviour
 
 	public IEnumerator DieCoroutine()
 	{
+		dead = true;
 		renderer.enabled = false;
 		collider2D.enabled = false;
+		if (carrying) {
+			flag.Drop();
+		}
+		
 		particleSystem.startColor = Manager.S.teamColors[team];
 		particleSystem.Play();
 		yield return new WaitForSeconds(respawnTime);
@@ -199,6 +208,7 @@ public class Player : MonoBehaviour
 	{
 		renderer.enabled = true;
 		collider2D.enabled = true;
+		dead = false;
 		if (spawnpoint) {
 			transform.position = spawnpoint.transform.position;
 			Destroy(spawnpoint.gameObject);
@@ -206,14 +216,11 @@ public class Player : MonoBehaviour
 		}
 		else 
 			transform.position = initialPos;
-		if (carrying) {
-			flag.Drop();
-		}
 		flag = null;
 		rigidbody2D.velocity = Vector2.zero;
 		itemNo = -1;
 		if (itemIcon)
-						Destroy (itemIcon);
+			Destroy (itemIcon);
 	}
 
 	public void InvalidateSpawn()

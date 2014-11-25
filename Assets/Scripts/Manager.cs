@@ -220,17 +220,19 @@ public class Manager : MonoBehaviour
     }
 
     public void DidScore(Player scorer) {
-        if (++teamScores[scorer.team] >= pointLimit) {
-            StartCoroutine(WinGame(scorer.team));
-        } else {
-            StartNewRound(false, scorer.team);
-        }
+        StartCoroutine(ScoreCoroutine(scorer.team));
     }
 
-    private IEnumerator WinGame(string team) {
-        countdownGUIText.enabled = countdownBackground.enabled = true;
-        countdownGUIText.text = team + " team wins!";
-        yield return new WaitForSeconds(2);
-        Application.LoadLevel(0);
+    private IEnumerator ScoreCoroutine(string team) {
+        allPlayers.ForEach(p => p.Die());
+        yield return new WaitForSeconds(1);        
+        if (++teamScores[team] >= pointLimit) {
+            countdownGUIText.enabled = countdownBackground.enabled = true;
+            countdownGUIText.text = team + " team wins!";
+            yield return new WaitForSeconds(2);
+            Application.LoadLevel(0);
+        } else {
+            StartNewRound(false, team);
+        }
     }
 }

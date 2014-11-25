@@ -15,7 +15,7 @@ public class DecoyInput : InputControl
 
     public override Vector2 RunVelocity(int playerNum)
     {
-        wobble = ConstrainedRandomDirection(0.2f, 30f, wobble);
+        wobble = ConstrainedRandomDirection(0.3f, 20f, wobble);
         return wobble;
     }
 
@@ -30,7 +30,7 @@ public class DecoyInput : InputControl
     }
 
     public void Collision() {
-        direction = wobble = ConstrainedRandomDirection(0.01f, 90f, direction);
+        direction = wobble = ConstrainedRandomDirection(0.1f, 180f, direction);
     }
 
     public Vector2 ConstrainedRandomDirection(float timeBetweenChanges, float maxAngleChange, Vector2 basis)

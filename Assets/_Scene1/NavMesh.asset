@@ -1,0 +1,10 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!194 &19400000
+NavMesh:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: NavMesh
+  m_MeshData: 5445534d0100000000000000da8bfcc1abfe3ac152b8fe3e56550542565505420004000000100000
+  m_Heightmaps: []

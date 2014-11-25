@@ -12,7 +12,7 @@ public class Decoy : DropItem
     public override bool TryDrop(Player p) {
         base.TryDrop(p);
         
-        // lifeTime = 6f;
+        lifeTime = 6f;
         CreateFakePlayer(p);
         return true;
     }

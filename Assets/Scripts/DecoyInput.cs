@@ -30,7 +30,7 @@ public class DecoyInput : InputControl
     }
 
     public void Collision() {
-        direction = wobble = ConstrainedRandomDirection(0.01f, 90f, direction);
+        direction = wobble = ConstrainedRandomDirection(0.05f, 90f, direction);
     }
 
     public Vector2 ConstrainedRandomDirection(float timeBetweenChanges, float maxAngleChange, Vector2 basis)

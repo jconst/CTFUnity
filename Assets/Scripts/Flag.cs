@@ -42,6 +42,9 @@ public class Flag : MonoBehaviour
 	void Score()
 	{
 		Manager.S.DidScore(carrier);
+		particleSystem.Play();
+		renderer.enabled = false;
+		countdown = 100f; //stop repeated scoring while game reloads
 	}
 
 	public void Drop()
@@ -57,6 +60,7 @@ public class Flag : MonoBehaviour
 		transform.position = initialPosit;
 		carrier = null;
 		countdown = timeLimit;
+		renderer.enabled = true;
 	}
 
 	public void OnTriggerEnter2D(Collider2D coll) {

@@ -18,6 +18,8 @@ public class Bullet : MonoBehaviour
         if (p) {
             p.Die();
             Destroy(gameObject);
+        } else if (coll.gameObject.tag == "Edge") {
+            Destroy(gameObject);
         }
     }
 }

@@ -12,6 +12,11 @@ TagManager:
   - Countdown
   - ItemSpawn
   - ItemPickup
+  - pressStart
+  - player1
+  - player2
+  - player3
+  - player4
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

@@ -87,7 +87,7 @@ GameObject:
   - 23: {fileID: 11617864}
   m_Layer: 0
   m_Name: P3
-  m_TagString: Untagged
+  m_TagString: player3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,7 +225,7 @@ GameObject:
   - 23: {fileID: 702338810}
   m_Layer: 0
   m_Name: P1
-  m_TagString: Untagged
+  m_TagString: player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -294,7 +294,7 @@ GameObject:
   - 23: {fileID: 897690309}
   m_Layer: 0
   m_Name: P4
-  m_TagString: Untagged
+  m_TagString: player4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,7 +363,7 @@ GameObject:
   - 23: {fileID: 953502278}
   m_Layer: 0
   m_Name: P2
-  m_TagString: Untagged
+  m_TagString: player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

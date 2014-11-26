@@ -32,8 +32,8 @@ public class Manager : MonoBehaviour
     // -- VARIABLES --
     public Dictionary<string, Vector2> spawnLocations =
        new Dictionary<string, Vector2> {
-       {"Blue", new Vector2(5f, 0)},
-       {"Red", new Vector2(-5f, 0)}
+       {"Blue", new Vector2(-5f, 0)},
+       {"Red", new Vector2(5f, 0)}
     };
 	public Dictionary<string, int> teamScores;
 	public Dictionary<string, int> teamManas;
@@ -92,11 +92,11 @@ public class Manager : MonoBehaviour
         return teamList.ToDictionary(t => t, t => {
             GameObject go = Instantiate(Resources.Load("ScoreText")) as GameObject;
             GUIText gt = go.GetComponent<GUIText>();
-            float width = .5f / teamList.Count();
+            float width = .8f / teamList.Count();
             float index = (float)teamList.IndexOf(t);
             go.transform.parent = scoreBoard.transform;
             go.transform.localScale = new Vector2(width, 1);
-            go.transform.localPosition = new Vector3(index*width - 0.15f, 0.1f, 1);
+            go.transform.localPosition = new Vector3(index*width - 0.2f, 0.1f, 1);
             gt.color = teamColors[t];
             gt.fontSize = (int)(Screen.height * 0.04);
             return gt;
@@ -105,12 +105,12 @@ public class Manager : MonoBehaviour
 
 	Dictionary<string, ManaBar> InitManaBars(List<string> teamList) {
 		return teamList.ToDictionary(t => t, t => {
-			GameObject go = Instantiate(Resources.Load("ManaText")) as GameObject;
+			GameObject go = Instantiate(Resources.Load("ManaBar")) as GameObject;
 			ManaBar mb = go.GetComponent<ManaBar>();
-			mb.team=t;
-			GUIText gt= go.GetComponent<GUIText>();
+			mb.team = t;
+			GUIText gt= go.GetComponentInChildren<GUIText>();
 			float index = (float)teamList.IndexOf(t);
-			go.transform.position = new Vector3(Mathf.Abs(index - 0.04f), 0.3f, 1);
+			go.transform.position = new Vector3(Mathf.Abs(index - 0.04f), 0.5f, 0);
 			gt.color = teamColors[t];
 			return mb;
 		});
@@ -120,7 +120,7 @@ public class Manager : MonoBehaviour
         if (PlayerOptions.teamForPlayer.Count == 0) {
             //for testing without needing to load menu
             PlayerOptions.teamForPlayer[0] = "Red";
-            PlayerOptions.teamForPlayer[1] = "Blue";
+            PlayerOptions.teamForPlayer[3] = "Blue";
         }
 		return PlayerOptions.teamForPlayer.Select(kvp => SpawnPlayer(kvp.Value, kvp.Key)).ToList();
     }

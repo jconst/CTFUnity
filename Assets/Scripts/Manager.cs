@@ -19,12 +19,6 @@ public class Manager : MonoBehaviour
         {"Red", Color.red}
     };
 
-    public Dictionary<string, int> teamSizes =
-       new Dictionary<string, int> {
-        {"Blue", 1},
-        {"Red", 1}
-    };
-
     public Dictionary<string, Vector2> spawnLocations =
        new Dictionary<string, Vector2> {
        {"Blue", new Vector2(5f, -1f)},
@@ -124,18 +118,10 @@ public class Manager : MonoBehaviour
 	}
 	
 	List<Player> SpawnPlayers() {
-		return teamSizes.SelectMany(kvp => SpawnTeam(kvp.Key, kvp.Value)).ToList();
-    }
-
-    List<Player> SpawnTeam(string team, int size) {
-        int teamNum = teams.FindIndex(t => t == team);
-        return Enumerable.Range(0, size).Select(i => SpawnPlayer(team, (size*teamNum)+i)).ToList();
+		return PlayerOptions.teamForPlayer.Select(kvp => SpawnPlayer(kvp.Value, kvp.Key)).ToList();
     }
 
     Player SpawnPlayer(string team, int index) {
-		if(PlayerOptions.playerColors[index] != "") {
-			team = PlayerOptions.playerColors[index];
-		}
         GameObject playerGO = Instantiate(Resources.Load("Player")) as GameObject;
         Player player = playerGO.GetComponent<Player>();
 

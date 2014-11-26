@@ -31,6 +31,12 @@ public class Manager : MonoBehaviour
        {"Red", new Vector2(-5f, 1f)}
     };
 
+    public Dictionary<string, int> teamLayers =
+       new Dictionary<string, int> {
+       {"Blue", 9},
+       {"Red", 10}
+    };
+
     public float manaTime = 10f;
     const int countdownLength = 3;
     const int pointLimit = 5;
@@ -135,6 +141,7 @@ public class Manager : MonoBehaviour
 
         Vector3 initialPos = spawnLocations[team] + (new Vector2(index, index));
         playerGO.transform.position = player.initialPos = initialPos;
+        playerGO.layer = teamLayers[team];
         player.team = team;
         player.number = index;
         player.renderer.material.color = teamColors[team];

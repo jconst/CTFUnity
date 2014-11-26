@@ -16,7 +16,7 @@ public class Decoy : DropItem
         base.TryDrop(p);
         
         line = GetComponent<LineRenderer>();
-        // lifeTime = 10f;
+        lifeTime = 10f;
         CreateFakePlayer(p);
         return true;
     }

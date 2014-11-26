@@ -9,6 +9,8 @@ public class Decoy : DropItem
     Player fakePlayer;
     DecoyInput input;
 
+    public Vector2 target = Vector2.zero;
+
     public override bool TryDrop(Player p) {
         base.TryDrop(p);
         
@@ -19,33 +21,47 @@ public class Decoy : DropItem
 
     public void CreateFakePlayer(Player p) {
         GameObject go = Instantiate(owner.gameObject) as GameObject;
-        Vector2 startDirection = p.lastInputVelocity.normalized;
-        go.transform.position += (Vector3)startDirection * 0.5f;
         fakePlayer = go.GetComponent<Player>();
 
         fakePlayer.collider2D.sharedMaterial = physMat;
-        fakePlayer.canGrabFlag = false;
-        fakePlayer.inputCtrl = input = new DecoyInput(fakePlayer, startDirection);
+        // fakePlayer.canGrabFlag = false;
+        fakePlayer.inputCtrl = input = new DecoyInput(this);
     }
 
     public new void Update() {
         base.Update();
+        LockToFakePlayer();
+        FindTarget();
+    }
+
+    void LockToFakePlayer() {
         transform.localScale = fakePlayer.transform.localScale * 2f;
         transform.rotation = fakePlayer.transform.rotation;
         transform.position = fakePlayer.transform.position;
     }
 
-    public void OnTriggerStay2D(Collider2D coll) {
-        if (coll.gameObject != owner.gameObject &&
-            coll.gameObject != fakePlayer.gameObject &&
-            coll.gameObject.tag != "Bomb") {
-            Debug.Log(coll.gameObject.name);
-            input.Collision();
+    void FindTarget() {
+        Flag flag = Manager.S.flag;
+        Vector2 newTarget = (flag.carrier == null || flag.carrier.team != fakePlayer.team)
+                          ? flag.transform.position
+                          : Manager.S.teamBases[fakePlayer.otherTeam].transform.position;
+        if (target != newTarget) {
+            CalculatePath(newTarget);
         }
+        target = newTarget;
+    }
+
+    void CalculatePath(Vector3 t) {
+        NavMesh.CalculatePath(transform.position, convertXYToXZ(t), -1, input.path);
+        input.UpdateWaypoints();
     }
 
     public override void Deactivate() {
         Destroy(fakePlayer.gameObject);
         base.Deactivate();
+    }
+
+    Vector3 convertXYToXZ(Vector3 v) {
+        return new Vector3(v.x, 0, v.y);
     }
 }

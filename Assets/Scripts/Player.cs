@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
@@ -44,6 +45,12 @@ public class Player : MonoBehaviour
 	public bool carrying {
 		get {
 			return flag != null;
+		}
+	}
+
+	public string otherTeam {
+		get {
+			return Manager.S.teams.Where(t => t != team).Single();
 		}
 	}
 

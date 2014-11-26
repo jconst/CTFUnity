@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Flag : MonoBehaviour
 {
-	Player carrier;
+	public Player carrier;
 	Vector3 initialPosit;
 
 	const float timeLimit = 3f;

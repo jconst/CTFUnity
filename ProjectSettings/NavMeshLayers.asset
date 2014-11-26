@@ -5,7 +5,7 @@ NavMeshLayers:
   m_ObjectHideFlags: 0
   Built-in Layer 0:
     name: Default
-    cost: 1
+    cost: 0
     editType: 2
   Built-in Layer 1:
     name: Not Walkable

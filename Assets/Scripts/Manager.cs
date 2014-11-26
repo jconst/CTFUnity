@@ -40,13 +40,15 @@ public class Manager : MonoBehaviour
 	public Dictionary<string, int> teamManas;
 	public Dictionary<string, GUIText> teamScoreText;
 	public Dictionary<string, ManaBar> teamManaBars;
+    public Dictionary<string, GameObject> teamBases;
     public List<Player> allPlayers;
-    private float timePassed=0;
-    public bool roundStarted = false;
-	public bool itemPickups = false;
-
+    public Flag flag;
     public GUIText countdownGUIText;
     public GUITexture countdownBackground;
+
+    private float timePassed=0;
+    public bool roundStarted = false;
+    public bool itemPickups = false;
 
     static public Manager S {
         get {
@@ -60,17 +62,21 @@ public class Manager : MonoBehaviour
         teamScores = InitScores(teams);
 		teamManas = InitManas(teams);
         teamScoreText = InitScoreText(teams);
-		if (itemPickups) {
-			foreach(GameObject go in GameObject.FindGameObjectsWithTag("ItemSpawn"))
-			{
-				go.GetComponent<ItemSpawn>().activ=itemPickups;
-			}
-				}
-		else
-			teamManaBars = InitManaBars (teams);
         allPlayers = SpawnPlayers();
         CreateOverlayCamera();
         CreateCountdown();
+
+        if (itemPickups) {
+            foreach(GameObject go in GameObject.FindGameObjectsWithTag("ItemSpawn"))
+            {
+                go.GetComponent<ItemSpawn>().activ=itemPickups;
+            }
+        }
+        else
+            teamManaBars = InitManaBars (teams);
+        teamBases = teams.ToDictionary(team => team,                                 //key
+                                       team => GameObject.FindWithTag(team+"Side")); //value
+        flag = GameObject.FindObjectOfType(typeof(Flag)) as Flag;
 
         StartNewRound(true, null);
     }
@@ -184,7 +190,6 @@ public class Manager : MonoBehaviour
             p.Reset();
             p.frozen = true;
         });
-        Flag flag = GameObject.FindObjectOfType(typeof(Flag)) as Flag;
         flag.Reset();
 
         StartCoroutine(CountdownCoroutine(showRules, teamScored));

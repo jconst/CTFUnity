@@ -19,12 +19,6 @@ public class Manager : MonoBehaviour
         {"Red", Color.red}
     };
 
-    public Dictionary<string, Vector2> spawnLocations =
-       new Dictionary<string, Vector2> {
-       {"Blue", new Vector2(5f, -1f)},
-       {"Red", new Vector2(-5f, 1f)}
-    };
-
     public Dictionary<string, int> teamLayers =
        new Dictionary<string, int> {
        {"Blue", 9},
@@ -36,6 +30,11 @@ public class Manager : MonoBehaviour
     const int pointLimit = 5;
 
     // -- VARIABLES --
+    public Dictionary<string, Vector2> spawnLocations =
+       new Dictionary<string, Vector2> {
+       {"Blue", new Vector2(5f, 0)},
+       {"Red", new Vector2(-5f, 0)}
+    };
 	public Dictionary<string, int> teamScores;
 	public Dictionary<string, int> teamManas;
 	public Dictionary<string, GUIText> teamScoreText;
@@ -118,6 +117,11 @@ public class Manager : MonoBehaviour
 	}
 	
 	List<Player> SpawnPlayers() {
+        if (PlayerOptions.teamForPlayer.Count == 0) {
+            //for testing without needing to load menu
+            PlayerOptions.teamForPlayer[0] = "Red";
+            PlayerOptions.teamForPlayer[1] = "Blue";
+        }
 		return PlayerOptions.teamForPlayer.Select(kvp => SpawnPlayer(kvp.Value, kvp.Key)).ToList();
     }
 
@@ -125,7 +129,8 @@ public class Manager : MonoBehaviour
         GameObject playerGO = Instantiate(Resources.Load("Player")) as GameObject;
         Player player = playerGO.GetComponent<Player>();
 
-        Vector3 initialPos = spawnLocations[team] + (new Vector2(index, index));
+        Vector3 initialPos = spawnLocations[team];
+        spawnLocations[team] = Quaternion.Euler(0,0,20) * spawnLocations[team];
         playerGO.transform.position = player.initialPos = initialPos;
         playerGO.layer = teamLayers[team];
         player.team = team;

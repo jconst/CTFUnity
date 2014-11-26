@@ -34,4 +34,12 @@ public static class Extensions
         var i = 0;
         foreach ( var e in ie ) action( e, i++ );
     }
+
+    public static Vector3 convertXYToXZ(this Vector3 v) {
+        return new Vector3(v.x, 0, v.y);
+    }
+
+    public static Vector3 convertXZToXY(this Vector3 v) {
+        return new Vector3(v.x, v.z, 0);
+    }
 }

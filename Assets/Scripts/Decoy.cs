@@ -5,15 +5,17 @@ using System.Linq;
 
 public class Decoy : DropItem
 {
+    const bool drawPath = true;
     public PhysicsMaterial2D physMat;
     Player fakePlayer;
     DecoyInput input;
-
-    public Vector2 target = Vector2.zero;
+    LineRenderer line;
+    Vector2 target = new Vector2 (-1000, -1000);
 
     public override bool TryDrop(Player p) {
         base.TryDrop(p);
         
+        line = GetComponent<LineRenderer>();
         lifeTime = 6f;
         CreateFakePlayer(p);
         return true;
@@ -26,6 +28,7 @@ public class Decoy : DropItem
         fakePlayer.collider2D.sharedMaterial = physMat;
         // fakePlayer.canGrabFlag = false;
         fakePlayer.inputCtrl = input = new DecoyInput(this);
+        Manager.S.allPlayers.Add(fakePlayer);
     }
 
     public new void Update() {
@@ -52,16 +55,21 @@ public class Decoy : DropItem
     }
 
     void CalculatePath(Vector3 t) {
-        NavMesh.CalculatePath(transform.position, convertXYToXZ(t), -1, input.path);
+        NavMesh.CalculatePath(transform.position.convertXYToXZ(), t.convertXYToXZ(), -1, input.path);
+        if (drawPath) {
+            line.SetVertexCount(input.path.corners.Length+1);
+            line.SetPosition(0, transform.position);
+            input.path.corners.Each((pt, i) => {
+                line.SetPosition(i+1, pt.convertXZToXY());
+            });
+        }
         input.UpdateWaypoints();
     }
 
     public override void Deactivate() {
-        Destroy(fakePlayer.gameObject);
+        Manager.S.allPlayers.Remove(fakePlayer);
+        fakePlayer.Die();
+        Destroy(fakePlayer.gameObject, 1);
         base.Deactivate();
-    }
-
-    Vector3 convertXYToXZ(Vector3 v) {
-        return new Vector3(v.x, 0, v.y);
     }
 }

@@ -35,6 +35,9 @@ public class Decoy : DropItem
         base.Update();
         LockToFakePlayer();
         FindTarget();
+        if (fakePlayer.tackling) {
+            input.tackleForce = Vector2.zero; //avoid infinite tackle
+        }
     }
 
     void LockToFakePlayer() {
@@ -80,13 +83,6 @@ public class Decoy : DropItem
                 //tackle him
                 input.tackleForce = (p.transform.position - fakePlayer.transform.position).normalized;
             }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D coll){
-        Player p = coll.GetComponent<Player>();
-        if (p != null && p.team != fakePlayer.team) {
-            input.tackleForce = Vector2.zero;
         }
     }
 }

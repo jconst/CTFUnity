@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Decoy : DropItem
 {
-    const bool drawPath = true;
+    bool drawPath = false;
     public PhysicsMaterial2D physMat;
     Player fakePlayer;
     DecoyInput input;
@@ -16,7 +16,7 @@ public class Decoy : DropItem
         base.TryDrop(p);
         
         line = GetComponent<LineRenderer>();
-        lifeTime = 6f;
+        // lifeTime = 10f;
         CreateFakePlayer(p);
         return true;
     }
@@ -38,8 +38,6 @@ public class Decoy : DropItem
     }
 
     void LockToFakePlayer() {
-        transform.localScale = fakePlayer.transform.localScale * 2f;
-        transform.rotation = fakePlayer.transform.rotation;
         transform.position = fakePlayer.transform.position;
     }
 
@@ -48,13 +46,13 @@ public class Decoy : DropItem
         Vector2 newTarget = (flag.carrier == null || flag.carrier.team != fakePlayer.team)
                           ? flag.transform.position
                           : Manager.S.teamBases[fakePlayer.otherTeam].transform.position;
-        if (target != newTarget) {
-            CalculatePath(newTarget);
+        if ((target - newTarget).magnitude > 0.5f) {
+            CalculateNewPath(newTarget);
         }
         target = newTarget;
     }
 
-    void CalculatePath(Vector3 t) {
+    void CalculateNewPath(Vector3 t) {
         NavMesh.CalculatePath(transform.position.convertXYToXZ(), t.convertXYToXZ(), -1, input.path);
         if (drawPath) {
             line.SetVertexCount(input.path.corners.Length+1);
@@ -71,5 +69,24 @@ public class Decoy : DropItem
         fakePlayer.Die();
         Destroy(fakePlayer.gameObject, 1);
         base.Deactivate();
+    }
+
+    void OnTriggerStay2D(Collider2D coll){
+        Player p = coll.GetComponent<Player>();
+        if (p != null && p.team != fakePlayer.team) {
+            if (p.dead) {
+                input.tackleForce = Vector2.zero;
+            } else {
+                //tackle him
+                input.tackleForce = (p.transform.position - fakePlayer.transform.position).normalized;
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D coll){
+        Player p = coll.GetComponent<Player>();
+        if (p != null && p.team != fakePlayer.team) {
+            input.tackleForce = Vector2.zero;
+        }
     }
 }

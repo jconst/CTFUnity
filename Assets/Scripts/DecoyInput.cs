@@ -7,6 +7,8 @@ using System.Linq;
 public class DecoyInput : InputControl
 {
     public NavMeshPath path;
+    public Vector2 tackleForce = Vector2.zero;
+
     List<Vector3> waypoints;
     int pathIndex;
     Decoy decoy;
@@ -51,7 +53,7 @@ public class DecoyInput : InputControl
 
     public override Vector2 TackleVelocity(int playerNum)
     {
-        return Vector2.zero;
+        return tackleForce;
     }
 
     public override bool ItemButtonDown(int playerNum, int itemNum)

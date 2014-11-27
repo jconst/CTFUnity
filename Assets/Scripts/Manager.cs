@@ -69,8 +69,13 @@ public class Manager : MonoBehaviour
             foreach(GameObject go in GameObject.FindGameObjectsWithTag("ItemSpawn"))
             {
                 go.GetComponent<ItemSpawn>().activ=itemPickups;
+
             }
-        }
+			GameObject go1=Instantiate(Resources.Load("RedManaBkg")) as GameObject;
+			GameObject go2=Instantiate(Resources.Load("BlueManaBkg")) as GameObject;
+			go1.transform.position=new Vector3(Mathf.Abs(1 - 0.04f), 0.5f, 0);
+			go2.transform.position=new Vector3(Mathf.Abs(0 - 0.04f), 0.5f, 0);
+		}
         else
             teamManaBars = InitManaBars (teams);
         teamBases = teams.ToDictionary(team => team,                                 //key

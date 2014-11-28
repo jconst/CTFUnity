@@ -47,8 +47,8 @@ public class Decoy : DropItem
 
     void FindTarget() {
         Flag flag = Manager.S.flag;
-        Vector2 newTarget = (flag.carrier == null || flag.carrier.team != fakePlayer.team)
-                          ? flag.transform.position
+        Vector2 newTarget = (flag.carrier == null || flag.carrier.team != fakePlayer.team) ? flag.transform.position
+                          : flag.carrier != fakePlayer ? RandomEnemy().transform.position
                           : Manager.S.teamBases[fakePlayer.otherTeam].transform.position;
         if ((target - newTarget).magnitude > 0.5f) {
             CalculateNewPath(newTarget);
@@ -66,6 +66,12 @@ public class Decoy : DropItem
             });
         }
         input.UpdateWaypoints();
+    }
+
+    Player RandomEnemy() {
+        List<Player> enemies = Manager.S.allPlayers.Where(p => p.team != fakePlayer.team).ToList();
+        int randIndex = (int)(Extensions.Rand * enemies.Count);
+        return enemies[randIndex];
     }
 
     public override void Deactivate() {

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 public static class Extensions
 {
-    // private static System.Random random;
-    // public static float Rand {
-    //     get { 
-    //         if (random == null)
-    //             random = new System.Random(new System.DateTime().Millisecond);
-    //         return (float)(random.NextDouble());
-    //     }
-    // }
+    private static System.Random random;
+    public static float Rand {
+        get { 
+            if (random == null)
+                random = new System.Random(new System.DateTime().Millisecond);
+            return (float)(random.NextDouble());
+        }
+    }
 
     public static float ToAngle(this Vector2 v) {
         float angle = Vector2.Angle(Vector2.up, v);

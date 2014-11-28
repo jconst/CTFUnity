@@ -36,7 +36,7 @@ public class SelectTeam : MonoBehaviour {
 					PlayerOptions.teamForPlayer[i] = (p.transform.position.x < 0) ? "Red" : "Blue";
 					p.renderer.material.color = Color.grey;
 				}
-			}			
+			}
 			if (Mathf.Abs(InputControl.S.RunVelocity(i).x) > 0.5) {
 				GameObject p = GameObject.FindGameObjectWithTag("player"+(i+1));
 				if(p.renderer.enabled && !PlayerOptions.teamForPlayer.ContainsKey(i)) {

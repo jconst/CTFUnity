@@ -7,26 +7,30 @@ public class ItemPickup : MonoBehaviour {
 	public ItemSpawn isp;
 	public Texture tex;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnTriggerEnter2D(Collider2D coll)
+	{
+		Player p = coll.GetComponent<Player>();
+		if (p) {
+			Pickup(p);
+		}
 	}
 
 	public void Pickup(Player p)
 	{
+		Debug.Log("here");
 		isp.spawned = false;
-		if (number != 5) {
-						p.itemIcon = Instantiate (Resources.Load ("InvIcon")) as GameObject;
-						p.itemIcon.GetComponent<GUITexture> ().texture = tex;
-						p.itemNo = number;
-				} else
-						Manager.S.teamManas [p.team] = Mathf.Min (3, Manager.S.teamManas [p.team] + 1);
-		Destroy (this.gameObject);
+		if (number == 5) {
+			Manager.S.teamManas [p.team] = Mathf.Min (3, Manager.S.teamManas [p.team] + 1);
+			Destroy (this.gameObject);
+		} else if (p.itemNo == -1) {
+			p.itemIcon = Instantiate (Resources.Load ("InvIcon")) as GameObject;
+			p.itemIcon.GetComponent<GUITexture> ().texture = tex;
+			p.itemNo = number;
 
+			p.itemIcon.transform.parent = Manager.S.teamManaBars[p.team].transform;
+			p.itemIcon.transform.localScale = new Vector3 (1f, 0.35f, 1f);
+			p.itemIcon.transform.localPosition = new Vector3 (0f, 0f, 1);
+			Destroy (this.gameObject);
+		}
 	}
 }

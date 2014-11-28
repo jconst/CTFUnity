@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 131: {fileID: 13100000}
   - 114: {fileID: 11400002}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ManaBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

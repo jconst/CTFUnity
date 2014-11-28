@@ -294,7 +294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4fe32ef822ac243a1aceae26a7e743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activ: 0
   spawned: 0
   spawnTime: 15
 --- !u!4 &268129660
@@ -1040,7 +1039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4fe32ef822ac243a1aceae26a7e743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activ: 0
   spawned: 0
   spawnTime: 15
 --- !u!4 &583133833
@@ -1669,7 +1667,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4fe32ef822ac243a1aceae26a7e743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activ: 0
   spawned: 0
   spawnTime: 15
 --- !u!4 &950818277
@@ -3365,7 +3362,7 @@ MonoBehaviour:
   teams:
   - Blue
   - Red
-  manaTime: 15
+  manaTime: 1
   allPlayers: []
   flag: {fileID: 0}
   countdownGUIText: {fileID: 0}
@@ -3596,7 +3593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4fe32ef822ac243a1aceae26a7e743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activ: 0
   spawned: 0
   spawnTime: 15
 --- !u!4 &1623047008
@@ -4301,7 +4297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4fe32ef822ac243a1aceae26a7e743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activ: 0
   spawned: 0
   spawnTime: 15
 --- !u!4 &2023268467
@@ -4412,7 +4407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4fe32ef822ac243a1aceae26a7e743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activ: 0
   spawned: 0
   spawnTime: 15
 --- !u!4 &2056974765

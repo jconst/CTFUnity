@@ -5,7 +5,7 @@ using System.Linq;
 
 public class MainCamera : MonoBehaviour
 {
-    const float cameraEasing = 0.01f;
+    const float cameraEasing = 0.03f;
     const float maxCameraSize = 15f;
     const float minCameraSize = 6f;
  

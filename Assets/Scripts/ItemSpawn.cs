@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ItemSpawn : MonoBehaviour {
 
-	public bool activ;
 	public bool spawned;
 
 	float time=0f;
@@ -18,13 +17,13 @@ public class ItemSpawn : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!spawned)
-						time += Time.deltaTime;
+			time += Time.deltaTime;
 		if (time > spawnTime) {
-			if(activ)
-						SpawnPickup (Random.Range (1, 5));
-			else SpawnPickup(5);
-				}
-	
+			if(Manager.S.itemPickups)
+				SpawnPickup (Random.Range (1, 5));
+			else 
+				SpawnPickup(5);
+		}
 	}
 
 	void SpawnPickup(int number)

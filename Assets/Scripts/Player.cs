@@ -114,13 +114,12 @@ public class Player : MonoBehaviour
 				}
 			});
 		} else {
-			dropItems.Each ((item, indexFromZero) => {
-				int index = indexFromZero + 1;
-				if (inputCtrl.ItemButtonDown (number, index)&&itemNo!=-1) {
+			for (int i=0; i < 4; ++i) {
+				if (itemNo != -1 && inputCtrl.ItemButtonDown(number, i+1)) {
 					DropNewItem (dropItems[itemNo-1]);
-					itemNo=-1;
+					itemNo = -1;
 				}
-			});
+			}
 		}
 	}
 
@@ -134,13 +133,12 @@ public class Player : MonoBehaviour
 		DropItem dropItem = go.GetComponent<DropItem>();
 		if (!pickups) {
 			if (Manager.S.teamManas [team] >= 1 && dropItem.TryDrop (this)) {
-					Manager.S.teamManas [team] -= 1;
+				Manager.S.teamManas [team] -= 1;
 			} else { 
-					Destroy (go);
+				Destroy (go);
 			}
 		} else if(dropItem.TryDrop(this))
-				Destroy (itemIcon);
-
+			Destroy (itemIcon);
 	}
 
 	void CheckTackle() {
@@ -175,21 +173,6 @@ public class Player : MonoBehaviour
 			hasKnockback = true;
 
 	}
-
-	void OnTriggerEnter2D(Collider2D coll)
-	{
-		if (coll.CompareTag ("ItemPickup") && itemNo == -1) {
-						coll.gameObject.GetComponent<ItemPickup> ().Pickup (this);
-						if (pickups) {
-								itemIcon.transform.parent =
-				GameObject.Find (team + "ManaBkg(Clone)").transform;
-								itemIcon.transform.localScale = new Vector3 (1f, -0.2105f, 1f);
-								itemIcon.transform.localPosition =
-				new Vector3 (0f, (number % 2) - 1.5f, 1);
-						}
-				}
-		}
-
 	
 	public void Die()
 	{

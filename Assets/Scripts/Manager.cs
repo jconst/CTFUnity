@@ -62,22 +62,10 @@ public class Manager : MonoBehaviour
 		teamManas = InitManas(teams);
         teamScoreText = InitScoreText(teams);
         allPlayers = SpawnPlayers();
-        CreateOverlayCamera();
         CreateCountdown();
 
-        if (itemPickups) {
-            foreach(GameObject go in GameObject.FindGameObjectsWithTag("ItemSpawn"))
-            {
-                go.GetComponent<ItemSpawn>().activ=itemPickups;
+        teamManaBars = InitManaBars (teams);
 
-            }
-			GameObject go1=Instantiate(Resources.Load("RedManaBkg")) as GameObject;
-			GameObject go2=Instantiate(Resources.Load("BlueManaBkg")) as GameObject;
-			go1.transform.position=new Vector3(Mathf.Abs(1 - 0.04f), 0.5f, 0);
-			go2.transform.position=new Vector3(Mathf.Abs(0 - 0.04f), 0.5f, 0);
-		}
-        else
-            teamManaBars = InitManaBars (teams);
         teamBases = teams.ToDictionary(team => team,                                 //key
                                        team => GameObject.FindWithTag(team+"Side")); //value
         flag = GameObject.FindObjectOfType(typeof(Flag)) as Flag;
@@ -113,9 +101,12 @@ public class Manager : MonoBehaviour
 			GameObject go = Instantiate(Resources.Load("ManaBar")) as GameObject;
 			ManaBar mb = go.GetComponent<ManaBar>();
 			mb.team = t;
-			GUIText gt= go.GetComponentInChildren<GUIText>();
+			GUIText gt = go.GetComponentInChildren<GUIText>();
+            if (itemPickups) {
+                Destroy(gt.gameObject);
+            }
 			float index = (float)teamList.IndexOf(t);
-			go.transform.position = new Vector3(Mathf.Abs(index - 0.04f), 0.5f, 0);
+			go.transform.position = new Vector3(Mathf.Abs(index - 0.04f), 0.5f, -1);
 			gt.color = teamColors[t];
 			return mb;
 		});
@@ -144,15 +135,6 @@ public class Manager : MonoBehaviour
 		player.pickups = itemPickups;
 
         return player;
-    }
-
-    void CreateOverlayCamera() {
-        GameObject cameraGO = Instantiate(Resources.Load("UICamera"),
-                                          new Vector3(0f,0f,-10f), 
-                                          Quaternion.Euler(180, 0, 0)) as GameObject;
-        Camera camera = cameraGO.GetComponent<Camera>();
-        camera.rect = new Rect(0, 0, 1, 1);
-        camera.clearFlags = CameraClearFlags.Nothing;
     }
 
     void CreateCountdown() {

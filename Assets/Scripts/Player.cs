@@ -28,9 +28,10 @@ public class Player : MonoBehaviour
 	public bool tackling = false;
 	public bool hasKnockback = false;
 	public float currentBoost = 1f;
-	public bool dead;
 
-	public bool pickups;
+	public bool dead;
+	public bool invincible;
+
 	public GameObject itemIcon;
 	public int itemNo=-1;
 
@@ -64,6 +65,7 @@ public class Player : MonoBehaviour
 		CheckDrop();
 		CheckTackle();
 		MoveStep();
+		CheckInvincible();
 	}
 
 	void MoveStep()
@@ -106,7 +108,7 @@ public class Player : MonoBehaviour
 	}
 
 	void CheckDrop() {
-		if (!pickups) {
+		if (!Manager.S.itemPickups) {
 			dropItems.Each ((item, indexFromZero) => {
 				int index = indexFromZero + 1;
 				if (inputCtrl.ItemButtonDown (number, index)) {
@@ -131,7 +133,7 @@ public class Player : MonoBehaviour
 		go.transform.position = newPos;
 
 		DropItem dropItem = go.GetComponent<DropItem>();
-		if (!pickups) {
+		if (!Manager.S.itemPickups) {
 			if (Manager.S.teamManas [team] >= 1 && dropItem.TryDrop (this)) {
 				Manager.S.teamManas [team] -= 1;
 			} else { 
@@ -158,6 +160,12 @@ public class Player : MonoBehaviour
 		hasKnockback = false;
 	}
 
+	void CheckInvincible() {
+		Color c = renderer.material.color;
+		c.a = invincible ? 0.5f : 1;
+		renderer.material.color = c;
+	}
+
 	void OnCollisionEnter2D(Collision2D coll)
 	{
 		Player p = coll.gameObject.GetComponent<Player>();
@@ -171,12 +179,12 @@ public class Player : MonoBehaviour
 		}
 		if (tackling)
 			hasKnockback = true;
-
 	}
 	
 	public void Die()
 	{
-		StartCoroutine(DieCoroutine());
+		if (!invincible)
+			StartCoroutine(DieCoroutine());
 	}
 
 	public IEnumerator DieCoroutine()
@@ -192,6 +200,9 @@ public class Player : MonoBehaviour
 		particleSystem.Play();
 		yield return new WaitForSeconds(respawnTime);
 		Reset();
+		invincible = true;
+		yield return new WaitForSeconds(1);
+		invincible = false;
 	}
 
 	public void Reset()

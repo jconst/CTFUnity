@@ -84,7 +84,7 @@ public class Decoy : DropItem
     void OnTriggerStay2D(Collider2D coll){
         Player p = coll.GetComponent<Player>();
         if (p != null && p.team != fakePlayer.team) {
-            if (p.dead) {
+            if (p.dead || p.invincible) {
                 input.tackleForce = Vector2.zero;
             } else {
                 //tackle him

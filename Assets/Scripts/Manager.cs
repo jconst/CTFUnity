@@ -133,7 +133,6 @@ public class Manager : MonoBehaviour
         player.team = team;
         player.number = index;
         player.renderer.material.color = teamColors[team];
-		player.pickups = itemPickups;
 
         return player;
     }

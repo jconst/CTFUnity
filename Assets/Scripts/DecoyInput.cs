@@ -9,7 +9,7 @@ public class DecoyInput : InputControl
     public NavMeshPath path;
     public Vector2 tackleForce = Vector2.zero;
 
-    List<Vector3> waypoints;
+    public List<Vector3> waypoints;
     int pathIndex;
     Decoy decoy;
     Vector3 currentWaypoint {
@@ -48,7 +48,7 @@ public class DecoyInput : InputControl
             UpdateWaypoint();
             toWaypoint = currentWaypoint - decoy.transform.position;
         }
-        return toWaypoint.normalized;
+        return toWaypoint.normalized * 0.9f;
     }
 
     public override Vector2 TackleVelocity(int playerNum)

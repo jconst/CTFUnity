@@ -39,7 +39,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Radius: 1.79999995
+  m_Radius: 1.60000002
   m_Center: {x: 0, y: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -57,6 +57,7 @@ MonoBehaviour:
   time: 0
   lifeTime: 3600
   physMat: {fileID: 6200000, guid: 4ce98f622c46844268ccbde6f70ef5c2, type: 2}
+  target: {x: -1000, y: -1000}
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

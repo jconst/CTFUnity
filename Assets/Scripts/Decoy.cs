@@ -5,18 +5,18 @@ using System.Linq;
 
 public class Decoy : DropItem
 {
-    bool drawPath = false;
+    bool drawPath = true;
     public PhysicsMaterial2D physMat;
     Player fakePlayer;
     DecoyInput input;
     LineRenderer line;
-    Vector2 target = new Vector2 (-1000, -1000);
+    public Vector2 target = new Vector2 (-1000, -1000);
 
     public override bool TryDrop(Player p) {
         base.TryDrop(p);
         
         line = GetComponent<LineRenderer>();
-        lifeTime = 10f;
+        lifeTime = 1000f;
         CreateFakePlayer(p);
         return true;
     }
@@ -26,7 +26,8 @@ public class Decoy : DropItem
         fakePlayer = go.GetComponent<Player>();
 
         fakePlayer.collider2D.sharedMaterial = physMat;
-        fakePlayer.canRespawn = false;
+        // fakePlayer.canRespawn = false;
+        fakePlayer.currentBoost = 1f;
         fakePlayer.flag = null;
         fakePlayer.inputCtrl = input = new DecoyInput(this);
         Manager.S.allPlayers.Add(fakePlayer);
@@ -50,10 +51,14 @@ public class Decoy : DropItem
         Vector2 newTarget = (flag.carrier == null || flag.carrier.team != fakePlayer.team) ? flag.transform.position
                           : flag.carrier != fakePlayer ? RandomEnemy().transform.position
                           : Manager.S.teamBases[fakePlayer.otherTeam].transform.position;
-        if ((target - newTarget).magnitude > 0.5f) {
+
+        //if new target is different enough or fakePlayer is
+        //not at target & doesn't know where to go, recalc path
+        if ((target - newTarget).magnitude > 0.5f ||
+            (((Vector2)fakePlayer.transform.position - newTarget).magnitude > 0.5 && input.waypoints.Count == 0)) {
             CalculateNewPath(newTarget);
+            target = newTarget;
         }
-        target = newTarget;
     }
 
     void CalculateNewPath(Vector3 t) {

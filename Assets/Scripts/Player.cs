@@ -10,8 +10,6 @@ public class Player : MonoBehaviour
 	public int number;
 	public Vector3 initialPos;
 	public Vector2 lastInputVelocity;
-	public bool frozen = false;
-	public bool canGrabFlag = true;
 	public InputControl inputCtrl;
 
 	public Flag flag;
@@ -23,14 +21,17 @@ public class Player : MonoBehaviour
 	const float tackleCooldown = 0.85f;
 	const float respawnTime = 1f;
 
+	public float currentBoost = 1f;
+	public float tackleStartTime;
 	public Vector2 tackleDirection;
-	float tackleStartTime;
 	public bool tackling = false;
 	public bool hasKnockback = false;
-	public float currentBoost = 1f;
 
 	public bool dead;
 	public bool invincible;
+	public bool frozen = false;
+	public bool canGrabFlag = true;
+	public bool canRespawn = true;
 
 	public GameObject itemIcon;
 	public int itemNo=-1;
@@ -199,6 +200,10 @@ public class Player : MonoBehaviour
 		particleSystem.startColor = Manager.S.teamColors[team];
 		particleSystem.Play();
 		yield return new WaitForSeconds(respawnTime);
+		if (!canRespawn) {
+			Destroy(gameObject);
+			yield break;
+		}
 		Reset();
 		invincible = true;
 		yield return new WaitForSeconds(1);

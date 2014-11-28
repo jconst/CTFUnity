@@ -26,7 +26,7 @@ public class Decoy : DropItem
         fakePlayer = go.GetComponent<Player>();
 
         fakePlayer.collider2D.sharedMaterial = physMat;
-        // fakePlayer.canGrabFlag = false;
+        fakePlayer.canRespawn = false;
         fakePlayer.flag = null;
         fakePlayer.inputCtrl = input = new DecoyInput(this);
         Manager.S.allPlayers.Add(fakePlayer);

@@ -93,18 +93,17 @@ public class Player : MonoBehaviour
 			}
 			if (tackling) {
 				float tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
-				rigidbody2D.velocity = tackleDirection * tackleCurSpeed;
+				rigidbody2D.velocity = tackleDirection * tackleCurSpeed * currentBoost;
 			} 
 			else {
 				Vector2 velocity = inputCtrl.RunVelocity(number);
 				speed *= (carrying ? 0.9f : 1f);
 				if (velocity.magnitude > 0.2f ||
 					lastInputVelocity.magnitude > 0.1f) {
-					rigidbody2D.velocity = velocity.normalized * speed;
+					rigidbody2D.velocity = velocity.normalized * speed * currentBoost;
 				}
 				lastInputVelocity = velocity;
 			}
-			rigidbody2D.velocity *= currentBoost;
 		}
 	}
 

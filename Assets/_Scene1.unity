@@ -3368,7 +3368,7 @@ MonoBehaviour:
   countdownGUIText: {fileID: 0}
   countdownBackground: {fileID: 0}
   roundStarted: 0
-  itemPickups: 1
+  itemPickups: 0
 --- !u!4 &1564047625
 Transform:
   m_ObjectHideFlags: 0

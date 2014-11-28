@@ -108,6 +108,7 @@ public class Manager : MonoBehaviour
 			float index = (float)teamList.IndexOf(t);
 			go.transform.position = new Vector3(Mathf.Abs(index - 0.04f), 0.5f, -1);
 			gt.color = teamColors[t];
+            gt.fontSize = Screen.width / 100;
 			return mb;
 		});
 	}
@@ -141,6 +142,7 @@ public class Manager : MonoBehaviour
         GameObject countdownParent = Instantiate(Resources.Load("Countdown")) as GameObject;
         countdownGUIText = countdownParent.GetComponentInChildren<GUIText>();
         countdownBackground = countdownParent.GetComponentInChildren<GUITexture>();
+        countdownGUIText.fontSize = Screen.width / 18;
     }
 
     // -- UPDATE --

@@ -146,13 +146,14 @@ public class Manager : MonoBehaviour
 
     // -- UPDATE --
 
-    public void Update() {
+    public void Update() { 
         teamScoreText.ToList().ForEach(kvp => {
             GUIText gt = kvp.Value;
             int score = teamScores[kvp.Key];
             gt.text = score.ToString();
         });
 		timePassed += Time.deltaTime;
+
 		if (!itemPickups) {
     		if (timePassed >= manaTime) {
 				teams.ForEach (team => {
@@ -228,5 +229,10 @@ public class Manager : MonoBehaviour
         } else {
             StartNewRound(false, team);
         }
+    }
+
+    public void DidScore(String team) {
+        teamScores[team]++;
+        StartNewRound(false, team);
     }
 }

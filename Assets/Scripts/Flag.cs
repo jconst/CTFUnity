@@ -7,16 +7,15 @@ public class Flag : MonoBehaviour
 {
 	public Player carrier;
 	Vector3 initialPosit;
+	ProgressBar progress;
 
 	const float timeLimit = 3f;
 	float countdown = timeLimit;
 
-	// Use this for initialization
 	void Start () {
 		initialPosit = transform.position;
 	}
 
-	// Update is called once per frame
 	void Update () {
 		if (carrier != null) {
 			if (!carrier.carrying) {
@@ -61,16 +60,24 @@ public class Flag : MonoBehaviour
 		carrier = null;
 		countdown = timeLimit;
 		renderer.enabled = true;
+
+		if (progress) 
+			progress.Reset();
 	}
 
 	public void OnTriggerEnter2D(Collider2D coll) {
 		CheckPickup(coll);
+		ScoreZone zone = coll.GetComponent<ScoreZone>();
+		if (zone && carrier && carrier.team != zone.team) {
+			StartProgressBar(coll);
+		}
 	}
 
 	public void OnTriggerStay2D(Collider2D coll) {
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
 		if (zone && carrier && carrier.team != zone.team) {
 			countdown -= Time.deltaTime;
+			progress.countdown -= Time.deltaTime;
 		}
 	}
 
@@ -78,6 +85,8 @@ public class Flag : MonoBehaviour
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
 		if (zone) {
 			countdown = timeLimit;
+			GameObject pb = GameObject.FindWithTag("ProgressBar");
+			Destroy(pb);
 		}
 	}
 
@@ -86,5 +95,17 @@ public class Flag : MonoBehaviour
 		if (carrier == null && player) {
 			Pickup(player);
 		}
+	}
+
+	void StartProgressBar(Collider2D coll) {
+		GameObject go = (GameObject)Instantiate(Resources.Load("ProgressBar"));
+		progress = go.GetComponent<ProgressBar>();
+		
+		progress.timeLimit = timeLimit;
+		progress.countdown = timeLimit;
+		
+		Vector3 temp = coll.transform.position;
+		temp.y -= 1.5f;
+		progress.transform.position = temp;
 	}
 }

@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Decoy : DropItem
 {
-    bool drawPath = true;
+    bool drawPath = false;
     public PhysicsMaterial2D physMat;
     Player fakePlayer;
     DecoyInput input;
@@ -16,7 +16,7 @@ public class Decoy : DropItem
         base.TryDrop(p);
         
         line = GetComponent<LineRenderer>();
-        lifeTime = 1000f;
+        lifeTime = 10f;
         CreateFakePlayer(p);
         return true;
     }
@@ -26,7 +26,7 @@ public class Decoy : DropItem
         fakePlayer = go.GetComponent<Player>();
 
         fakePlayer.collider2D.sharedMaterial = physMat;
-        // fakePlayer.canRespawn = false;
+        fakePlayer.canRespawn = false;
         fakePlayer.currentBoost = 1f;
         fakePlayer.flag = null;
         fakePlayer.inputCtrl = input = new DecoyInput(this);

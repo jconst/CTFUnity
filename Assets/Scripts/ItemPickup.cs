@@ -17,7 +17,6 @@ public class ItemPickup : MonoBehaviour {
 
 	public void Pickup(Player p)
 	{
-		Debug.Log("here");
 		isp.spawned = false;
 		if (number == 5) {
 			Manager.S.teamManas [p.team] = Mathf.Min (3, Manager.S.teamManas [p.team] + 1);

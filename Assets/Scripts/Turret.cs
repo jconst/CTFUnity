@@ -9,9 +9,14 @@ public class Turret : DropItem
     public float secondsSinceLastShot = 0f;    
     private float range = 6f;
     private int numShots = 5;
+    public bool dead = false;
 
     new void Update() {
+        if (dead)
+            return;
+            
         base.Update();
+        lifeTime = 30;
         Vector2 toTarget = ClosestEnemyPlayer().transform.position - transform.position;
         transform.rotation = toTarget.ToQuaternion();
         secondsSinceLastShot += Time.deltaTime;
@@ -29,6 +34,7 @@ public class Turret : DropItem
                                           transform.rotation) as GameObject;
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         bullet.heading = heading;
+        bullet.team = owner.team;
         secondsSinceLastShot = 0f;
         if (--numShots <= 0) {
             Destroy(gameObject);
@@ -43,5 +49,24 @@ public class Turret : DropItem
 
     float HowFar(Player p) {
         return (transform.position - p.transform.position).magnitude;
+    }
+
+    void OnCollisionEnter2D(Collision2D coll){
+        if (coll.gameObject.tag == "Edge" && coll.relativeVelocity.magnitude > 3)
+            Deactivate();
+    }
+
+    public override void Deactivate() {
+        StartCoroutine(DieCoroutine());
+    }
+
+    public IEnumerator DieCoroutine()
+    {
+        dead = true;
+        renderer.enabled = false;
+        collider2D.enabled = false;
+        particleSystem.Play();
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
     }
 }

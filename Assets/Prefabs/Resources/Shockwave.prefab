@@ -14,7 +14,7 @@ GameObject:
   - 58: {fileID: 5800000}
   - 120: {fileID: 12000000}
   - 50: {fileID: 5000000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,6 @@ MonoBehaviour:
   manaCost: 3
   time: 0
   lifeTime: 6
-  safetime: 1
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

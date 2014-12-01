@@ -51,17 +51,17 @@ public class Shockwave : DropItem
     }
 
     void HitEdge(Collider2D coll) {
-        Player p = coll.GetComponent<Player>();
-        if (p && p.team != owner.team) {
-            p.rigidbody2D.AddForce(ForceForColl(coll), ForceMode2D.Impulse);
-            p.hasKnockback = true;
+        Rigidbody2D body = coll.GetComponent<Rigidbody2D>();
+        if (body) {
+            Player p = coll.GetComponent<Player>();
+            if (p) {
+                p.hasKnockback = true;
+                if (p.team == owner.team) {
+                    return;
+                }
+            }
+            body.AddForce(ForceForColl(coll), ForceMode2D.Impulse);
         }
-        // Flag f = coll.GetComponent<Flag>();
-        // if (f) {
-        //     f.Drop();
-        //     Debug.Log(ForceForColl(coll));
-        //     f.rigidbody2D.AddForce(ForceForColl(coll), ForceMode2D.Impulse);
-        // }
     }
 
     Vector2 ForceForColl(Collider2D coll) {

@@ -9,8 +9,11 @@ public class Bullet : MonoBehaviour
     public Vector2 heading = Vector2.up;
     public string team;
 
+    void Start() {
+        rigidbody2D.velocity = (Vector3)heading.normalized * speed;
+    }
+
     void Update() {
-        transform.position += (Vector3)heading.normalized * speed * Time.deltaTime;
         Destroy(gameObject, 5f);
     }
 

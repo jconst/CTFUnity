@@ -55,10 +55,10 @@ public class Shockwave : DropItem
         if (body) {
             Player p = coll.GetComponent<Player>();
             if (p) {
-                p.hasKnockback = true;
                 if (p.team == owner.team) {
                     return;
                 }
+                p.hasKnockback = true;
             }
             body.AddForce(ForceForColl(coll), ForceMode2D.Impulse);
         }

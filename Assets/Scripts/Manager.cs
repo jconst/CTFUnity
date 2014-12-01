@@ -58,8 +58,8 @@ public class Manager : MonoBehaviour
     // -- SETUP --
 
     void Start() {
+        Time.timeScale = 1.3f;
         teamScores = InitScores(teams);
-		teamManas = InitManas(teams);
         teamScoreText = InitScoreText(teams);
         allPlayers = SpawnPlayers();
         CreateCountdown();
@@ -185,6 +185,7 @@ public class Manager : MonoBehaviour
     public IEnumerator CountdownCoroutine(bool showRules, string teamScored)
     {
         countdownGUIText.enabled = countdownBackground.enabled = true;
+        teamManas = InitManas(teams);
 
         if (showRules) {
             countdownGUIText.text = "Hold the bomb in\nyour enemy's base!";

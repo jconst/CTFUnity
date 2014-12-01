@@ -14,7 +14,7 @@ public class Turret : DropItem
     new void Update() {
         if (dead)
             return;
-            
+
         base.Update();
         lifeTime = 30;
         Vector2 toTarget = ClosestEnemyPlayer().transform.position - transform.position;
@@ -52,7 +52,7 @@ public class Turret : DropItem
     }
 
     void OnCollisionEnter2D(Collision2D coll){
-        if (coll.gameObject.tag == "Edge" && coll.relativeVelocity.magnitude > 3)
+        if (coll.relativeVelocity.magnitude > 3)
             Deactivate();
     }
 

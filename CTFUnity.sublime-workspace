@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"OnCo",
+				"OnCollisionEnter	collision"
+			],
+			[
 				"new",
 				"newTarget"
 			],
@@ -304,10 +308,6 @@
 				"gameObject"
 			],
 			[
-				"OnCo",
-				"OnCollisionStay	collision"
-			],
-			[
 				"dest",
 				"destPos"
 			],
@@ -528,30 +528,6 @@
 			}
 		},
 		{
-			"file": "Assets/Scripts/SelectTeam.cs",
-			"settings":
-			{
-				"buffer_size": 2161,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Assets/Scripts/StartScreen.cs",
-			"settings":
-			{
-				"buffer_size": 522,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Assets/Scripts/PlayerOptions.cs",
-			"settings":
-			{
-				"buffer_size": 289,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "Assets/Scripts/Decoy.cs",
 			"settings":
 			{
@@ -563,7 +539,7 @@
 			"file": "Assets/Scripts/Manager.cs",
 			"settings":
 			{
-				"buffer_size": 7563,
+				"buffer_size": 7713,
 				"line_ending": "Unix"
 			}
 		},
@@ -576,22 +552,6 @@
 			}
 		},
 		{
-			"file": "Assets/Scripts/SpawnPad.cs",
-			"settings":
-			{
-				"buffer_size": 290,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Assets/Scripts/ItemPickup.cs",
-			"settings":
-			{
-				"buffer_size": 890,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "Assets/Scripts/MainCamera.cs",
 			"settings":
 			{
@@ -600,18 +560,50 @@
 			}
 		},
 		{
-			"file": "Assets/Scripts/Extensions.cs",
-			"settings":
-			{
-				"buffer_size": 1233,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "Assets/Scripts/DecoyInput.cs",
 			"settings":
 			{
 				"buffer_size": 1763,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Bullet.cs",
+			"settings":
+			{
+				"buffer_size": 692,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Shockwave.cs",
+			"settings":
+			{
+				"buffer_size": 2142,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Turret.cs",
+			"settings":
+			{
+				"buffer_size": 2295,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/DropItem.cs",
+			"settings":
+			{
+				"buffer_size": 655,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/SelectTeam.cs",
+			"settings":
+			{
+				"buffer_size": 2161,
 				"line_ending": "Unix"
 			}
 		}
@@ -696,20 +688,24 @@
 	},
 	"file_history":
 	[
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Extensions.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/ItemPickup.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SpawnPad.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/PlayerOptions.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/StartScreen.cs",
+		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SelectTeam.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/ItemSpawn.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/ManaBar.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Player.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/DecoyInput.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Manager.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Flag.cs",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Extensions.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/MainCamera.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Decoy.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Bullet.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Extensions.cs.meta",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Turret.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Fire.cs",
-		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SpawnPad.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/SmokeBomb.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/DropItem.cs",
 		"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts/Shockwave.cs",
@@ -819,11 +815,7 @@
 		"/Users/josephconstan/Code/LegendOfZelda/Assets/KeyConfig.cs",
 		"/Users/josephconstan/Code/LegendOfZelda/Assets/Character.cs",
 		"/Users/josephconstan/Code/LegendOfZelda/Assets/Utility.cs",
-		"/Users/josephconstan/Code/485/p1/.gitignore",
-		"/Users/josephconstan/Library/Application Support/Sublime Text 2/Packages/Alignment/Base File.sublime-settings",
-		"/Users/josephconstan/Code/LegendOfZelda/Assets/enemyAI.txt",
-		"/Users/josephconstan/Code/LegendOfZelda/Assets/ZeldaObject.cs",
-		"/Users/josephconstan/Code/LegendOfZelda/todoOrder.txt"
+		"/Users/josephconstan/Code/485/p1/.gitignore"
 	],
 	"find":
 	{
@@ -831,7 +823,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts",
@@ -848,6 +840,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"InitManaBars",
 			"\"here\"",
 			".pickups",
 			"pickups",
@@ -974,8 +967,7 @@
 			"StartLevel",
 			"SwitchView",
 			"destination",
-			"void",
-			"= ="
+			"void"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1121,7 +1113,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1150,103 +1142,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 501.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "Assets/Scripts/SelectTeam.cs",
-					"settings":
-					{
-						"buffer_size": 2161,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1392,
-								1392
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "Assets/Scripts/StartScreen.cs",
-					"settings":
-					{
-						"buffer_size": 522,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								448,
-								448
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "Assets/Scripts/PlayerOptions.cs",
-					"settings":
-					{
-						"buffer_size": 289,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								286,
-								286
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "Assets/Scripts/Decoy.cs",
 					"settings":
 					{
@@ -1271,25 +1173,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 873.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 2,
 					"file": "Assets/Scripts/Manager.cs",
 					"settings":
 					{
-						"buffer_size": 7563,
+						"buffer_size": 7713,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4600,
-								4600
+								1591,
+								1591
 							]
 						],
 						"settings":
@@ -1302,13 +1204,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2235.0,
+						"translation.y": 571.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 3,
 					"file": "Assets/Scripts/Player.cs",
 					"settings":
 					{
@@ -1319,8 +1221,8 @@
 						"selection":
 						[
 							[
-								2038,
-								2038
+								4596,
+								4596
 							]
 						],
 						"settings":
@@ -1332,72 +1234,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1348.0,
+						"translation.y": 3402.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "Assets/Scripts/SpawnPad.cs",
-					"settings":
-					{
-						"buffer_size": 290,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "Assets/Scripts/ItemPickup.cs",
-					"settings":
-					{
-						"buffer_size": 890,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								305,
-								305
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
+					"buffer": 4,
 					"file": "Assets/Scripts/MainCamera.cs",
 					"settings":
 					{
@@ -1422,44 +1265,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "Assets/Scripts/Extensions.cs",
-					"settings":
-					{
-						"buffer_size": 1233,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								389,
-								127
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 5,
 					"file": "Assets/Scripts/DecoyInput.cs",
 					"settings":
 					{
@@ -1484,7 +1296,161 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 392.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Assets/Scripts/Bullet.cs",
+					"settings":
+					{
+						"buffer_size": 692,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								323,
+								323
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Assets/Scripts/Shockwave.cs",
+					"settings":
+					{
+						"buffer_size": 2142,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1788,
+								1788
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 486.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "Assets/Scripts/Turret.cs",
+					"settings":
+					{
+						"buffer_size": 2295,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1891,
+								1891
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 399.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Assets/Scripts/DropItem.cs",
+					"settings":
+					{
+						"buffer_size": 655,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								468,
+								468
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "Assets/Scripts/SelectTeam.cs",
+					"settings":
+					{
+						"buffer_size": 2161,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1815,
+								1815
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

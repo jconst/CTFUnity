@@ -3395,7 +3395,7 @@ MonoBehaviour:
   teams:
   - Blue
   - Red
-  manaTime: 1
+  manaTime: 15
   allPlayers: []
   flag: {fileID: 0}
   countdownGUIText: {fileID: 0}

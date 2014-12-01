@@ -4,7 +4,7 @@ using System.Collections;
 public class SelectTeam : MonoBehaviour {
 
 	float timePassed = 0;
-	float blinkTime = 0.75f;
+	float blinkTime = 0.25f;
 	bool canPressStart = false;
 
 	// Use this for initialization

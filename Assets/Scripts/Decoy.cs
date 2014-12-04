@@ -35,6 +35,11 @@ public class Decoy : DropItem
 
     public new void Update() {
         base.Update();
+
+        if (fakePlayer.dead) {
+            Deactivate();
+        }
+
         LockToFakePlayer();
         FindTarget();
         if (fakePlayer.tackling) {
@@ -81,8 +86,10 @@ public class Decoy : DropItem
 
     public override void Deactivate() {
         Manager.S.allPlayers.Remove(fakePlayer);
-        fakePlayer.Die();
-        Destroy(fakePlayer.gameObject, 1);
+        if (!fakePlayer.dead) {
+            fakePlayer.Die();
+            Destroy(fakePlayer.gameObject, 1);
+        }
         base.Deactivate();
     }
 

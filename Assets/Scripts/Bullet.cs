@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Bullet : MonoBehaviour
 {
-    public const float speed = 6f;
+    public const float speed = 4f;
     public Vector2 heading = Vector2.up;
     public string team;
 
@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll) {
         Player p = coll.gameObject.GetComponent<Player>();
-        if (p/* && p.team != team*/) {
+        if (p && p.team != team) {
             p.Die();
             Destroy(gameObject);
         } else if (coll.gameObject.tag == "Edge") {

@@ -58,7 +58,7 @@ public class Manager : MonoBehaviour
     // -- SETUP --
 
     void Start() {
-        Time.timeScale = 1.3f;
+        Time.timeScale = 1.2f;
         teamScores = InitScores(teams);
         teamScoreText = InitScoreText(teams);
         allPlayers = SpawnPlayers();
@@ -170,6 +170,26 @@ public class Manager : MonoBehaviour
     }
 
 	// -- GAME EVENTS --
+    public void DidScore(Player scorer) {
+        StartCoroutine(ScoreCoroutine(scorer.team));
+    }
+
+    private IEnumerator ScoreCoroutine(string team) {
+        allPlayers.ForEach(p => p.Die());
+        (GameObject.FindObjectsOfType(typeof(Turret)) as Turret[])
+                   .ToList()
+                   .ForEach(t => t.Deactivate());
+        yield return new WaitForSeconds(1);        
+        if (++teamScores[team] >= pointLimit) {
+            countdownGUIText.enabled = countdownBackground.enabled = true;
+            countdownGUIText.text = team + " team wins!";
+            yield return new WaitForSeconds(2);
+            Application.LoadLevel(0);
+        } else {
+            StartNewRound(false, team);
+        }
+    }
+
     public void StartNewRound(bool showRules, string teamScored)
     {
         roundStarted = false;
@@ -178,6 +198,10 @@ public class Manager : MonoBehaviour
             p.frozen = true;
         });
         flag.Reset();
+        (GameObject.FindGameObjectsWithTag("ItemPickup") as GameObject[])
+                   .ToList()
+                   .ForEach(Destroy);
+        timePassed = 0;
 
         StartCoroutine(CountdownCoroutine(showRules, teamScored));
     }
@@ -213,27 +237,5 @@ public class Manager : MonoBehaviour
         yield return new WaitForSeconds(1);
         countdownGUIText.enabled = false;
         countdownGUIText.text = null;
-    }
-
-    public void DidScore(Player scorer) {
-        StartCoroutine(ScoreCoroutine(scorer.team));
-    }
-
-    private IEnumerator ScoreCoroutine(string team) {
-        allPlayers.ForEach(p => p.Die());
-        yield return new WaitForSeconds(1);        
-        if (++teamScores[team] >= pointLimit) {
-            countdownGUIText.enabled = countdownBackground.enabled = true;
-            countdownGUIText.text = team + " team wins!";
-            yield return new WaitForSeconds(2);
-            Application.LoadLevel(0);
-        } else {
-            StartNewRound(false, team);
-        }
-    }
-
-    public void DidScore(String team) {
-        teamScores[team]++;
-        StartNewRound(false, team);
     }
 }

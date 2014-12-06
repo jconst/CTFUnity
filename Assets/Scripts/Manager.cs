@@ -48,6 +48,7 @@ public class Manager : MonoBehaviour
     private float timePassed=0;
     public bool roundStarted = false;
     public bool itemPickups = false;
+    private bool isPause = false;
 
     static public Manager S {
         get {
@@ -146,7 +147,15 @@ public class Manager : MonoBehaviour
 
     // -- UPDATE --
 
-    public void Update() { 
+    public void Update() {  
+        if(Input.GetButtonDown("start") || Input.GetKeyDown(KeyCode.Return)) {
+           isPause = !isPause;
+           if(isPause)
+              Time.timeScale = 0;
+           else
+              Time.timeScale = 1;
+        }
+
         teamScoreText.ToList().ForEach(kvp => {
             GUIText gt = kvp.Value;
             int score = teamScores[kvp.Key];
@@ -167,6 +176,17 @@ public class Manager : MonoBehaviour
 				gt.currMana = teamManas [kvp.Key];
     		});
 		}
+    }
+
+    private void OnGUI() {
+        Rect fullScreen = new Rect(0, 0, Screen.width, Screen.height);
+
+        if(isPause)
+            GUI.Window(0, fullScreen, PauseMenu, "PAUSED");
+    }
+
+    private void PauseMenu(int windowID) {
+        
     }
 
 	// -- GAME EVENTS --

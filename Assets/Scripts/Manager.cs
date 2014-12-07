@@ -71,6 +71,8 @@ public class Manager : MonoBehaviour
                                        team => GameObject.FindWithTag(team+"Side")); //value
         flag = GameObject.FindObjectOfType(typeof(Flag)) as Flag;
 
+        AudioManager.Main.PlayNewSound("Background", loop: true);
+
         StartNewRound(true, null);
     }
 

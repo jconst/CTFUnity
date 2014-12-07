@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"Fin",
+				"FindGameObjectsWithTag	tag"
+			],
+			[
+				"Find",
+				"FindWithTag	tag"
+			],
+			[
 				"OnCo",
 				"OnCollisionEnter	collision"
 			],
@@ -86,10 +94,6 @@
 			[
 				"conv",
 				"convertXYToXZ"
-			],
-			[
-				"Find",
-				"FindTarget"
 			],
 			[
 				"sco",
@@ -510,10 +514,6 @@
 			[
 				"pos",
 				"position"
-			],
-			[
-				"first",
-				"firstRoomMapPos"
 			]
 		]
 	},
@@ -531,7 +531,7 @@
 			"file": "Assets/Scripts/Decoy.cs",
 			"settings":
 			{
-				"buffer_size": 3334,
+				"buffer_size": 3453,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,7 +539,7 @@
 			"file": "Assets/Scripts/Manager.cs",
 			"settings":
 			{
-				"buffer_size": 7713,
+				"buffer_size": 7913,
 				"line_ending": "Unix"
 			}
 		},
@@ -571,7 +571,7 @@
 			"file": "Assets/Scripts/Bullet.cs",
 			"settings":
 			{
-				"buffer_size": 692,
+				"buffer_size": 688,
 				"line_ending": "Unix"
 			}
 		},
@@ -823,7 +823,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
 			"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts",
@@ -840,6 +840,9 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"timePassed",
+			"manaTime",
+			"DidScore",
 			"InitManaBars",
 			"\"here\"",
 			".pickups",
@@ -964,10 +967,7 @@
 			"Clear",
 			"pTemp",
 			"NextLevel",
-			"StartLevel",
-			"SwitchView",
-			"destination",
-			"void"
+			"StartLevel"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1113,7 +1113,7 @@
 	"groups":
 	[
 		{
-			"selected": 10,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1152,15 +1152,15 @@
 					"file": "Assets/Scripts/Decoy.cs",
 					"settings":
 					{
-						"buffer_size": 3334,
+						"buffer_size": 3453,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								462,
-								462
+								1079,
+								1079
 							]
 						],
 						"settings":
@@ -1173,7 +1173,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 873.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1183,15 +1183,15 @@
 					"file": "Assets/Scripts/Manager.cs",
 					"settings":
 					{
-						"buffer_size": 7713,
+						"buffer_size": 7913,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1591,
-								1591
+								1589,
+								1589
 							]
 						],
 						"settings":
@@ -1204,7 +1204,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 650.0,
+						"translation.y": 387.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1221,8 +1221,8 @@
 						"selection":
 						[
 							[
-								4596,
-								4596
+								398,
+								398
 							]
 						],
 						"settings":
@@ -1234,7 +1234,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3402.0,
+						"translation.y": 16.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1265,7 +1265,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 8.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1306,15 +1306,15 @@
 					"file": "Assets/Scripts/Bullet.cs",
 					"settings":
 					{
-						"buffer_size": 692,
+						"buffer_size": 688,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								323,
-								323
+								169,
+								169
 							]
 						],
 						"settings":
@@ -1389,7 +1389,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 399.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

@@ -48,6 +48,7 @@ public class Manager : MonoBehaviour
     private float timePassed=0;
     public bool roundStarted = false;
     public bool itemPickups = false;
+    private bool isPause = false;
 
     static public Manager S {
         get {
@@ -58,7 +59,7 @@ public class Manager : MonoBehaviour
     // -- SETUP --
 
     void Start() {
-        Time.timeScale = 1.3f;
+        Time.timeScale = 1.2f;
         teamScores = InitScores(teams);
         teamScoreText = InitScoreText(teams);
         allPlayers = SpawnPlayers();
@@ -146,7 +147,15 @@ public class Manager : MonoBehaviour
 
     // -- UPDATE --
 
-    public void Update() { 
+    public void Update() {  
+        if(Input.GetButtonDown("start") || Input.GetKeyDown(KeyCode.Return)) {
+           isPause = !isPause;
+           if(isPause)
+              Time.timeScale = 0;
+           else
+              Time.timeScale = 1;
+        }
+
         teamScoreText.ToList().ForEach(kvp => {
             GUIText gt = kvp.Value;
             int score = teamScores[kvp.Key];
@@ -169,7 +178,38 @@ public class Manager : MonoBehaviour
 		}
     }
 
+    private void OnGUI() {
+        Rect fullScreen = new Rect(0, 0, Screen.width, Screen.height);
+
+        if(isPause)
+            GUI.Window(0, fullScreen, PauseMenu, "PAUSED");
+    }
+
+    private void PauseMenu(int windowID) {
+        
+    }
+
 	// -- GAME EVENTS --
+    public void DidScore(Player scorer) {
+        StartCoroutine(ScoreCoroutine(scorer.team));
+    }
+
+    private IEnumerator ScoreCoroutine(string team) {
+        allPlayers.ForEach(p => p.Die());
+        (GameObject.FindObjectsOfType(typeof(Turret)) as Turret[])
+                   .ToList()
+                   .ForEach(t => t.Deactivate());
+        yield return new WaitForSeconds(1);        
+        if (++teamScores[team] >= pointLimit) {
+            countdownGUIText.enabled = countdownBackground.enabled = true;
+            countdownGUIText.text = team + " team wins!";
+            yield return new WaitForSeconds(2);
+            Application.LoadLevel(0);
+        } else {
+            StartNewRound(false, team);
+        }
+    }
+
     public void StartNewRound(bool showRules, string teamScored)
     {
         roundStarted = false;
@@ -178,6 +218,10 @@ public class Manager : MonoBehaviour
             p.frozen = true;
         });
         flag.Reset();
+        (GameObject.FindGameObjectsWithTag("ItemPickup") as GameObject[])
+                   .ToList()
+                   .ForEach(Destroy);
+        timePassed = 0;
 
         StartCoroutine(CountdownCoroutine(showRules, teamScored));
     }
@@ -213,27 +257,5 @@ public class Manager : MonoBehaviour
         yield return new WaitForSeconds(1);
         countdownGUIText.enabled = false;
         countdownGUIText.text = null;
-    }
-
-    public void DidScore(Player scorer) {
-        StartCoroutine(ScoreCoroutine(scorer.team));
-    }
-
-    private IEnumerator ScoreCoroutine(string team) {
-        allPlayers.ForEach(p => p.Die());
-        yield return new WaitForSeconds(1);        
-        if (++teamScores[team] >= pointLimit) {
-            countdownGUIText.enabled = countdownBackground.enabled = true;
-            countdownGUIText.text = team + " team wins!";
-            yield return new WaitForSeconds(2);
-            Application.LoadLevel(0);
-        } else {
-            StartNewRound(false, team);
-        }
-    }
-
-    public void DidScore(String team) {
-        teamScores[team]++;
-        StartNewRound(false, team);
     }
 }

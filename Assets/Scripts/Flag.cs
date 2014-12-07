@@ -52,6 +52,8 @@ public class Flag : MonoBehaviour
 			carrier.flag = null;
 		carrier = null;
 		countdown = timeLimit;
+		GameObject pb = GameObject.FindWithTag("ProgressBar");
+		Destroy(pb);
 	}
 
 	public void Reset()

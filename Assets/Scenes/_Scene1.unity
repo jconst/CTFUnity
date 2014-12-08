@@ -151,7 +151,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 247482501}
   - 33: {fileID: 247482503}
-  - 23: {fileID: 247482502}
   m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
@@ -171,26 +170,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1821771845}
   m_RootOrder: 14
---- !u!23 &247482502
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 247482500}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: a0d7e4e52ffeefc4eafd931d28f80b65, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &247482503
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1489,7 +1468,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 822384297}
   - 33: {fileID: 822384299}
-  - 23: {fileID: 822384298}
   m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
@@ -1509,26 +1487,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1777510560}
   m_RootOrder: 14
---- !u!23 &822384298
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 822384296}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: a0d7e4e52ffeefc4eafd931d28f80b65, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &822384299
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1703,7 +1661,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1058480700}
   - 33: {fileID: 1058480702}
-  - 23: {fileID: 1058480701}
   m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
@@ -1723,26 +1680,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1821771845}
   m_RootOrder: 13
---- !u!23 &1058480701
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1058480699}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: a0d7e4e52ffeefc4eafd931d28f80b65, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &1058480702
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2934,7 +2871,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1112660513}
   - 33: {fileID: 1112660515}
-  - 23: {fileID: 1112660514}
   m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
@@ -2954,26 +2890,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1821771845}
   m_RootOrder: 12
---- !u!23 &1112660514
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1112660512}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: fabbb3afa46802d4ba84b0a491e86352, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &1112660515
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2990,7 +2906,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1141930243}
   - 33: {fileID: 1141930245}
-  - 23: {fileID: 1141930244}
   m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
@@ -3010,26 +2925,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1777510560}
   m_RootOrder: 13
---- !u!23 &1141930244
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1141930242}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: a0d7e4e52ffeefc4eafd931d28f80b65, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &1141930245
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3195,7 +3090,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1243207178}
   - 33: {fileID: 1243207180}
-  - 23: {fileID: 1243207179}
   m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
@@ -3215,26 +3109,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1777510560}
   m_RootOrder: 12
---- !u!23 &1243207179
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1243207177}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: fabbb3afa46802d4ba84b0a491e86352, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &1243207180
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3987,7 +3861,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1816461905}
   - 33: {fileID: 1816461908}
-  - 23: {fileID: 1816461906}
   m_Layer: 8
   m_Name: MainArea
   m_TagString: Untagged
@@ -4007,26 +3880,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2105744863}
   m_RootOrder: 2
---- !u!23 &1816461906
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1816461904}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: fabbb3afa46802d4ba84b0a491e86352, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!33 &1816461908
 MeshFilter:
   m_ObjectHideFlags: 0

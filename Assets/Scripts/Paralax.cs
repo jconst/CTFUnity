@@ -4,7 +4,7 @@ using System.Collections;
 public class Paralax : MonoBehaviour {
 
 	MainCamera mc;
-	float scale=0.4f;
+	float scale=0.25f;
 	// Use this for initialization
 	void Start () {
 		mc = Camera.main.GetComponent<MainCamera> ();

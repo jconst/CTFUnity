@@ -8,9 +8,17 @@ public class MainCamera : MonoBehaviour
     const float cameraEasing = 0.03f;
     const float maxCameraSize = 15f;
     const float minCameraSize = 6f;
- 
+	Vector3 opos;
+	public Vector3 deltaPos;
+ 	
+	void Start(){
+		opos = transform.position;
+	}
+
     void Update() {
         fitAllPlayersInCamera();
+		deltaPos = transform.position - opos;
+		opos = transform.position;
     }
 
     void fitAllPlayersInCamera() {

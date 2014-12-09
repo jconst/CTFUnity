@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Red
-  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: a9e959123b4a986478ab71e9d2f342a1, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,12 +17,43 @@ Material:
         first:
           name: _MainTex
         second:
+          m_Texture: {fileID: 2800000, guid: ae9e15890467d344f959d295ab8c2a15, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MSKTex
+        second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _TileX
+        second: 1
+      data:
+        first:
+          name: _TileY
+        second: 1
+      data:
+        first:
+          name: _GlowStrength
+        second: 13.2142859
+      data:
+        first:
+          name: _GlowRange
+        second: 100
+      data:
+        first:
+          name: _BlurRadius
+        second: 1
     m_Colors:
       data:
         first:
           name: _Color
         second: {r: .854901969, g: .152941182, b: .192156866, a: 0}
+      data:
+        first:
+          name: _GlowColor
+        second: {r: 1, g: 0, b: 0, a: .501960814}

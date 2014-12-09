@@ -1,0 +1,484 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0090)./UnityFreeObjSGlow.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<!-- TemplateBeginEditable name="doctitle" -->
+	<title>UnityIndieGlow</title>
+	<!-- TemplateEndEditable -->
+	<meta name="description" content="Designed and developed FlatterBacke">
+	<style type="text/css">
+	body {
+	background-image: url(images/BackGround.jpg);
+	background-repeat: repeat;
+}
+    body,td,th {
+	
+}
+    </style>
+	<!-- TemplateBeginEditable name="head" -->
+	<!-- TemplateEndEditable -->
+
+</head>
+<body>
+	<div class="topBanner">
+	  <div align="center">
+	    <h1><strong>Unity Indie Glow Per Objekt Glow Effect</strong></h1>
+	  </div>
+	</div>
+	<div class="container">
+	  <div class="contentArea">
+		  <div class="contentleft"><!-- TemplateBeginEditable name="content" -->
+			<p align="center">This document describes the step to add the per object glow effect into your Unity 3D projects.</p>
+		    <p align="center">Also you will be introduced how to create custom materials and shaders and additional features for this effect.</p>
+		    <p align="center">This asset has been tested with Unity 3.5.6 which is the minimum requirement and Unity 4.x</p>
+		    <p align="center">You need at least Shader Model 3.0 to display this effect..</p>
+			
+	      <p align="center">&nbsp;</p>
+		    <p> <a name="Themen"></a></p><a name="Themen">
+		    <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+	      <p><img class="Edge1" src="images/Edge1.jpg" border="0"></p>
+	      <p>&nbsp;</p>
+		    <h3><strong>Index:</strong></h3>
+		    </a><p><a name="Themen"><strong>1:</strong>  </a><a href="#Thema1">The installation of the sample scene into a new project.</a></p>
+	      <ul>
+	        <p><strong>1.1 </strong> <a href="#Thema1.1">Complete Asset Import.</a></p>
+		      <p><strong>1.2 </strong> <a href="#Thema1.2">Layer definition.</a></p>
+		      <p><strong>1.3 </strong> <a href="#Thema1.3">Layer settings.</a></p>
+		      <p><strong>1.4 </strong> <a href="#Thema1.4">Physic Time settings.</a></p>
+		      <p><strong>1.5 </strong> <a href="#Thema1.5">Quality settings.</a></p>
+		      <p><strong>1.6 </strong> <a href="#Thema1.6">Testing scenes.</a></p>
+		    </ul>
+	      <p><strong>2:</strong> <a href="#Thema2">The import of this asset in a new or existing Unity3D project without the sample scene.</a></p>
+		  <ul>
+	        <p><strong>2.1</strong> <a href="#Thema2.1">Asset Import without the sample scene.</a></p>
+	        <p><strong>2.2</strong> <a href="#Thema2.2">Glow Layer definition.</a></p>
+	        <p><strong>2.3</strong> <a href="#Thema2.3">Glow Script binding.</a></p>
+	        <p><strong>2.4</strong> <a href="#Thema2.4">Glow Script settings.</a></p>
+	      </ul>
+	      <p><strong>3:</strong> <a href="#Thema3">The creation of simple glow materials and binding to GameObjects.</a></p>
+	      <ul>
+	        <p><strong>3.1</strong> <a href="#Thema3.1">Glow Material creation.</a></p>
+	        <p><strong>3.2</strong> <a href="#Thema3.2">Glow Object Script binding.</a></p>
+	        <p><strong>3.3</strong> <a href="#Thema3.3">Glow Object Script setting.</a></p>
+	        <p><strong>3.4</strong> <a href="#Thema3.4">Glow Object Material configuration.</a></p>
+	      </ul>
+	      <p><strong>4:</strong> <a href="#Thema4">A simple introduction to the material/shader types.</a></p>
+	      <ul>
+	        <p><strong>4.1</strong> <a href="#Thema4.1">Glow Shader types.</a></p>
+	        <p><strong>4.2</strong> <a href="#Thema4.2">UV animated Glow.</a></p>
+	        <p><strong>4.3</strong> <a href="#Thema4.3">UV animated Pulse Glow.</a></p>
+	        <p><strong>4.4</strong> <a href="#Thema4.4">Fluid Glow.</a></p>
+	        <p><strong>4.5</strong> <a href="#Thema4.5">Particle Glow.</a></p>
+	        <p><strong>4.6</strong> <a href="#Thema4.6">Pulse Glow.</a></p>
+          </ul> 
+		  <p><strong>5:</strong> <a href="#Thema5">Common hints to the shader performance and basic functions.</a>		  </p>
+		  <ul>
+		    <p><strong>5.1</strong> <a href="#Thema5.1">Enabling or disabling the Glow Asset.</a></p>
+		    <p><strong>5.2</strong> <a href="#Thema5.2">External set of the global glow strength.</a></p>
+		    <p><strong>5.3</strong> <a href="#Thema5.3">External set of the global blur radius.</a></p>
+		    <p><strong>5.4</strong> <a href="#Thema5.4">External set of the global screen glow factor.</a></p>
+		    <p><strong>5.5</strong> <a href="#Thema5.5">Glow Base Shader performance hint.</a></p>
+		    <p><strong>5.6</strong> <a href="#Thema5.6">Creating glow objects at runtime.</a></p>
+		    <p><strong>5.7</strong> <a href="#Thema5.7">Glow Factor Performance.</a></p>
+		  </ul>
+		  <p>&nbsp;</p>
+		  <p><img class="Edge1" src="images/Edge1.jpg" border="0"></p>
+		  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+		  <p>&nbsp;</p>
+		  <!-- TemplateEndEditable -->
+		    </div>
+			<!-- TemplateBeginEditable name="sidebar" -->
+			<div class="contentright">
+				<a name="Thema1">
+				<h3>1: The installation of the sample scene into a new project.</h3>
+                </a><a name="Thema1.1">
+				<p><strong>1.1 Complete Asset Import.</strong></p>
+                
+                <ul>
+				<p>At first import the UnityFreeGlowAsset.package completely into a new project.</p>
+				<p>The PreviewScene.scene is located at IndieGlow/PreviewScene/UnityScenes in your project window.</p>
+				
+				<p><strong>Image 1.1</strong></p>
+				<p><img class="Preview_Scene_Location" src="images/Preview_Scene_Location.jpg" border="0"></p>
+                </ul>
+				<p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema1.2">
+				<p><strong>1.2 Layer definition.</strong></p>
+                <ul>
+				<p>The sample scene requires 3 global Layer: GlowObject, Laser and Player.				</p>
+				<p>The Layer should be added by using Edit/Project Settings/Tags.</p>
+				<p><strong>Image 1.2</strong></p>
+                <p><img class="Layer_Inspector_Settings" src="images/Layer_Inspector_Settings.jpg" border="0"></p>
+                </ul>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p>&nbsp;</p>
+              </a><a name="Thema1.3">
+                <p><strong>1.3 Layer settings.</strong></p>
+                <ul>
+                <p>Now you need to igonore collisions between the Laser and Player Layer, which an be set at the Physics Settings.</p>
+				<p>This can be found at Edit/Project Settings/Physics.</p>
+				<p><strong>Image 1.3</strong></p>
+                <p><img class="Physics_Layer_Settings" src="images/Physics_Layer_Settings.jpg" border="0"></p>
+                </ul>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p>&nbsp;</p>
+              </a><a name="Thema1.4">
+                <p><strong>1.4 Physic Time settings.</strong>                </p>
+                <ul>
+                <p>Now you need to set the Fixed Update Rate of the Physics Engine, so that the laser (GameObject) collisions with the scene objects will be improved.				</p>
+				<p>This can be done at Edit/Project Settings/Time.</p>
+				<p><strong>Image 1.4</strong></p>
+                <p><img class="Physiks_Timing" src="images/Physiks_Timing.jpg" border="0"></p>
+				<p>The standard Fixed Timestep Rate is set to a minimum of 0.02 ms, we change this to 0.015</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema1.5">
+				<p><strong>1.5 Quality settings.</strong></p>
+                <ul>
+				<p>The only thing missing now is the Quality Setting to impriove the lighting of the predefined scene geometry.</p>
+				<p>Here we raise the PerPixelLightCount from 2 to 7.</p>
+				<p>Also we change the "VSync Count" to "Dont Sync".</p>
+				<p><strong>Image 1.5</strong></p>
+				<p><img class="Preview_Scene_Quality_Settings" src="images/Preview_Scene_Quality_Settings.jpg" border="0"></p>
+                </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema1.6">
+				<p> <strong>1.6 Testing scenes.</strong></p>
+                <ul>
+				<p>The configuration is completed we can now press the Play button and move in our scene.</p>
+				<p><strong>Image 1.6</strong></p>
+			  <p><img class="Play_Button" src="images/Play_Button.jpg" border="0"></p>
+              </ul>
+                </a><p><a name="Thema1.6"></a><a href="./UnityFreeObjSGlow.html#Themen">Back to index</a></p>
+              <p>&nbsp;</p>
+                <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+                <p><img class="Edge1" src="images/Edge1.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+                <a name="Thema2">
+			  <h3>2: The import of this asset in a new or existing Unity3D project without the sample scene.</h3>
+              </a><a name="Thema2.1">
+				<p><strong>2.1 Asset Import without the sample scene.</strong>                </p>
+				<ul>
+				<p>Firstly we import UnityFreeGlowAsset.package without the sample scene.</p>
+			  <p>Deactivate the checkbox at IndieGlow/PreviewScene.</p>
+			  <p><strong>Image 2.1</strong></p>
+				<p><img class="Package_Without_Preview_Scene_Import" src="images/Package_Without_Preview_Scene_Import.jpg" border="0"></p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema2.2">
+				<p><strong>2.2 Glow Layer definition.</strong>                </p>
+				<ul>
+				<p>Add the "GlowObject" Layer like previously described in <strong>Step 1.2 </strong>.</p>
+				<p><strong>Image 2.2</strong></p>
+				<p><img class="Layer_Inspector_Settings2" src="images/Layer_Inspector_Settings2.jpg" border="0"></p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema2.3">
+				<p><strong>2.3 Glow Script binding.</strong>                </p>
+				<ul>
+				<p>You need to assign the "GlowCamera" Script to your Camera GameObject.</p>
+				<p>Activate the CheckBox "Debug Mode" if you wish to display a small HUD which exposes most of the component features.</p>
+				<p><strong>Image 2.3</strong></p>
+				<p><img class="GlowSourceHandler_Attach" src="images/GlowSourceHandler_Attach.jpg" border="0"></p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema2.4">
+				<p><strong>2.4 Glow Script settings.</strong>                </p>
+				<ul>
+				<p>Now we will need to add several materials to the GlowCamera.</p>
+				<p>Lokate the directory IndieGlow/Materials/GlowCameraMaterial.</p>
+				<p>You need to assign 3 materials.</p>
+				<p>Simply move the 3 materials from the GlowCameraMaterial directory onto the empty slots of the GlowCamera component.</p>
+				<p><strong>Image 2.4</strong></p>
+				<p><img class="GlowSourceHandler_Setup" src="images/GlowSourceHandler_Setup.jpg" border="0"></p>
+			  <p>The basic setup has been completed</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+				</a><p><a name="Thema2.4"> </a><a href="./UnityFreeObjSGlow.html#Themen">Back to index</a>			    </p>
+			  <p>&nbsp;</p>
+				<p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge1" src="images/Edge1.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+                <a name="Thema3">
+			  <h3>3: The creation of simple glow materials and binding to GameObjects.</h3>
+              </a><a name="Thema3.1">
+				<p><strong>3.1 Glow Material creation.</strong>                </p>
+				<ul>
+				<p>A Glow Material is the material to use on your objects you want to let glow. You assign the material to the GlowObject component this object needs.</p>
+				<p>We start with the creation of a new  material "Assets/Create/Material".</p>
+				<p>Assign a glow shader to this material, for example the simple static Glow without any other special effect.</p>
+				<p>Choose IndiGlowLab/ObjectShader/GlowMaskShader_Default_Ranged for this sample.</p>
+				<p><strong>Image 3.1</strong></p>
+				<p><img class="GlowMaterialCreation_Simple" src="./images/GlowMaterialCreation_Simple.jpg" border="0"></p>
+				<p>Assign a glow texture to the Base(RBG) Texture2D field.</p>
+				<p>This texture defines the area which should glow, a dark value means no or a low intensity glow and any other value the opposite.</p>
+				<p>The alpha channel will not be used.</p>
+				<p>Specify the texture repeat by changing the "X / Y Tiling" field.</p>
+				<p>"Glow Intesity" will change the overall intensity of the glow.</p>
+				<p>"Glow Range" specifies how far the glow will be visible by the distance to the camera and how much the overglow effect should appear based upon the distance to the camera too, a value of 10 is a good start here.</p>
+				<p>The range is specified by world units.</p>
+				<p>With this you can select the range per object</p>
+				<p>Play with the values when in play mode to find the best for your scene. Also have a look at the sample materials from the preview scene</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema3.2">
+				<p><strong>3.2 Glow Object Script binding.</strong></p>
+				<ul>
+				<p>Add the GlowObject component to the GameObject you want to let glow.</p>
+				<p>You can find this component at: IndieGlow/Scripts/GlowObject/GlowObject.</p>
+				<p><strong>Image 3.2</strong></p>
+				<p><img class="GlowObjectScript_Attach" src="images/GlowObjectScript_Attach.jpg" border="0"></p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+                <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+                <p>&nbsp;</p>
+                </a><a name="Thema3.3">
+              <p><strong>3.3 Glow Object Script setting.</strong>                </p>
+              <ul>
+                <p>Assign the material we created at step 3.1 to this component.</p>
+                <p>You can also assign any other material to the renderer of the GameObject as you would do without the glow.</p>
+                <p><strong>Image 3.3</strong></p>
+                <p><img class="GlowObjectScript_Settings" src="images/GlowObjectScript_Settings.jpg" border="0"></p>
+                <p>We gave the "TestGlow1" material a simple texture</p>
+                <p><strong>Image 3.3.1</strong></p>
+                <p><img class="TestGlow_Texture" src="images/TestGlow_Texture.jpg" border="0"></p>
+                <p>This is how it will loook in play mode.</p>
+                <p><strong>Image 3.3.2</strong></p>
+                <p><img class="GlowObject_Preview" src="images/GlowObject_Preview.jpg" border="0"></p>
+              </ul>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+				<p>&nbsp;</p>
+                </a><a name="Thema3.4">
+				<p><strong>3.4 Glow Object Material configuration.</strong>                </p>
+				<ul>
+				<p>You can configure the glow material at runtime as long as you have activated the Debug Mode at the GlowCamera component which should be assigned to your camera.</p>
+				<p>Press the Tab key to display the cursor or activate the "ShowCursor" Mode at the GlowCamera component before start.</p>
+				<p>Now select your glow material and change for example the intensity at runtime.</p>
+				<p>When the glow is not visible it is possible that your GameObject is too far away, you can change this by changing the "Glow Range".</p>
+				<p>All changed values will still be set after you exit the play mode.</p>
+				<p><strong>Image 3.4</strong></p>
+				<p><img class="GlowObject_Settings_At_Runtime" src="images/GlowObject_Settings_At_Runtime.jpg" border="0"></p>
+              </ul>
+				<p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+                <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+                </a><p><a name="Thema3.4"></a><a href="./UnityFreeObjSGlow.html#Themen">Back to index</a></p>
+				<p>&nbsp;</p>
+				<p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge1" src="images/Edge1.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+                <a name="Thema4">
+			  <h3>4: A simple introduction to the material/shader types.</h3>
+              </a><a name="Thema4.1">
+			  <p><strong>4.1 Glow Shader types.</strong></p>
+              <ul>
+			  <p>The asset contains 6 different shader variations.</p>
+			  <p>1: Default Glow  (static not animated glow)</p>
+			  <p>2: UV animated Glow (Simple scroll on the U or V axis of the texture)</p>
+			  <p>3: UV animated Pulse Glow (UV animated  with pulsating glow intensity)</p>
+			  <p>4: Fluid Glow ( UV animated glow with wave like movement of the texture)</p>
+			  <p>5: Particle Glow (A simple shader made for particle effects)</p>
+			  <p>6: Pulse Glow (Static glow with pulsating glow intensity)</p>
+			  <p>The default glow has been described at step 3.4 so we skip it here.</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema4.2">
+			  <p><strong>4.2 UV animated Glow.</strong></p>
+              <ul>
+			  <p>Shader Type: UV animated Glow.</p>
+			  <p><strong>Image 4.2</strong></p>
+			  <p><img class="UV_Animated" src="images/UV_Animated.jpg" border="0"></p>
+			  <p>X/Y Tiling specified the texture repeats.</p>
+			  <p>UV Rate X specifies the scroll speed at the horizontal axis.</p>
+			  <p>UV Rate Y specifies the scroll speed at the vertical axis..</p>
+			  <p>Glow Intesity will change the overall intensity of the glow.</p>
+			  <p>Glow Range specifies how far the glow will be visible by the distance to the camera</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema4.3">
+			  <p><strong>4.3 UV animated Pulse Glow.</strong></p>
+              <ul>
+			  <p>Shader Type: UV animated Pulse Glow.</p>
+			  <p><strong>Image 4.3</strong></p>
+			  <p><img class="UV_Animated_Pulse" src="images/UV_Animated_Pulse.jpg" border="0"></p>
+			  <p>X/Y Tiling specified the texture repeats.</p>
+			  <p>UV Rate X specifies the scroll speed at the horizontal axis.</p>
+			  <p>UV Rate Y specifies the scroll speed at the vertical axis..</p>
+			  <p>Pulse Rate specifies the pulse frequency.</p>
+			  <p>Pulse Range specifies the pulse intensity min and max value.</p>
+			  <p>Glow Intesity will change the overall intensity of the glow.</p>
+			  <p>Glow Range specifies how far the glow will be visible by the distance to the camera</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema4.4">
+			  <p><strong>4.4 Fluid Glow.</strong></p>
+              <ul>
+			  <p>Shader Type: Fluid Glow.</p>
+			  <p><strong>Image 4.4</strong></p>
+			  <p><img class="Fluid" src="images/Fluid.jpg" border="0"></p>
+			  <p>X/Y Tiling specified the texture repeats.</p>
+			  <p>UV Rate X specifies the scroll speed at the horizontal axis.</p>
+			  <p>UV Rate Y specifies the scroll speed at the vertical axis..</p>
+			  <p>Pulse Rate specifies the pulse frequency.</p>
+			  <p>Pulse Range specifies the pulse intensity min and max value.</p>
+			  <p>Glow Intesity will change the overall intensity of the glow.</p>
+			  <p>Glow Range specifies how far the glow will be visible by the distance to the camera</p>			  
+			  <p>Intensity specifies the speed of the Layer Pixel movement.</p>
+			  <p>Rate specifies the range of the Layer Pixel movement.</p>
+			  <p>To use layer 2 and 3 you need the increase the color in a grayscale spectrum of the layer.</p>
+			  <p>Black will hide the layer.</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p>&nbsp;</p>
+              </a><a name="Thema4.5">
+              <p><strong>4.5 Particle Glow.</strong></p>
+              <ul>
+              <p>Shader Type: Particle Glow.</p>
+              <p><strong>Image 4.5</strong></p>
+              <p><img class="Particle" src="images/Particle.jpg" border="0"></p>
+              <p>Glow Intesity will change the overall intensity of the glow.</p>
+			  <p>Glow Range specifies how far the glow will be visible by the distance to the camera</p>
+              </ul>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p>&nbsp;</p>
+              </a><a name="Thema4.6">
+              <p><strong>4.6 Pulse Glow.</strong></p>
+              <ul>
+              <p>Shader Type: Pulse Glow.</p>
+              <p><strong>Bild 4.6</strong></p>
+              <p><img class="Pulse" src="images/Pulse.jpg" border="0"></p>
+			  <p>X/Y Tiling specified the texture repeats.</p>
+			  <p>Pulse Rate specifies the pulse frequency.</p>
+			  <p>Pulse Range specifies the pulse intensity min and max value.</p>
+			  <p>Glow Intesity will change the overall intensity of the glow.</p>
+			  <p>Glow Range specifies how far the glow will be visible by the distance to the camera</p>
+              </ul>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              </a><p><a name="Thema4.6"></a><a href="./UnityFreeObjSGlow.html#Themen">Back to index</a>
+			  </p>
+				<p>&nbsp;</p>
+				<p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge1" src="images/Edge1.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+                <a name="Thema5">
+			  <h3>5: Common hints to the shader performance and basic functions.</h3>
+              </a><a name="Thema5.1">
+			  <p><strong>5.1 Enabling or disabling the Glow Asset.</strong>              </p>
+			  <ul>
+			  <p>Activate or deactivate the glow effect by using following method.</p>
+			  <p>GlowCamera.ActivateGlowShader(Boolean); &lt;true/false&gt;</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema5.2">
+			  <p><strong>5.2 External set of the global glow strength.</strong>              </p>
+			  <ul>
+			  <p>Set the global glow strength.</p>
+			  <p>GlowCamera.SetGlobalGlowStrength(Value); &lt;0.0f/20.0f&gt;</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema5.3">
+			  <p><strong>Schritt 5.3 External set of the global blur radius.</strong>              </p>
+			  <ul>
+			  <p>Set the global BlurRadius.</p>
+			  <p>GlowCamera.SetGlobalBlurRadius(Value); &lt;0.0f/20.0f&gt;</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema5.4">
+			  <p><strong>5.4 External set of the global screen glow factor.</strong>              </p>
+			  <ul>
+			  <p>Set the gloabal factors of the Glow Mask texture resolution.</p>
+			  <p>GlowCamera.SetGlobalFactor(Value); &lt;0.055f/1.0f&gt;</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema5.5">
+			  <p><strong>5.5 Glow Base Shader performance hint.</strong>              </p>
+			  <ul>
+			  <p>A small performance tweak is to edit the GlowShader_Base.shader to reduce or increase the gpu usage which also results in a better or lower quality.</p>
+			  <p>Look at the function: half4 blur(half2 radius, half2 uvOriginal, half2 clampMax) {</p>
+			  <p>At line 50 change the Blur Segement amount.</p>
+			  <p>int Segments = 16;	// Min 4 / Max 20 Segments</p>
+			  <p>A lower count will reduce the GPU usage but will also lower the visual quality.</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+              </a><a name="Thema5.6">
+			  <p><strong>5.6 Creating glow objects at runtime.</strong>              </p>
+			  <ul>
+			  <p>Simply create a prefab with the needed components.</p>
+			  <p>For example the Laser prefab at the sample preview scene.</p>
+              </ul>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p>&nbsp;</p>
+              </a><a name="Thema5.7">
+              <p><strong>5.7 Glow Factor Performance.</strong></p>
+              <ul>
+              <p>A Higher Factor ( Glow Mask Resolution ) needs more Performance.</p>
+              <p>The Default Value is 0.5 but you can Change it.</p>
+              </ul>
+              </a>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+              <p>&nbsp;</p>
+              <p><a name="Thema5.7">
+                </a>
+              </p>
+              <p><a name="Thema5.6"></a><a href="./UnityFreeObjSGlow.html#Themen">Back to index</a>
+			  </p>
+				<p>&nbsp;</p>
+				<p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p><img class="Edge1" src="images/Edge1.jpg" border="0"></p>
+			  <p><img class="Edge2" src="images/Edge2.jpg" border="0"></p>
+			  <p>&nbsp;</p>
+			</div>
+			<!-- TemplateEndEditable -->
+			<div style="clear:both;"></div>
+		</div>
+		<div style="clear:both;"></div>
+		<div class="footerArea">
+			<div class="footernav"></div>
+			<div class="copyright">
+				© 2013 By FlatterBacke
+			</div>
+		</div>
+	</div>
+
+</body></html>

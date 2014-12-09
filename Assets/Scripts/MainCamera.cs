@@ -5,7 +5,7 @@ using System.Linq;
 
 public class MainCamera : MonoBehaviour
 {
-    const float cameraEasing = 0.03f;
+    const float cameraEasing = 0.1f;
     const float maxCameraSize = 15f;
     const float minCameraSize = 6f;
 	Vector3 opos;
@@ -23,12 +23,12 @@ public class MainCamera : MonoBehaviour
 
     void fitAllPlayersInCamera() {
         List<Player> allPlayers = Manager.S.allPlayers;
-        const float padding = 0.2f;
+        Vector2 padding = new Vector2(0.2f, 3f);
 
-        float maxX = allPlayers.Max(p => p.transform.position.x) + padding;
-        float maxY = allPlayers.Max(p => p.transform.position.y) + padding;
-        float minX = allPlayers.Min(p => p.transform.position.x) - padding;
-        float minY = allPlayers.Min(p => p.transform.position.y) - padding;
+        float maxX = allPlayers.Max(p => p.transform.position.x) + padding.x;
+        float maxY = allPlayers.Max(p => p.transform.position.y) + padding.y;
+        float minX = allPlayers.Min(p => p.transform.position.x) - padding.x;
+        float minY = allPlayers.Min(p => p.transform.position.y) - padding.y;
 
         float adjustedNewSize;
         if (!Manager.S.roundStarted) {

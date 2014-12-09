@@ -9,14 +9,15 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
-  - 65: {fileID: 6500000}
   - 23: {fileID: 2300000}
-  m_Layer: 0
+  - 114: {fileID: 11400000}
+  - 58: {fileID: 5800000}
+  m_Layer: 8
   m_Name: Blue Side
   m_TagString: BlueSide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -25,8 +26,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: .5}
-  m_LocalScale: {x: 2, y: 2, z: .00499999989}
+  m_LocalPosition: {x: -25.4211445, y: -.0371417403, z: -.100000024}
+  m_LocalScale: {x: 18, y: 18, z: .00499999989}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -56,19 +57,30 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6500000
-BoxCollider:
+  m_Mesh: {fileID: 4300150, guid: 5188a59ff6dcabb4d8982d8fb7571253, type: 3}
+--- !u!58 &5800000
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
+  m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_Radius: .113778554
+  m_Center: {x: -1.1920929e-07, y: -3.72529074e-09}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8367868e2e63f44b2bc1516d4962c048, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: Blue
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

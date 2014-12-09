@@ -21,7 +21,9 @@ public class Flag : MonoBehaviour
 			if (!carrier.carrying) {
 				carrier = null;
 			} else {
-				transform.position = carrier.transform.position;
+				Vector3 newPos = carrier.transform.position;
+				newPos.z = initialPosit.z;
+				transform.position = newPos;
 			}
 		}
 		if (countdown < 0) 

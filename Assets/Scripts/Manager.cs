@@ -49,6 +49,7 @@ public class Manager : MonoBehaviour
     public bool roundStarted = false;
     public bool itemPickups = false;
     private bool isPause = false;
+    private bool tutorial = true;
 
     static public Manager S {
         get {
@@ -72,8 +73,8 @@ public class Manager : MonoBehaviour
         flag = GameObject.FindObjectOfType(typeof(Flag)) as Flag;
 
         AudioManager.Main.PlayNewSound("Background", loop: true);
-
-        StartNewRound(true, null);
+           
+        StartNewRound(false, null);
     }
 
     Dictionary<string, int> InitScores(List<string> teamList) {
@@ -149,35 +150,43 @@ public class Manager : MonoBehaviour
 
     // -- UPDATE --
 
-    public void Update() {  
+    public void Update() {          
         if(Input.GetButtonDown("start") || Input.GetKeyDown(KeyCode.Return)) {
-           isPause = !isPause;
-           if(isPause)
-              Time.timeScale = 0;
-           else
-              Time.timeScale = 1;
+            if(tutorial) {
+                tutorial = false;
+                teamScores = InitScores(teams);
+                StartNewRound(true, null);   
+            } else {
+                isPause = !isPause;
+                if(isPause)
+                  Time.timeScale = 0;
+                else
+                  Time.timeScale = 1;
+            }
         }
 
-        teamScoreText.ToList().ForEach(kvp => {
-            GUIText gt = kvp.Value;
-            int score = teamScores[kvp.Key];
-            gt.text = score.ToString();
-        });
-		timePassed += Time.deltaTime;
+        if(!tutorial) {
+            teamScoreText.ToList().ForEach(kvp => {
+                GUIText gt = kvp.Value;
+                int score = teamScores[kvp.Key];
+                gt.text = score.ToString();
+            });
+            timePassed += Time.deltaTime;
 
-		if (!itemPickups) {
-    		if (timePassed >= manaTime) {
-				teams.ForEach (team => {
-					teamManas [team] += 1;
-					teamManas [team] = Mathf.Min (teamManas [team], 3);
-				});
-				timePassed = 0;
-    		}
-    		teamManaBars.ToList ().ForEach (kvp => {
-				ManaBar gt = kvp.Value;
-				gt.currMana = teamManas [kvp.Key];
-    		});
-		}
+            if (!itemPickups) {
+                if (timePassed >= manaTime) {
+                    teams.ForEach (team => {
+                        teamManas [team] += 1;
+                        teamManas [team] = Mathf.Min (teamManas [team], 3);
+                    });
+                    timePassed = 0;
+                }
+                teamManaBars.ToList ().ForEach (kvp => {
+                    ManaBar gt = kvp.Value;
+                    gt.currMana = teamManas [kvp.Key];
+                });
+            }
+        }
     }
 
     private void OnGUI() {
@@ -234,6 +243,8 @@ public class Manager : MonoBehaviour
         teamManas = InitManas(teams);
 
         if (showRules) {
+            yield return new WaitForSeconds(1);
+            
             countdownGUIText.text = "Hold the bomb in\nyour enemy's base!";
             yield return new WaitForSeconds(2);
 
@@ -241,17 +252,31 @@ public class Manager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
         }
 
-        if (teamScored != null) {
+        if (!tutorial) {
+            for(int i=countdownLength; i > 0; i--) {
+                countdownGUIText.text = i.ToString();
+                yield return new WaitForSeconds(0.7f);
+            }
+            countdownGUIText.text = "Start!\n\n\n";
+        }
+
+        if(tutorial && teamScored == null) {
+            countdownGUIText.text = "Press Start to skip tutorial";
+            yield return new WaitForSeconds(2f);
+
+            countdownGUIText.text = "Left stick for movement";
+            yield return new WaitForSeconds(1.5f);
+
+            countdownGUIText.text = "Right stick for tackling";
+            yield return new WaitForSeconds(1.5f);
+
+            countdownGUIText.text = "Face buttons to drop items";
+            yield return new WaitForSeconds(1.5f);
+        } else if (teamScored != null) {
             countdownGUIText.text = teamScored + " team scored!";
             yield return new WaitForSeconds(1);
         }
 
-        for(int i=countdownLength; i > 0; i--) {
-            countdownGUIText.text = i.ToString();
-            yield return new WaitForSeconds(0.7f);
-        }
-
-        countdownGUIText.text = "Start!\n\n\n";
         allPlayers.ForEach(p => p.frozen = false);
         roundStarted = true;
         countdownBackground.enabled = false;

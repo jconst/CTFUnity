@@ -264,7 +264,7 @@ public class Manager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
         }
 
-        if (!tutorial) {
+        if (!tutorial && teamScored == null) {
             for(int i=countdownLength; i > 0; i--) {
                 countdownGUIText.text = i.ToString();
                 yield return new WaitForSeconds(0.7f);
@@ -283,7 +283,7 @@ public class Manager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
 
             countdownGUIText.text = "Face buttons to drop items";
-            yield return new WaitForSeconds(1.5f);
+            //yield return new WaitForSeconds(1.5f);
         } else if (teamScored != null) {
             countdownGUIText.text = teamScored + " team scored!";
             yield return new WaitForSeconds(1);

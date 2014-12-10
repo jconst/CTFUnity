@@ -244,7 +244,7 @@ public class Manager : MonoBehaviour
         teamManas = InitManas(teams);
 
         if (showRules) {
-            countdownGUIText.text = "Hold the bomb in\nyour enemy's base!";
+            countdownGUIText.text = "Bring the pollen\nto your flower!";
             yield return new WaitForSeconds(2);
 
             countdownGUIText.text = "First to " + pointLimit + " points wins!";

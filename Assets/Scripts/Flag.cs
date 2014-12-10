@@ -82,7 +82,7 @@ public class Flag : MonoBehaviour
 	public void OnTriggerEnter2D(Collider2D coll) {
 		CheckPickup(coll);
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
-		if (zone && carrier && carrier.team != zone.team) {
+		if (zone && carrier && carrier.team == zone.team) {
 			currentScoreZone = zone;
 			StartProgressBar(coll);
 			pollenating = true;

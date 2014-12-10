@@ -1335,8 +1335,8 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Radius: .113778539
-  m_Center: {x: 0, y: -3.7252903e-09}
+  m_Radius: .5
+  m_Center: {x: 0, y: -0}
 --- !u!23 &555319317
 Renderer:
   m_ObjectHideFlags: 0
@@ -1365,7 +1365,7 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 1977097249}
   m_GameObject: {fileID: 555319314}
-  m_Mesh: {fileID: 4300150, guid: 5188a59ff6dcabb4d8982d8fb7571253, type: 3}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &555319319
 Transform:
   m_ObjectHideFlags: 0
@@ -1374,7 +1374,7 @@ Transform:
   m_GameObject: {fileID: 555319314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 24.9491539, y: .0600996614, z: -.100000001}
-  m_LocalScale: {x: 16, y: 16, z: .00499999989}
+  m_LocalScale: {x: 3.5, y: 3.5, z: .00499999989}
   m_Children: []
   m_Father: {fileID: 2105744863}
   m_RootOrder: 0
@@ -2159,6 +2159,30 @@ Prefab:
     - target: {fileID: 400000, guid: f39869594a467f940835986668155c82, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300000, guid: f39869594a467f940835986668155c82, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 400000, guid: f39869594a467f940835986668155c82, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f39869594a467f940835986668155c82, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800000, guid: f39869594a467f940835986668155c82, type: 2}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800000, guid: f39869594a467f940835986668155c82, type: 2}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800000, guid: f39869594a467f940835986668155c82, type: 2}
+      propertyPath: m_Radius
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f39869594a467f940835986668155c82, type: 2}
@@ -5716,6 +5740,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: b925953eec14ec1469b74cadb90b0643, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3300000, guid: b925953eec14ec1469b74cadb90b0643, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 400000, guid: b925953eec14ec1469b74cadb90b0643, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800000, guid: b925953eec14ec1469b74cadb90b0643, type: 2}
+      propertyPath: m_Radius
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800000, guid: b925953eec14ec1469b74cadb90b0643, type: 2}
+      propertyPath: m_Center.y
+      value: -0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b925953eec14ec1469b74cadb90b0643, type: 2}
   m_RootGameObject: {fileID: 555319314}
@@ -6081,8 +6125,8 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Radius: .113778554
-  m_Center: {x: -1.1920929e-07, y: -3.72529074e-09}
+  m_Radius: .5
+  m_Center: {x: 0, y: 0}
 --- !u!23 &2099274083
 Renderer:
   m_ObjectHideFlags: 0
@@ -6111,7 +6155,7 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 940367080}
   m_GameObject: {fileID: 2099274081}
-  m_Mesh: {fileID: 4300150, guid: 5188a59ff6dcabb4d8982d8fb7571253, type: 3}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &2099274085
 Transform:
   m_ObjectHideFlags: 0
@@ -6120,7 +6164,7 @@ Transform:
   m_GameObject: {fileID: 2099274081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25.4211445, y: -.0371417403, z: -.100000024}
-  m_LocalScale: {x: 16, y: 16, z: .00499999989}
+  m_LocalScale: {x: 3.5, y: 3.5, z: .00499999989}
   m_Children: []
   m_Father: {fileID: 2105744863}
   m_RootOrder: 1

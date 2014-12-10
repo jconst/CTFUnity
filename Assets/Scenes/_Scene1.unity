@@ -1305,7 +1305,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 555319314}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Radius: .113778539
   m_Center: {x: 0, y: -3.7252903e-09}
 --- !u!23 &555319317
@@ -1345,7 +1345,7 @@ Transform:
   m_GameObject: {fileID: 555319314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 24.9491539, y: .0600996614, z: -.100000001}
-  m_LocalScale: {x: 18, y: 18, z: .00499999989}
+  m_LocalScale: {x: 16, y: 16, z: .00499999989}
   m_Children: []
   m_Father: {fileID: 2105744863}
   m_RootOrder: 0
@@ -1915,6 +1915,14 @@ Prefab:
       objectReference: {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 2300000, guid: c4b678322d72740699c32e889b4a9943, type: 2}
       propertyPath: m_UseLightProbes
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: c4b678322d72740699c32e889b4a9943, type: 2}
+      propertyPath: InitialModule.startColor.maxColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: c4b678322d72740699c32e889b4a9943, type: 2}
+      propertyPath: VelocityModule.enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2696,7 +2704,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4281767136
+        rgba: 4294967295
       minMaxState: 0
     startSize:
       scalar: 1
@@ -5897,7 +5905,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 2099274081}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Radius: .113778554
   m_Center: {x: -1.1920929e-07, y: -3.72529074e-09}
 --- !u!23 &2099274083
@@ -5937,7 +5945,7 @@ Transform:
   m_GameObject: {fileID: 2099274081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25.4211445, y: -.0371417403, z: -.100000024}
-  m_LocalScale: {x: 18, y: 18, z: .00499999989}
+  m_LocalScale: {x: 16, y: 16, z: .00499999989}
   m_Children: []
   m_Father: {fileID: 2105744863}
   m_RootOrder: 1

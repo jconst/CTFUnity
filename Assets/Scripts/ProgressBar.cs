@@ -7,11 +7,10 @@ public class ProgressBar : MonoBehaviour {
 	public string team;
 	public float timeLimit;
 	public float countdown;
-	public float fullWidth = 2f;
+	float fullWidth = 2.5f;
 
 	void Update() {
  		if (transform.localScale.x > fullWidth) {
-//print(" before didScore");
 			Destroy(this.gameObject);
 		} else {
 			float progressAmount = fullWidth*Time.deltaTime/timeLimit;

@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"par",
+				"particles"
+			],
+			[
+				"part",
+				"particleSystem"
+			],
+			[
 				"Fin",
 				"FindGameObjectsWithTag	tag"
 			],
@@ -150,10 +158,6 @@
 			[
 				"cou",
 				"countRemaining"
-			],
-			[
-				"par",
-				"parentGO"
 			],
 			[
 				"StartCor",
@@ -510,10 +514,6 @@
 			[
 				"spri",
 				"spriteForKey"
-			],
-			[
-				"pos",
-				"position"
 			]
 		]
 	},
@@ -539,7 +539,7 @@
 			"file": "Assets/Scripts/Manager.cs",
 			"settings":
 			{
-				"buffer_size": 7913,
+				"buffer_size": 8488,
 				"line_ending": "Unix"
 			}
 		},
@@ -555,7 +555,7 @@
 			"file": "Assets/Scripts/MainCamera.cs",
 			"settings":
 			{
-				"buffer_size": 1382,
+				"buffer_size": 1561,
 				"line_ending": "Unix"
 			}
 		},
@@ -604,6 +604,30 @@
 			"settings":
 			{
 				"buffer_size": 2161,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/AudioManager.cs",
+			"settings":
+			{
+				"buffer_size": 1754,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Extensions.cs",
+			"settings":
+			{
+				"buffer_size": 1233,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Assets/Scripts/Flag.cs",
+			"settings":
+			{
+				"buffer_size": 2986,
 				"line_ending": "Unix"
 			}
 		}
@@ -823,7 +847,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/Users/josephconstan/Code/Unity/CTFUnity/Assets/Scripts",
@@ -840,6 +864,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"PlayExplosionEffect",
 			"timePassed",
 			"manaTime",
 			"DidScore",
@@ -966,8 +991,7 @@
 			"Clear()",
 			"Clear",
 			"pTemp",
-			"NextLevel",
-			"StartLevel"
+			"NextLevel"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1113,7 +1137,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 13,
 			"sheets":
 			[
 				{
@@ -1183,15 +1207,15 @@
 					"file": "Assets/Scripts/Manager.cs",
 					"settings":
 					{
-						"buffer_size": 7913,
+						"buffer_size": 8488,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1589,
-								1589
+								886,
+								886
 							]
 						],
 						"settings":
@@ -1204,7 +1228,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 387.0,
+						"translation.y": 337.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1221,8 +1245,8 @@
 						"selection":
 						[
 							[
-								398,
-								398
+								4494,
+								4494
 							]
 						],
 						"settings":
@@ -1234,7 +1258,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 16.0,
+						"translation.y": 634.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1244,15 +1268,15 @@
 					"file": "Assets/Scripts/MainCamera.cs",
 					"settings":
 					{
-						"buffer_size": 1382,
+						"buffer_size": 1561,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								176,
-								176
+								608,
+								608
 							]
 						],
 						"settings":
@@ -1265,7 +1289,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 8.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1451,6 +1475,98 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 366.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "Assets/Scripts/AudioManager.cs",
+					"settings":
+					{
+						"buffer_size": 1754,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 81.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "Assets/Scripts/Extensions.cs",
+					"settings":
+					{
+						"buffer_size": 1233,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "Assets/Scripts/Flag.cs",
+					"settings":
+					{
+						"buffer_size": 2986,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2728,
+								2728
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Unity3D/UnityC#.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1851.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

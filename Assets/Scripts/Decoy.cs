@@ -18,6 +18,7 @@ public class Decoy : DropItem
         line = GetComponent<LineRenderer>();
         lifeTime = 10f;
         CreateFakePlayer(p);
+		AudioManager.Main.PlayNewSound ("robot");
         return true;
     }
 

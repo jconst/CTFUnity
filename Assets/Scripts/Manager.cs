@@ -224,6 +224,10 @@ public class Manager : MonoBehaviour
                    .ToList()
                    .ForEach(Destroy);
         timePassed = 0;
+		foreach (GameObject spawnpt in GameObject.FindGameObjectsWithTag("ItemSpawn")) {
+			ItemSpawn its=spawnpt.GetComponent<ItemSpawn>();
+			its.spawned=false;
+				}
 
         StartCoroutine(CountdownCoroutine(showRules, teamScored));
     }

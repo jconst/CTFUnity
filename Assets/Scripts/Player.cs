@@ -198,6 +198,7 @@ public class Player : MonoBehaviour
 		
 		particleSystem.startColor = Manager.S.teamColors[team];
 		particleSystem.Play();
+		AudioManager.Main.PlayNewSound ("bangLarge");
 		yield return new WaitForSeconds(respawnTime);
 		if (!canRespawn) {
 			Destroy(gameObject);

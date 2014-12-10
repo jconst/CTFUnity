@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 	const float tackleCooldown = 0.85f;
 	const float respawnTime = 1f;
 
+	public Vector2 heading = Vector2.up;
 	public float currentBoost = 1f;
 	public float tackleStartTime;
 	public Vector2 tackleDirection;
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
 		CheckDrop();
 		CheckTackle();
 		MoveStep();
+		UpdateRotation();
 		CheckInvincible();
 	}
 
@@ -94,6 +96,7 @@ public class Player : MonoBehaviour
 			if (tackling) {
 				float tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
 				rigidbody2D.velocity = tackleDirection * tackleCurSpeed * currentBoost;
+				heading = tackleDirection.normalized;
 			} 
 			else {
 				Vector2 velocity = inputCtrl.RunVelocity(number);
@@ -101,11 +104,17 @@ public class Player : MonoBehaviour
 				if (velocity.magnitude > 0.2f ||
 					lastInputVelocity.magnitude > 0.1f) {
 					rigidbody2D.velocity = velocity.normalized * speed * currentBoost;
+					heading = velocity.normalized;
 				}
 				lastInputVelocity = velocity;
 			}
 		}
 	}
+
+    void UpdateRotation()
+    {
+        transform.rotation = heading.ToQuaternion();
+    }
 
 	void CheckDrop() {
 		if (!Manager.S.itemPickups) {
@@ -173,12 +182,18 @@ public class Player : MonoBehaviour
 			if (!tackling) {
 				Die();
 			}
+			else AudioManager.Main.PlayNewSound("bounce");
 		    if (tackling && carrying) {
 				flag.Drop();
+
 			}
+
 		}
-		if (tackling)
-			hasKnockback = true;
+		if (tackling) {
+						hasKnockback = true;
+						if(!p) AudioManager.Main.PlayNewSound("bounce");
+						
+				}
 	}
 	
 	public void Die()
@@ -198,6 +213,7 @@ public class Player : MonoBehaviour
 		
 		particleSystem.startColor = Manager.S.teamColors[team];
 		particleSystem.Play();
+		AudioManager.Main.PlayNewSound ("YouDiedLol");
 		yield return new WaitForSeconds(respawnTime);
 		if (!canRespawn) {
 			Destroy(gameObject);

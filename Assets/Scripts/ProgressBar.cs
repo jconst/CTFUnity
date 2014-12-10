@@ -4,15 +4,10 @@ using System.Collections;
 public class ProgressBar : MonoBehaviour {
 	public string team;
 	public float timeLimit;
-	public float countdown;
 	float fullWidth = 2.5f;
 
 	void Update() {
- 		if (transform.localScale.x > fullWidth) {
-			Destroy(this.gameObject);
-		} else {
-			float progressAmount = fullWidth*Time.deltaTime/timeLimit;
-
+		float curWidth = fullWidth * (1-(Manager.S.flag.countdown/Flag.timeLimit));
 			Vector3 ls = transform.localScale;
 	 		ls.x += progressAmount;
  			transform.localScale = ls;
@@ -21,7 +16,7 @@ public class ProgressBar : MonoBehaviour {
 
 	public void Reset() {
 		Vector3 ls = transform.localScale;
-		ls.x = 0;
+ 		ls.x = curWidth;
 		transform.localScale = ls;
 	}
 }

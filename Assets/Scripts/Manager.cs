@@ -25,7 +25,7 @@ public class Manager : MonoBehaviour
        {"Red", 10}
     };
 
-    public float manaTime = 10f;
+    public float manaTime = 15f;
     const int countdownLength = 3;
     const int pointLimit = 5;
 
@@ -44,6 +44,7 @@ public class Manager : MonoBehaviour
     public Flag flag;
     public GUIText countdownGUIText;
     public GUITexture countdownBackground;
+    public Texture pauseImage;
 
     private float timePassed=0;
     public bool roundStarted = false;
@@ -175,16 +176,22 @@ public class Manager : MonoBehaviour
 
             if (!itemPickups) {
                 if (timePassed >= manaTime) {
+                    int lol =0;
                     teams.ForEach (team => {
-                        teamManas [team] += 1;
-                        teamManas [team] = Mathf.Min (teamManas [team], 3);
-                    });
-                    timePassed = 0;
-                }
-                teamManaBars.ToList ().ForEach (kvp => {
-                    ManaBar gt = kvp.Value;
-                    gt.currMana = teamManas [kvp.Key];
+                    if(teamManas[team]==3)
+                        lol+=1;
+                    teamManas [team] += 1;
+                    teamManas [team] = Mathf.Min (teamManas [team], 3);
+
                 });
+                if(lol!=2)
+                    AudioManager.Main.PlayNewSound("manaupall");
+                timePassed = 0;
+            }
+            teamManaBars.ToList ().ForEach (kvp => {
+                ManaBar gt = kvp.Value;
+                gt.currMana = teamManas [kvp.Key];
+            });
             }
         }
     }
@@ -192,8 +199,9 @@ public class Manager : MonoBehaviour
     private void OnGUI() {
         Rect fullScreen = new Rect(0, 0, Screen.width, Screen.height);
 
-        if(isPause)
-            GUI.Window(0, fullScreen, PauseMenu, "PAUSED");
+        if(isPause) {
+            GUI.Window(0, fullScreen, PauseMenu, pauseImage);
+        }
     }
 
     private void PauseMenu(int windowID) {
@@ -233,6 +241,10 @@ public class Manager : MonoBehaviour
                    .ToList()
                    .ForEach(Destroy);
         timePassed = 0;
+		foreach (GameObject spawnpt in GameObject.FindGameObjectsWithTag("ItemSpawn")) {
+			ItemSpawn its=spawnpt.GetComponent<ItemSpawn>();
+			its.spawned=false;
+				}
 
         StartCoroutine(CountdownCoroutine(showRules, teamScored));
     }
@@ -244,8 +256,8 @@ public class Manager : MonoBehaviour
 
         if (showRules) {
             yield return new WaitForSeconds(1);
-            
-            countdownGUIText.text = "Hold the bomb in\nyour enemy's base!";
+
+            countdownGUIText.text = "Bring the pollen\nto your flower!";
             yield return new WaitForSeconds(2);
 
             countdownGUIText.text = "First to " + pointLimit + " points wins!";

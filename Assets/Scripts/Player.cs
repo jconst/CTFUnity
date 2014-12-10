@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 	const float tackleCooldown = 0.85f;
 	const float respawnTime = 1f;
 
+	public Vector2 heading = Vector2.up;
 	public float currentBoost = 1f;
 	public float tackleStartTime;
 	public Vector2 tackleDirection;
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
 		CheckDrop();
 		CheckTackle();
 		MoveStep();
+		UpdateRotation();
 		CheckInvincible();
 	}
 
@@ -94,6 +96,7 @@ public class Player : MonoBehaviour
 			if (tackling) {
 				float tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
 				rigidbody2D.velocity = tackleDirection * tackleCurSpeed * currentBoost;
+				heading = tackleDirection.normalized;
 			} 
 			else {
 				Vector2 velocity = inputCtrl.RunVelocity(number);
@@ -101,11 +104,17 @@ public class Player : MonoBehaviour
 				if (velocity.magnitude > 0.2f ||
 					lastInputVelocity.magnitude > 0.1f) {
 					rigidbody2D.velocity = velocity.normalized * speed * currentBoost;
+					heading = velocity.normalized;
 				}
 				lastInputVelocity = velocity;
 			}
 		}
 	}
+
+    void UpdateRotation()
+    {
+        transform.rotation = heading.ToQuaternion();
+    }
 
 	void CheckDrop() {
 		if (!Manager.S.itemPickups) {

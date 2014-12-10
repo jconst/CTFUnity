@@ -4634,6 +4634,7 @@ MonoBehaviour:
   flag: {fileID: 0}
   countdownGUIText: {fileID: 0}
   countdownBackground: {fileID: 0}
+  pauseImage: {fileID: 2800000, guid: 8624d2070a921489c8bddf02ca945b63, type: 3}
   roundStarted: 0
   itemPickups: 0
 --- !u!4 &1564047625

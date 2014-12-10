@@ -6,24 +6,31 @@ public class ItemSpawn : MonoBehaviour {
 	public bool spawned;
 
 	float time=0f;
-	public float spawnTime=20f;
+	float spawnTime;
 
-
-	// Use this for initialization
-	void Start () {
-	
+	void Start() {
+		Reset();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		if (!spawned)
+		if (!spawned) {
 			time += Time.deltaTime;
-		if (time > spawnTime) {
+		} if (time > spawnTime) {
 			if(Manager.S.itemPickups)
 				SpawnPickup (Random.Range (1, 5));
 			else 
 				SpawnPickup(5);
+			Reset();
 		}
+		if (Time.time % 3 < 0.1) {
+			rigidbody2D.velocity = Quaternion.Euler(0,0, Extensions.Rand * 360) * Vector2.up * 10;
+		}
+	}
+
+	void Reset() {
+		spawnTime = Random.Range(10, 40);
+		rigidbody2D.velocity = Quaternion.Euler(0,0, Extensions.Rand * 360) * Vector2.up * 10;
 	}
 
 	void SpawnPickup(int number)

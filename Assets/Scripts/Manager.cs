@@ -25,7 +25,7 @@ public class Manager : MonoBehaviour
        {"Red", 10}
     };
 
-    public float manaTime = 10f;
+    public float manaTime = 15f;
     const int countdownLength = 3;
     const int pointLimit = 5;
 

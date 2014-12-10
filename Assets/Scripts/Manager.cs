@@ -44,6 +44,7 @@ public class Manager : MonoBehaviour
     public Flag flag;
     public GUIText countdownGUIText;
     public GUITexture countdownBackground;
+    public Texture pauseImage;
 
     private float timePassed=0;
     public bool roundStarted = false;
@@ -189,8 +190,9 @@ public class Manager : MonoBehaviour
     private void OnGUI() {
         Rect fullScreen = new Rect(0, 0, Screen.width, Screen.height);
 
-        if(isPause)
-            GUI.Window(0, fullScreen, PauseMenu, "PAUSED");
+        if(isPause) {
+            GUI.Window(0, fullScreen, PauseMenu, pauseImage);
+        }
     }
 
     private void PauseMenu(int windowID) {

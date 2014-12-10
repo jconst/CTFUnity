@@ -12,13 +12,9 @@ public class Flag : MonoBehaviour
 	private List<GameObject> pollens = 
 	    new List<GameObject>();
 
-	const float timeLimit = 3f;
-	float countdown = timeLimit;
-	bool pollenating {
-		get {
-			return countdown > 0 && countdown < timeLimit;
-		}
-	}
+	static public float timeLimit = 3f;
+	public float countdown = timeLimit;
+	bool pollenating;
 
 	void Start () {
 		initialPosit = transform.position;
@@ -34,8 +30,12 @@ public class Flag : MonoBehaviour
 				transform.position = newPos;
 			}
 		}
-		if (countdown < 0) {
+		if (countdown <= 0) {
 			Score();
+		} else if (pollenating) {
+			countdown -= Time.deltaTime;
+		} else if (countdown <= timeLimit) {
+			countdown += Time.deltaTime;
 		}
 	}
 
@@ -74,9 +74,6 @@ public class Flag : MonoBehaviour
 		carrier = null;
 		countdown = timeLimit;
 		renderer.enabled = true;
-
-		if (progress) 
-			progress.Reset();
 	}
 
 	public void OnTriggerEnter2D(Collider2D coll) {
@@ -85,23 +82,14 @@ public class Flag : MonoBehaviour
 		if (zone && carrier && carrier.team != zone.team) {
 			currentScoreZone = zone;
 			StartProgressBar(coll);
-		}
-	}
-
-	public void OnTriggerStay2D(Collider2D coll) {
-		ScoreZone zone = coll.GetComponent<ScoreZone>();
-		if (zone && carrier && carrier.team != zone.team) {
-			countdown -= Time.deltaTime;
-			progress.countdown -= Time.deltaTime;
+			pollenating = true;
 		}
 	}
 
 	public void OnTriggerExit2D(Collider2D coll){
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
 		if (zone) {
-			countdown = timeLimit;
-			GameObject pb = GameObject.FindWithTag("ProgressBar");
-			Destroy(pb);
+			pollenating = false;
 		}
 	}
 
@@ -113,11 +101,10 @@ public class Flag : MonoBehaviour
 	}
 
 	void StartProgressBar(Collider2D coll) {
-		GameObject go = (GameObject)Instantiate(Resources.Load("ProgressBar"));
-		progress = go.GetComponent<ProgressBar>();
-		
-		progress.timeLimit = timeLimit;
-		progress.countdown = timeLimit;
+		if (!progress) {
+			GameObject go = (GameObject)Instantiate(Resources.Load("ProgressBar"));
+			progress = go.GetComponent<ProgressBar>();
+		}
 		
 		Vector3 temp = coll.transform.position;
 		temp.y += 2f;

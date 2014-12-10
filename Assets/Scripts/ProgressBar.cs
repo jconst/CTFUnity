@@ -6,33 +6,13 @@ public class ProgressBar : MonoBehaviour {
 	//public Player player;
 	public string team;
 	public float timeLimit;
-	public float countdown;
-	public float fullWidth = 2f;
+	float fullWidth = 2.5f;
 
 	void Update() {
- 		if (transform.localScale.x > fullWidth) {
-//print(" before didScore");
-			Destroy(this.gameObject);
-		} else {
-			float progressAmount = fullWidth*Time.deltaTime/timeLimit;
+		float curWidth = fullWidth * (1-(Manager.S.flag.countdown/Flag.timeLimit));
 
-			Vector3 ls = transform.localScale;
-	 		ls.x += progressAmount;
- 			transform.localScale = ls;
-
-	 		//Vector3 v = transform.localPosition;
-	 		//v.x += progressAmount/2;
-	 		//transform.localPosition = v;
-		}
-	}
-
-	public void Reset() {
 		Vector3 ls = transform.localScale;
-		ls.x = 0;
+ 		ls.x = curWidth;
 		transform.localScale = ls;
-
-		//Vector3 v = transform.localPosition;
-		//v.x -= 1/2;
-		//transform.localPosition = v;
 	}
 }

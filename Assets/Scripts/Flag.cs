@@ -8,9 +8,13 @@ public class Flag : MonoBehaviour
 	public Player carrier;
 	Vector3 initialPosit;
 	ProgressBar progress;
+	ScoreZone currentScoreZone;
+	private List<GameObject> pollens = 
+	    new List<GameObject>();
 
-	const float timeLimit = 3f;
-	float countdown = timeLimit;
+	static public float timeLimit = 3f;
+	public float countdown = timeLimit;
+	bool pollenating;
 
 	void Start () {
 		initialPosit = transform.position;
@@ -26,10 +30,17 @@ public class Flag : MonoBehaviour
 				transform.position = newPos;
 			}
 		}
-		if (countdown < 0) 
-		{
+		if (countdown <= 0) {
 			Score();
+		} else if (pollenating) {
+			countdown -= Time.deltaTime;
+		} else if (countdown <= timeLimit) {
+			countdown += Time.deltaTime;
 		}
+	}
+
+	void FixedUpdate() {
+		UpdatePollenateEffect();
 	}
 
 	public void Pickup(Player p)
@@ -43,8 +54,7 @@ public class Flag : MonoBehaviour
 	void Score()
 	{
 		Manager.S.DidScore(carrier);
-		particleSystem.Play();
-		renderer.enabled = false;
+		PlayExplodeEffect();
 		countdown = 100f; //stop repeated scoring while game reloads
 	}
 
@@ -64,33 +74,22 @@ public class Flag : MonoBehaviour
 		carrier = null;
 		countdown = timeLimit;
 		renderer.enabled = true;
-
-		if (progress) 
-			progress.Reset();
 	}
 
 	public void OnTriggerEnter2D(Collider2D coll) {
 		CheckPickup(coll);
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
 		if (zone && carrier && carrier.team != zone.team) {
+			currentScoreZone = zone;
 			StartProgressBar(coll);
-		}
-	}
-
-	public void OnTriggerStay2D(Collider2D coll) {
-		ScoreZone zone = coll.GetComponent<ScoreZone>();
-		if (zone && carrier && carrier.team != zone.team) {
-			countdown -= Time.deltaTime;
-			progress.countdown -= Time.deltaTime;
+			pollenating = true;
 		}
 	}
 
 	public void OnTriggerExit2D(Collider2D coll){
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
 		if (zone) {
-			countdown = timeLimit;
-			GameObject pb = GameObject.FindWithTag("ProgressBar");
-			Destroy(pb);
+			pollenating = false;
 		}
 	}
 
@@ -102,14 +101,46 @@ public class Flag : MonoBehaviour
 	}
 
 	void StartProgressBar(Collider2D coll) {
-		GameObject go = (GameObject)Instantiate(Resources.Load("ProgressBar"));
-		progress = go.GetComponent<ProgressBar>();
-		
-		progress.timeLimit = timeLimit;
-		progress.countdown = timeLimit;
+		if (!progress) {
+			GameObject go = (GameObject)Instantiate(Resources.Load("ProgressBar"));
+			progress = go.GetComponent<ProgressBar>();
+		}
 		
 		Vector3 temp = coll.transform.position;
-		temp.y -= 1.5f;
+		temp.y += 2f;
 		progress.transform.position = temp;
+	}
+
+	void PlayExplodeEffect() {
+		particleSystem.Play();
+		renderer.enabled = false;
+	}
+
+	void UpdatePollenateEffect() {
+		if (pollenating) {
+			EmitPollenParticle();
+		}
+
+		const float speed = 2;
+		pollens.RemoveAll(p => {
+			Vector2 toTarget = (Vector2)currentScoreZone.transform.position - (Vector2)p.transform.position;
+			p.rigidbody2D.velocity = Vector2.Lerp(p.rigidbody2D.velocity.normalized, toTarget.normalized, 0.2f) * speed;
+			p.transform.localScale *= 0.98f;
+			if (toTarget.magnitude <= 0.05) {
+				Destroy(p);
+				return true;
+			}
+			return false;
+		});
+	}
+
+	void EmitPollenParticle() {
+		float size = Extensions.Rand;
+		GameObject particle = Instantiate(Resources.Load("PollenParticle")) as GameObject;
+		particle.transform.position = transform.position;
+		particle.transform.localScale = new Vector3(size, size, size);
+		particle.rigidbody2D.velocity = Quaternion.Euler(0, 0, Extensions.Rand*360f) * Vector2.up; //rand direction
+		particle.transform.parent = currentScoreZone.transform;
+		pollens.Add(particle);
 	}
 }

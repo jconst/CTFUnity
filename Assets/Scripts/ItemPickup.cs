@@ -19,6 +19,7 @@ public class ItemPickup : MonoBehaviour {
 	{
 		isp.spawned = false;
 		if (number == 5) {
+			Debug.Log("here");
 			Manager.S.teamManas [p.team] = Mathf.Min (3, Manager.S.teamManas [p.team] + 1);
 			AudioManager.Main.PlayNewSound("Mana");
 			Destroy (this.gameObject);

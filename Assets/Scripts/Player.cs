@@ -185,15 +185,12 @@ public class Player : MonoBehaviour
 			else AudioManager.Main.PlayNewSound("bounce");
 		    if (tackling && carrying) {
 				flag.Drop();
-
 			}
-
 		}
 		if (tackling) {
-						hasKnockback = true;
-						if(!p) AudioManager.Main.PlayNewSound("bounce");
-						
-				}
+			hasKnockback = true;
+			if(!p) AudioManager.Main.PlayNewSound("bounce");				
+		}
 	}
 	
 	public void Die()

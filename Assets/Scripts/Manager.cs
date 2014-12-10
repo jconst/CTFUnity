@@ -75,7 +75,7 @@ public class Manager : MonoBehaviour
 
         AudioManager.Main.PlayNewSound("Background", loop: true);
            
-        StartNewRound(false, null);
+        StartCoroutine(TutorialCoroutine());
     }
 
     Dictionary<string, int> InitScores(List<string> teamList) {
@@ -152,47 +152,38 @@ public class Manager : MonoBehaviour
     // -- UPDATE --
 
     public void Update() {          
-        if(Input.GetButtonDown("start") || Input.GetKeyDown(KeyCode.Return)) {
-            if(tutorial) {
-                tutorial = false;
-                teamScores = InitScores(teams);
-                StartNewRound(true, null);   
-            } else {
-                isPause = !isPause;
-                if(isPause)
-                  Time.timeScale = 0;
-                else
-                  Time.timeScale = 1;
-            }
+        if(!tutorial && (Input.GetButtonDown("start") || Input.GetKeyDown(KeyCode.Return))) {
+            isPause = !isPause;
+            if(isPause)
+              Time.timeScale = 0;
+            else
+              Time.timeScale = 1;
         }
 
-        if(!tutorial) {
-            teamScoreText.ToList().ForEach(kvp => {
-                GUIText gt = kvp.Value;
-                int score = teamScores[kvp.Key];
-                gt.text = score.ToString();
-            });
-            timePassed += Time.deltaTime;
+        teamScoreText.ToList().ForEach(kvp => {
+            GUIText gt = kvp.Value;
+            int score = teamScores[kvp.Key];
+            gt.text = score.ToString();
+        });
+        timePassed += Time.deltaTime;
 
-            if (!itemPickups) {
-                if (timePassed >= manaTime) {
-                    int lol =0;
-                    teams.ForEach (team => {
+        if (!itemPickups) {
+            if (timePassed >= manaTime) {
+                int lol =0;
+                teams.ForEach (team => {
                     if(teamManas[team]==3)
                         lol+=1;
                     teamManas [team] += 1;
                     teamManas [team] = Mathf.Min (teamManas [team], 3);
-
                 });
                 if(lol!=2)
                     AudioManager.Main.PlayNewSound("manaupall");
                 timePassed = 0;
             }
-            teamManaBars.ToList ().ForEach (kvp => {
+            teamManaBars.ToList().ForEach (kvp => {
                 ManaBar gt = kvp.Value;
                 gt.currMana = teamManas [kvp.Key];
             });
-            }
         }
     }
 
@@ -215,9 +206,6 @@ public class Manager : MonoBehaviour
 
     private IEnumerator ScoreCoroutine(string team) {
         allPlayers.ForEach(p => p.Die());
-        (GameObject.FindObjectsOfType(typeof(Turret)) as Turret[])
-                   .ToList()
-                   .ForEach(t => t.Deactivate());
         yield return new WaitForSeconds(1);        
         if (++teamScores[team] >= pointLimit) {
             countdownGUIText.enabled = countdownBackground.enabled = true;
@@ -237,6 +225,9 @@ public class Manager : MonoBehaviour
             p.frozen = true;
         });
         flag.Reset();
+        (GameObject.FindObjectsOfType(typeof(Turret)) as Turret[])
+           .ToList()
+           .ForEach(t => t.Deactivate());
         (GameObject.FindGameObjectsWithTag("ItemPickup") as GameObject[])
                    .ToList()
                    .ForEach(Destroy);
@@ -244,7 +235,7 @@ public class Manager : MonoBehaviour
 		foreach (GameObject spawnpt in GameObject.FindGameObjectsWithTag("ItemSpawn")) {
 			ItemSpawn its=spawnpt.GetComponent<ItemSpawn>();
 			its.spawned=false;
-				}
+		}
 
         StartCoroutine(CountdownCoroutine(showRules, teamScored));
     }
@@ -263,31 +254,16 @@ public class Manager : MonoBehaviour
             countdownGUIText.text = "First to " + pointLimit + " points wins!";
             yield return new WaitForSeconds(1.5f);
         }
-
-        if (!tutorial && teamScored == null) {
-            for(int i=countdownLength; i > 0; i--) {
-                countdownGUIText.text = i.ToString();
-                yield return new WaitForSeconds(0.7f);
-            }
-            countdownGUIText.text = "Start!\n\n\n";
-        }
-
-        if(tutorial && teamScored == null) {
-            countdownGUIText.text = "Press Start to skip tutorial";
-            yield return new WaitForSeconds(2f);
-
-            countdownGUIText.text = "Left stick for movement";
-            yield return new WaitForSeconds(1.5f);
-
-            countdownGUIText.text = "Right stick for tackling";
-            yield return new WaitForSeconds(1.5f);
-
-            countdownGUIText.text = "Face buttons to drop items";
-            //yield return new WaitForSeconds(1.5f);
-        } else if (teamScored != null) {
+        if (teamScored != null) {
             countdownGUIText.text = teamScored + " team scored!";
             yield return new WaitForSeconds(1);
         }
+
+        for(int i=countdownLength; i > 0; i--) {
+            countdownGUIText.text = i.ToString();
+            yield return new WaitForSeconds(0.7f);
+        }
+        countdownGUIText.text = "Start!\n\n\n";
 
         allPlayers.ForEach(p => p.frozen = false);
         roundStarted = true;
@@ -296,5 +272,30 @@ public class Manager : MonoBehaviour
         yield return new WaitForSeconds(1);
         countdownGUIText.enabled = false;
         countdownGUIText.text = null;
+    }
+
+    public IEnumerator TutorialCoroutine() {
+        countdownBackground.enabled = false;
+        teamManas = InitManas(teams);
+
+        List<KeyValuePair<string, float>> messagesAndWaitTimes =
+        new List<KeyValuePair<string, float>> {
+            new KeyValuePair<string, float> ("Left stick for movement", 3f),
+            new KeyValuePair<string, float> ("Right stick for tackling", 3f),
+            new KeyValuePair<string, float> ("Face buttons to drop items", 3f)
+        };
+
+        foreach (KeyValuePair<string, float> p in messagesAndWaitTimes) {
+            countdownGUIText.text = p.Key;
+            for (int i=0; i<p.Value*20; ++i) {
+                if (Input.GetButton("start") || Input.GetKey(KeyCode.Return)) {
+                    goto Brk;
+                }
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        Brk:
+            StartNewRound(true, null);
+
     }
 }

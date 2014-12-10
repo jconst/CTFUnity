@@ -21,6 +21,7 @@ public class Shockwave : DropItem
         startColor = line.material.color;
         DrawEdge();
         Destroy(gameObject, lifeTime);
+		AudioManager.Main.PlayNewSound ("shock");
     }
 
     void DrawEdge() {

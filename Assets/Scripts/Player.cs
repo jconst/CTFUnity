@@ -173,12 +173,18 @@ public class Player : MonoBehaviour
 			if (!tackling) {
 				Die();
 			}
+			else AudioManager.Main.PlayNewSound("bounce");
 		    if (tackling && carrying) {
 				flag.Drop();
+
 			}
+
 		}
-		if (tackling)
-			hasKnockback = true;
+		if (tackling) {
+						hasKnockback = true;
+						if(!p) AudioManager.Main.PlayNewSound("bounce");
+						
+				}
 	}
 	
 	public void Die()
@@ -198,7 +204,7 @@ public class Player : MonoBehaviour
 		
 		particleSystem.startColor = Manager.S.teamColors[team];
 		particleSystem.Play();
-		AudioManager.Main.PlayNewSound ("bangLarge");
+		AudioManager.Main.PlayNewSound ("YouDiedLol");
 		yield return new WaitForSeconds(respawnTime);
 		if (!canRespawn) {
 			Destroy(gameObject);

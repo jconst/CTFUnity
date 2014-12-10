@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
 
     void Start() {
         rigidbody2D.velocity = (Vector3)heading.normalized * speed;
+		AudioManager.Main.PlayNewSound ("turret");
     }
 
     void Update() {

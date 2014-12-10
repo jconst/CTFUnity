@@ -14,10 +14,12 @@ public class Flag : MonoBehaviour
 
 	static public float timeLimit = 3f;
 	public float countdown = timeLimit;
+	float soundtimah;
 	bool pollenating;
 
 	void Start () {
 		initialPosit = transform.position;
+		soundtimah = 0f;
 	}
 
 	void Update () {
@@ -48,6 +50,7 @@ public class Flag : MonoBehaviour
 		if (p.canGrabFlag) {
 			carrier = p;
 			p.flag = this;
+			AudioManager.Main.PlayNewSound("Mana");
 		}
 	}
 
@@ -118,8 +121,14 @@ public class Flag : MonoBehaviour
 
 	void UpdatePollenateEffect() {
 		if (pollenating) {
-			EmitPollenParticle();
-		}
+						EmitPollenParticle ();
+						if (soundtimah > 0.28) {
+								AudioManager.Main.PlayNewSound ("thrust");
+								soundtimah = 0;
+						}
+						soundtimah += Time.fixedDeltaTime;
+				} else
+						soundtimah = 0;
 
 		const float speed = 2;
 		pollens.RemoveAll(p => {

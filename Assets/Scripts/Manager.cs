@@ -167,10 +167,16 @@ public class Manager : MonoBehaviour
 
 		if (!itemPickups) {
     		if (timePassed >= manaTime) {
+				int lol =0;
 				teams.ForEach (team => {
+					if(teamManas[team]==3)
+						lol+=1;
 					teamManas [team] += 1;
 					teamManas [team] = Mathf.Min (teamManas [team], 3);
+
 				});
+				if(lol!=2)
+					AudioManager.Main.PlayNewSound("manaupall");
 				timePassed = 0;
     		}
     		teamManaBars.ToList ().ForEach (kvp => {

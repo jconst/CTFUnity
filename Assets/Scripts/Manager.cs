@@ -166,7 +166,7 @@ public class Manager : MonoBehaviour
             }
         }
 
-        if(!tutorial) {
+       // if(!tutorial) {
             teamScoreText.ToList().ForEach(kvp => {
                 GUIText gt = kvp.Value;
                 int score = teamScores[kvp.Key];
@@ -185,7 +185,7 @@ public class Manager : MonoBehaviour
 
                 });
                 if(lol!=2)
-                    AudioManager.Main.PlayNewSound("manaupall");
+                    AudioManager.Main.PlayNewSound("Boost");
                 timePassed = 0;
             }
             teamManaBars.ToList ().ForEach (kvp => {
@@ -193,7 +193,7 @@ public class Manager : MonoBehaviour
                 gt.currMana = teamManas [kvp.Key];
             });
             }
-        }
+        //}
     }
 
     private void OnGUI() {
@@ -284,6 +284,11 @@ public class Manager : MonoBehaviour
 
             countdownGUIText.text = "Face buttons to drop items";
             //yield return new WaitForSeconds(1.5f);
+			for(int i=countdownLength; i > 0; i--) {
+				countdownGUIText.text = i.ToString();
+				yield return new WaitForSeconds(0.7f);
+			}
+			countdownGUIText.text = "Start!\n\n\n";
         } else if (teamScored != null) {
             countdownGUIText.text = teamScored + " team scored!";
             yield return new WaitForSeconds(1);

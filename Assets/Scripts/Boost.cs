@@ -21,7 +21,7 @@ public class Boost : DropItem
 
         lifeTime = 4f;
         lifeTime += 1f; //to account for fadeout
-		AudioManager.Main.PlayNewSound ("manaupall2");
+		AudioManager.Main.PlayNewSound ("Boost");
         return true;
     }
 

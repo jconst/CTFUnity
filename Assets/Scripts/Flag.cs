@@ -66,6 +66,7 @@ public class Flag : MonoBehaviour
 		if (carrier)
 			carrier.flag = null;
 		carrier = null;
+		pollenating = false;
 		countdown = timeLimit;
 		GameObject pb = GameObject.FindWithTag("ProgressBar");
 		Destroy(pb);

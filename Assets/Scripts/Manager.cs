@@ -221,11 +221,13 @@ public class Manager : MonoBehaviour
 
 	// -- GAME EVENTS --
     public void DidScore(Player scorer) {
-        StartCoroutine(ScoreCoroutine(scorer.team));
+        if (!tutorial)
+            StartCoroutine(ScoreCoroutine(scorer.team));
     }
 
     private IEnumerator ScoreCoroutine(string team) {
         allPlayers.ForEach(p => p.Die());
+        flag.renderer.enabled = false;
         yield return new WaitForSeconds(1);        
         if (++teamScores[team] >= pointLimit) {
             countdownGUIText.enabled = countdownBackground.enabled = true;

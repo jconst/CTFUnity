@@ -1374,7 +1374,7 @@ Transform:
   m_GameObject: {fileID: 555319314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 24.9491539, y: .0600996614, z: -.100000001}
-  m_LocalScale: {x: 3.5, y: 3.5, z: .00499999989}
+  m_LocalScale: {x: 4, y: 4, z: .00499999989}
   m_Children: []
   m_Father: {fileID: 2105744863}
   m_RootOrder: 0
@@ -2166,11 +2166,11 @@ Prefab:
       objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 400000, guid: f39869594a467f940835986668155c82, type: 2}
       propertyPath: m_LocalScale.x
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f39869594a467f940835986668155c82, type: 2}
       propertyPath: m_LocalScale.y
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5800000, guid: f39869594a467f940835986668155c82, type: 2}
       propertyPath: m_Center.x
@@ -5745,7 +5745,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b925953eec14ec1469b74cadb90b0643, type: 2}
       propertyPath: m_LocalScale.x
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3300000, guid: b925953eec14ec1469b74cadb90b0643, type: 2}
       propertyPath: m_Mesh
@@ -5753,7 +5753,7 @@ Prefab:
       objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 400000, guid: b925953eec14ec1469b74cadb90b0643, type: 2}
       propertyPath: m_LocalScale.y
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5800000, guid: b925953eec14ec1469b74cadb90b0643, type: 2}
       propertyPath: m_Radius
@@ -6167,7 +6167,7 @@ Transform:
   m_GameObject: {fileID: 2099274081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25.4211445, y: -.0371417403, z: -.100000024}
-  m_LocalScale: {x: 3.5, y: 3.5, z: .00499999989}
+  m_LocalScale: {x: 4, y: 4, z: .00499999989}
   m_Children: []
   m_Father: {fileID: 2105744863}
   m_RootOrder: 1

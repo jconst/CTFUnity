@@ -27,7 +27,7 @@ public class Flag : MonoBehaviour
 			if (!carrier.carrying) {
 				carrier = null;
 			} else {
-				Vector3 newPos = (Vector2)carrier.transform.position + (carrier.heading * 0.5f);
+				Vector3 newPos = (Vector2)carrier.transform.position + (carrier.heading * 0.7f);
 				newPos.z = initialPosit.z;
 				transform.position = newPos;
 			}
@@ -58,7 +58,7 @@ public class Flag : MonoBehaviour
 	{
 		Manager.S.DidScore(carrier);
 		PlayExplodeEffect();
-		countdown = 100f; //stop repeated scoring while game reloads
+		countdown = timeLimit; //stop repeated scoring while game reloads
 	}
 
 	public void Drop()
@@ -116,19 +116,18 @@ public class Flag : MonoBehaviour
 
 	void PlayExplodeEffect() {
 		particleSystem.Play();
-		renderer.enabled = false;
 	}
 
 	void UpdatePollenateEffect() {
 		if (pollenating) {
-						EmitPollenParticle ();
-						if (soundtimah > 0.28) {
-								AudioManager.Main.PlayNewSound ("thrust");
-								soundtimah = 0;
-						}
-						soundtimah += Time.fixedDeltaTime;
-				} else
-						soundtimah = 0;
+			EmitPollenParticle ();
+			if (soundtimah > 0.28) {
+				AudioManager.Main.PlayNewSound ("thrust");
+				soundtimah = 0;
+			}
+			soundtimah += Time.fixedDeltaTime;
+		} else
+			soundtimah = 0;
 
 		const float speed = 2;
 		pollens.RemoveAll(p => {

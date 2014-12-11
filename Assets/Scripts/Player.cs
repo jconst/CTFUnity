@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
 
     void UpdateRotation()
     {
-        transform.rotation = heading.ToQuaternion();
+        transform.rotation = (heading * -1).ToQuaternion();
     }
 
 	void CheckDrop() {

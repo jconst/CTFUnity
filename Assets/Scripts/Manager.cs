@@ -38,8 +38,8 @@ public class Manager : MonoBehaviour
     // -- VARIABLES --
     public Dictionary<string, Vector2> spawnLocations =
        new Dictionary<string, Vector2> {
-       {"Blue", new Vector2(0, -4f)},
-       {"Red", new Vector2(0, 4f)}
+       {"Blue", new Vector2(0, 4f)},
+       {"Red", new Vector2(0, -4f)}
     };
 	public Dictionary<string, int> teamScores;
 	public Dictionary<string, int> teamManas;
@@ -144,8 +144,9 @@ public class Manager : MonoBehaviour
         Player player = playerGO.GetComponent<Player>();
 
         Vector3 initialPos = spawnLocations[team];
-        spawnLocations[team] = Quaternion.Euler(0,0,20) * spawnLocations[team];
+        spawnLocations[team] = Quaternion.Euler(0,0,30) * spawnLocations[team];
         playerGO.transform.position = player.initialPos = initialPos;
+        player.heading = playerGO.transform.position * -1;
         playerGO.layer = teamLayers[team];
         player.team = team;
         player.number = index;

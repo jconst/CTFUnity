@@ -2551,6 +2551,7 @@ GameObject:
   - 50: {fileID: 1107535420}
   - 199: {fileID: 1107535427}
   - 198: {fileID: 1107535426}
+  - 122: {fileID: 1107535428}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Bomb
@@ -3712,6 +3713,17 @@ ParticleSystemRenderer:
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
+--- !u!122 &1107535428
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1107535419}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 2871215433
+  m_Size: 2
 --- !u!1 &1112660512
 GameObject:
   m_ObjectHideFlags: 0

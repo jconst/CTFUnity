@@ -272,8 +272,6 @@ public class Manager : MonoBehaviour
         teamManas = InitManas(teams);
 
         if (showRules) {
-            yield return new WaitForSeconds(1);
-
             countdownGUIText.text = "Bring the pollen\nto your flower!";
             yield return new WaitForSeconds(2);
 
@@ -301,7 +299,7 @@ public class Manager : MonoBehaviour
     }
 
     public IEnumerator TutorialCoroutine() {
-        countdownBackground.enabled = false;
+        countdownBackground.enabled = countdownGUIText.enabled = false;
         teamManas = InitManas(teams);
         tutorialSong = AudioManager.Main.PlayNewSound("Tutorial", loop: true);
 
@@ -311,17 +309,20 @@ public class Manager : MonoBehaviour
         tutorialGUIText = tutorialGUITexts[0];
         tutorialSkipGUIText = tutorialGUITexts[1];
         
-        tutorialGUIText.fontSize = Screen.width / 24;
-        tutorialSkipGUIText.fontSize = Screen.width / 30;
+        tutorialGUIText.fontSize = Screen.width / 30;
+        tutorialSkipGUIText.fontSize = Screen.width / 34;
 
-        tutorialGUIText.text = "Tutorial Mode";
-        tutorialSkipGUIText.text = "Press Start to skip";
+        tutorialSkipGUIText.text = "Press Start to skip tutorial";
 
         List<KeyValuePair<string, float>> messagesAndWaitTimes =
         new List<KeyValuePair<string, float>> {
-            new KeyValuePair<string, float> ("Left stick for movement", 3f),
-            new KeyValuePair<string, float> ("Right stick for tackling", 3f),
-            new KeyValuePair<string, float> ("Face buttons to drop items", 3f),
+            new KeyValuePair<string, float> ("Move around with the left stick", 3f),
+            new KeyValuePair<string, float> ("Sting your enemies with the right stick", 4f),
+            new KeyValuePair<string, float> ("(While stinging, you're invincible to other stings)", 4f),
+            new KeyValuePair<string, float> ("Press Y to boost!", 4f),
+            new KeyValuePair<string, float> ("Press B to create a drone to fight for you", 4f),
+            new KeyValuePair<string, float> ("Press A to create a turret", 4f),
+            new KeyValuePair<string, float> ("Press X to knock back turrets and enemies", 4f),
             new KeyValuePair<string, float> ("", 30f)
         };
 
@@ -329,13 +330,13 @@ public class Manager : MonoBehaviour
             foreach (string k in teamManas.Keys.ToList()) {
                 teamManas[k]++;
             }
-            countdownGUIText.text = p.Key;
+            tutorialGUIText.text = p.Key;
             for (int i=0; i<p.Value*20; ++i) {
                 if (Input.GetButton("start") || Input.GetKey(KeyCode.Return)) {
                     StartGame();
                     yield break;
                 }
-                yield return new WaitForSeconds(0.04f);
+                yield return new WaitForSeconds(0.045f);
             }
         }
     }
@@ -343,7 +344,6 @@ public class Manager : MonoBehaviour
     private void Blink() {
         Color color = tutorialGUIText.material.color;
         color.a = Mathf.Round(Mathf.PingPong(Time.time * 1f, 1.0f));
-        tutorialGUIText.material.color = color;
         tutorialSkipGUIText.material.color = color;
     }   
 }

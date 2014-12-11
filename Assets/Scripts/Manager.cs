@@ -60,6 +60,7 @@ public class Manager : MonoBehaviour
     public bool itemPickups = false;
     private bool isPause = false;
     private bool tutorial = true;
+    private Sound tutorialSong;
 
     static public Manager S {
         get {
@@ -81,8 +82,6 @@ public class Manager : MonoBehaviour
         teamBases = teams.ToDictionary(team => team,                                 //key
                                        team => GameObject.FindWithTag(team+"Side")); //value
         flag = GameObject.FindObjectOfType(typeof(Flag)) as Flag;
-
-        AudioManager.Main.PlayNewSound("Background", loop: true);
            
         StartCoroutine(TutorialCoroutine());
     }
@@ -148,12 +147,11 @@ public class Manager : MonoBehaviour
         playerGO.layer = teamLayers[team];
         player.team = team;
         player.number = index;
-        // player.renderer.material.color = teamColors[team];
 
         // set sprite:
         int idxInTeam = allPlayers.Where(p => p.team == team).Count();
         Sprite sp = Resources.Load(teamTextures[team][idxInTeam], typeof(Sprite)) as Sprite;
-        player.GetComponent<SpriteRenderer>().sprite = sp;
+        player.spriteRenderer.sprite = sp;
 
         return player;
     }
@@ -236,6 +234,15 @@ public class Manager : MonoBehaviour
         }
     }
 
+    public void StartGame() {
+        tutorialSong.playing = false;
+        tutorial = false;
+        tutorialGUIText.enabled = false;
+        tutorialSkipGUIText.enabled = false;
+        AudioManager.Main.PlayNewSound("Background", loop: true);
+        StartNewRound(true, null);
+    }
+
     public void StartNewRound(bool showRules, string teamScored)
     {
         roundStarted = false;
@@ -296,6 +303,7 @@ public class Manager : MonoBehaviour
     public IEnumerator TutorialCoroutine() {
         countdownBackground.enabled = false;
         teamManas = InitManas(teams);
+        tutorialSong = AudioManager.Main.PlayNewSound("Tutorial", loop: true);
 
         GameObject tutorialParent = Instantiate(Resources.Load("Tutorial")) as GameObject;
         GUIText[] tutorialGUITexts = tutorialParent.GetComponentsInChildren<GUIText>();
@@ -318,20 +326,18 @@ public class Manager : MonoBehaviour
         };
 
         foreach (KeyValuePair<string, float> p in messagesAndWaitTimes) {
+            foreach (string k in teamManas.Keys.ToList()) {
+                teamManas[k]++;
+            }
             countdownGUIText.text = p.Key;
             for (int i=0; i<p.Value*20; ++i) {
                 if (Input.GetButton("start") || Input.GetKey(KeyCode.Return)) {
-                    goto Brk;
+                    StartGame();
+                    yield break;
                 }
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.04f);
             }
         }
-        Brk:
-            yield return new WaitForSeconds(0.5f);
-            tutorial = false;
-            tutorialGUIText.enabled = false;
-            tutorialSkipGUIText.enabled = false;
-            StartNewRound(true, null);
     }
 
     private void Blink() {

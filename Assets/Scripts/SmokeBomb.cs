@@ -20,7 +20,6 @@ public class SmokeBomb : DropItem {
 		if (lifeTime <= fadeoutStartTime) {
 			Color color = gameObject.renderer.material.color;
 			color.a -= (1f/fadeoutStartTime) * Time.deltaTime;
-            Debug.Log(color.a);
 			gameObject.renderer.material.color = color;
 		}
     }

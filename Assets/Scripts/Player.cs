@@ -57,6 +57,12 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	public SpriteRenderer spriteRenderer {
+		get {
+			return GetComponent<SpriteRenderer>();
+		}
+	}
+
 	void Awake() {
 		inputCtrl = InputControl.S;
 	}
@@ -101,10 +107,12 @@ public class Player : MonoBehaviour
 			else {
 				Vector2 velocity = inputCtrl.RunVelocity(number);
 				speed *= (carrying ? 0.9f : 1f);
-				if (velocity.magnitude > 0.2f ||
-					lastInputVelocity.magnitude > 0.1f) {
+				bool moving = velocity.magnitude > 0.2f;
+				bool stopping = !moving && lastInputVelocity.magnitude > 0.1f;
+				if (moving || stopping) {
 					rigidbody2D.velocity = velocity.normalized * speed * currentBoost;
-					heading = velocity.normalized;
+					if (moving)
+						heading = velocity.normalized;
 				}
 				lastInputVelocity = velocity;
 			}
@@ -170,9 +178,9 @@ public class Player : MonoBehaviour
 	}
 
 	void CheckInvincible() {
-		Color c = renderer.material.color;
+		Color c = spriteRenderer.material.color;
 		c.a = invincible ? 0.5f : 1;
-		renderer.material.color = c;
+		spriteRenderer.material.color = c;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll)
@@ -202,7 +210,7 @@ public class Player : MonoBehaviour
 	public IEnumerator DieCoroutine()
 	{
 		dead = true;
-		renderer.enabled = false;
+		spriteRenderer.enabled = false;
 		collider2D.enabled = false;
 		if (carrying) {
 			flag.Drop();
@@ -224,7 +232,7 @@ public class Player : MonoBehaviour
 
 	public void Reset()
 	{
-		renderer.enabled = true;
+		spriteRenderer.enabled = true;
 		collider2D.enabled = true;
 		dead = false;
 		if (spawnpoint) {

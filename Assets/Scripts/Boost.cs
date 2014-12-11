@@ -51,9 +51,9 @@ public class Boost : DropItem
 
         const int fadeOutSmoothness = 10;
         for (int i=fadeOutSmoothness; i>=0; i--) {
-            Color fadedColor = shadow.renderer.material.color;
+            Color fadedColor = shadow.GetComponent<SpriteRenderer>().color;
             fadedColor.a = shadowStartAlpha * ((float)i / (float)fadeOutSmoothness);
-            shadow.renderer.material.color = fadedColor;
+            shadow.GetComponent<SpriteRenderer>().color = fadedColor;
             yield return new WaitForSeconds(shadowFadeoutTime / fadeOutSmoothness);
         }
         Destroy(shadow);

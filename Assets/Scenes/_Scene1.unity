@@ -1089,7 +1089,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
 --- !u!114 &520008292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2640,7 +2640,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!198 &1107535426
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4632,6 +4632,8 @@ MonoBehaviour:
   manaTime: 15
   allPlayers: []
   flag: {fileID: 0}
+  tutorialGUIText: {fileID: 0}
+  tutorialSkipGUIText: {fileID: 0}
   countdownGUIText: {fileID: 0}
   countdownBackground: {fileID: 0}
   pauseImage: {fileID: 2800000, guid: 8624d2070a921489c8bddf02ca945b63, type: 3}
@@ -6384,7 +6386,7 @@ Transform:
   - {fileID: 1821771845}
   - {fileID: 1191941249}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1001 &2109660778
 Prefab:
   m_ObjectHideFlags: 0

@@ -49,6 +49,8 @@ public class Manager : MonoBehaviour
     public List<Player> allPlayers =
        new List<Player>();
     public Flag flag;
+    public GUIText tutorialGUIText;
+    public GUIText tutorialSkipGUIText;
     public GUIText countdownGUIText;
     public GUITexture countdownBackground;
     public Texture pauseImage;
@@ -165,7 +167,10 @@ public class Manager : MonoBehaviour
 
     // -- UPDATE --
 
-    public void Update() {          
+    public void Update() {
+        // blinking tutorial text
+        if(tutorialGUIText.enabled) Blink();
+
         if(!tutorial && (Input.GetButtonDown("start") || Input.GetKeyDown(KeyCode.Return))) {
             isPause = !isPause;
             if(isPause)
@@ -292,12 +297,24 @@ public class Manager : MonoBehaviour
         countdownBackground.enabled = false;
         teamManas = InitManas(teams);
 
+        GameObject tutorialParent = Instantiate(Resources.Load("Tutorial")) as GameObject;
+        GUIText[] tutorialGUITexts = tutorialParent.GetComponentsInChildren<GUIText>();
+
+        tutorialGUIText = tutorialGUITexts[0];
+        tutorialSkipGUIText = tutorialGUITexts[1];
+        
+        tutorialGUIText.fontSize = Screen.width / 24;
+        tutorialSkipGUIText.fontSize = Screen.width / 30;
+
+        tutorialGUIText.text = "Tutorial Mode";
+        tutorialSkipGUIText.text = "Press Start to skip";
+
         List<KeyValuePair<string, float>> messagesAndWaitTimes =
         new List<KeyValuePair<string, float>> {
             new KeyValuePair<string, float> ("Left stick for movement", 3f),
             new KeyValuePair<string, float> ("Right stick for tackling", 3f),
             new KeyValuePair<string, float> ("Face buttons to drop items", 3f),
-            new KeyValuePair<string, float> ("Press start to begin!", 30f)
+            new KeyValuePair<string, float> ("", 30f)
         };
 
         foreach (KeyValuePair<string, float> p in messagesAndWaitTimes) {
@@ -310,7 +327,17 @@ public class Manager : MonoBehaviour
             }
         }
         Brk:
+            yield return new WaitForSeconds(0.5f);
             tutorial = false;
+            tutorialGUIText.enabled = false;
+            tutorialSkipGUIText.enabled = false;
             StartNewRound(true, null);
     }
+
+    private void Blink() {
+        Color color = tutorialGUIText.material.color;
+        color.a = Mathf.Round(Mathf.PingPong(Time.time * 1f, 1.0f));
+        tutorialGUIText.material.color = color;
+        tutorialSkipGUIText.material.color = color;
+    }   
 }

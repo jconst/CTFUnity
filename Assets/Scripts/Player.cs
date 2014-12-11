@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 	public GameObject itemIcon;
 	public int itemNo=-1;
 
- 	private List<string> dropItems =
+ 	static private List<string> dropItems =
 	    new List<string> {
 	   	"Turret",
 	   	"Decoy",

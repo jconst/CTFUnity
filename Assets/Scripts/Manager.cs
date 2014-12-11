@@ -25,6 +25,12 @@ public class Manager : MonoBehaviour
        {"Red", 10}
     };
 
+    public Dictionary<string, List<string>> teamTextures =
+       new Dictionary<string, List<string>> {
+        {"Blue", new List<string>{"blue_bee1", "blue_bee2"}},
+        {"Red",  new List<string>{"red_bee1",  "red_bee2"}}
+    };
+
     public float manaTime = 15f;
     const int countdownLength = 3;
     const int pointLimit = 5;
@@ -40,7 +46,8 @@ public class Manager : MonoBehaviour
 	public Dictionary<string, GUIText> teamScoreText;
 	public Dictionary<string, ManaBar> teamManaBars;
     public Dictionary<string, GameObject> teamBases;
-    public List<Player> allPlayers;
+    public List<Player> allPlayers =
+       new List<Player>();
     public Flag flag;
     public GUIText countdownGUIText;
     public GUITexture countdownBackground;
@@ -64,7 +71,7 @@ public class Manager : MonoBehaviour
         Time.timeScale = 1.2f;
         teamScores = InitScores(teams);
         teamScoreText = InitScoreText(teams);
-        allPlayers = SpawnPlayers();
+        SpawnPlayers();
         CreateCountdown();
 
         teamManaBars = InitManaBars (teams);
@@ -118,13 +125,15 @@ public class Manager : MonoBehaviour
 		});
 	}
 	
-	List<Player> SpawnPlayers() {
+	void SpawnPlayers() {
         if (PlayerOptions.teamForPlayer.Count == 0) {
             //for testing without needing to load menu
             PlayerOptions.teamForPlayer[0] = "Red";
             PlayerOptions.teamForPlayer[3] = "Blue";
         }
-		return PlayerOptions.teamForPlayer.Select(kvp => SpawnPlayer(kvp.Value, kvp.Key)).ToList();
+		PlayerOptions.teamForPlayer.ToList().ForEach(kvp => {
+            allPlayers.Add(SpawnPlayer(kvp.Value, kvp.Key));
+        });
     }
 
     Player SpawnPlayer(string team, int index) {
@@ -137,7 +146,12 @@ public class Manager : MonoBehaviour
         playerGO.layer = teamLayers[team];
         player.team = team;
         player.number = index;
-        player.renderer.material.color = teamColors[team];
+        // player.renderer.material.color = teamColors[team];
+
+        // set sprite:
+        int idxInTeam = allPlayers.Where(p => p.team == team).Count();
+        Sprite sp = Resources.Load(teamTextures[team][idxInTeam], typeof(Sprite)) as Sprite;
+        player.GetComponent<SpriteRenderer>().sprite = sp;
 
         return player;
     }
@@ -282,7 +296,8 @@ public class Manager : MonoBehaviour
         new List<KeyValuePair<string, float>> {
             new KeyValuePair<string, float> ("Left stick for movement", 3f),
             new KeyValuePair<string, float> ("Right stick for tackling", 3f),
-            new KeyValuePair<string, float> ("Face buttons to drop items", 3f)
+            new KeyValuePair<string, float> ("Face buttons to drop items", 3f),
+            new KeyValuePair<string, float> ("Press start to begin!", 30f)
         };
 
         foreach (KeyValuePair<string, float> p in messagesAndWaitTimes) {
@@ -295,7 +310,7 @@ public class Manager : MonoBehaviour
             }
         }
         Brk:
+            tutorial = false;
             StartNewRound(true, null);
-
     }
 }

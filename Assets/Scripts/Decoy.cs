@@ -56,7 +56,7 @@ public class Decoy : DropItem
         Flag flag = Manager.S.flag;
         Vector2 newTarget = (flag.carrier == null || flag.carrier.team != fakePlayer.team) ? flag.transform.position
                           : flag.carrier != fakePlayer ? RandomEnemy().transform.position
-                          : Manager.S.teamBases[fakePlayer.otherTeam].transform.position;
+                          : Manager.S.teamBases[fakePlayer.team].transform.position;
 
         //if new target is different enough or fakePlayer is
         //not at target & doesn't know where to go, recalc path

@@ -31,6 +31,7 @@ public class Decoy : DropItem
         fakePlayer.currentBoost = 1f;
         fakePlayer.flag = null;
         fakePlayer.inputCtrl = input = new DecoyInput(this);
+        fakePlayer.spriteRenderer.sprite = Resources.Load(owner.team+"Drone", typeof(Sprite)) as Sprite;
         Manager.S.allPlayers.Add(fakePlayer);
     }
 

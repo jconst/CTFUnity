@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: b3fdf480cb3b7ba4e993a946fd4a69a4
+guid: cfd778ec7950947c9a1b7a2acf581679
 TextureImporter:
   fileIDToRecycleName:
-    21300000: red_minion
+    21300000: BlueDrone
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,7 +38,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 270
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []

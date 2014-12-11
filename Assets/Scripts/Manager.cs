@@ -27,8 +27,8 @@ public class Manager : MonoBehaviour
 
     public Dictionary<string, List<string>> teamTextures =
        new Dictionary<string, List<string>> {
-        {"Blue", new List<string>{"blue_bee1", "blue_bee2"}},
-        {"Red",  new List<string>{"red_bee1",  "red_bee2"}}
+        {"Blue", new List<string>{"blue_bee", "blue_bee2"}},
+        {"Red",  new List<string>{"red_bee",  "red_bee2"}}
     };
 
     public float manaTime = 15f;
@@ -130,6 +130,8 @@ public class Manager : MonoBehaviour
         if (PlayerOptions.teamForPlayer.Count == 0) {
             //for testing without needing to load menu
             PlayerOptions.teamForPlayer[0] = "Red";
+            PlayerOptions.teamForPlayer[1] = "Blue";
+            PlayerOptions.teamForPlayer[2] = "Red";
             PlayerOptions.teamForPlayer[3] = "Blue";
         }
 		PlayerOptions.teamForPlayer.ToList().ForEach(kvp => {
@@ -328,7 +330,7 @@ public class Manager : MonoBehaviour
 
         foreach (KeyValuePair<string, float> p in messagesAndWaitTimes) {
             foreach (string k in teamManas.Keys.ToList()) {
-                teamManas[k]++;
+                teamManas[k] = Mathf.Min(teamManas[k] + 1, 3);
             }
             tutorialGUIText.text = p.Key;
             for (int i=0; i<p.Value*20; ++i) {

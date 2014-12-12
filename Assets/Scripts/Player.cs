@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
 			if (tackling) {
 				float tackleCurSpeed = tackleAveSpeed + (tackleAveSpeed * curve);
 				rigidbody2D.velocity = tackleDirection * tackleCurSpeed * currentBoost;
-				heading = tackleDirection.normalized;
+				Turn(tackleDirection);
 			} 
 			else {
 				Vector2 velocity = inputCtrl.RunVelocity(number);
@@ -112,16 +112,20 @@ public class Player : MonoBehaviour
 				if (moving || stopping) {
 					rigidbody2D.velocity = velocity.normalized * speed * currentBoost;
 					if (moving)
-						heading = velocity.normalized;
+						Turn(velocity);
 				}
 				lastInputVelocity = velocity;
 			}
 		}
 	}
 
+	void Turn(Vector2 newHeading) {
+		heading = Vector2.Lerp(heading.normalized, newHeading.normalized, 0.7f).normalized;
+	}
+
     void UpdateRotation()
     {
-        transform.rotation = heading.ToQuaternion();
+        transform.rotation = (heading * -1).ToQuaternion();
     }
 
 	void CheckDrop() {

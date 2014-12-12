@@ -27,8 +27,8 @@ public class Manager : MonoBehaviour
 
     public Dictionary<string, List<string>> teamTextures =
        new Dictionary<string, List<string>> {
-        {"Blue", new List<string>{"blue_bee1", "blue_bee2"}},
-        {"Red",  new List<string>{"red_bee1",  "red_bee2"}}
+        {"Blue", new List<string>{"blue_bee", "blue_bee2"}},
+        {"Red",  new List<string>{"red_bee",  "red_bee2"}}
     };
 
     public float manaTime = 15f;
@@ -38,8 +38,8 @@ public class Manager : MonoBehaviour
     // -- VARIABLES --
     public Dictionary<string, Vector2> spawnLocations =
        new Dictionary<string, Vector2> {
-       {"Blue", new Vector2(0, -4f)},
-       {"Red", new Vector2(0, 4f)}
+       {"Blue", new Vector2(0, 4f)},
+       {"Red", new Vector2(0, -4f)}
     };
 	public Dictionary<string, int> teamScores;
 	public Dictionary<string, int> teamManas;
@@ -130,6 +130,8 @@ public class Manager : MonoBehaviour
         if (PlayerOptions.teamForPlayer.Count == 0) {
             //for testing without needing to load menu
             PlayerOptions.teamForPlayer[0] = "Red";
+            PlayerOptions.teamForPlayer[1] = "Blue";
+            PlayerOptions.teamForPlayer[2] = "Red";
             PlayerOptions.teamForPlayer[3] = "Blue";
         }
 		PlayerOptions.teamForPlayer.ToList().ForEach(kvp => {
@@ -142,8 +144,9 @@ public class Manager : MonoBehaviour
         Player player = playerGO.GetComponent<Player>();
 
         Vector3 initialPos = spawnLocations[team];
-        spawnLocations[team] = Quaternion.Euler(0,0,20) * spawnLocations[team];
+        spawnLocations[team] = Quaternion.Euler(0,0,30) * spawnLocations[team];
         playerGO.transform.position = player.initialPos = initialPos;
+        player.heading = playerGO.transform.position * -1;
         playerGO.layer = teamLayers[team];
         player.team = team;
         player.number = index;
@@ -218,11 +221,13 @@ public class Manager : MonoBehaviour
 
 	// -- GAME EVENTS --
     public void DidScore(Player scorer) {
-        StartCoroutine(ScoreCoroutine(scorer.team));
+        if (!tutorial)
+            StartCoroutine(ScoreCoroutine(scorer.team));
     }
 
     private IEnumerator ScoreCoroutine(string team) {
         allPlayers.ForEach(p => p.Die());
+        flag.renderer.enabled = false;
         yield return new WaitForSeconds(1);        
         if (++teamScores[team] >= pointLimit) {
             countdownGUIText.enabled = countdownBackground.enabled = true;
@@ -272,8 +277,6 @@ public class Manager : MonoBehaviour
         teamManas = InitManas(teams);
 
         if (showRules) {
-            yield return new WaitForSeconds(1);
-
             countdownGUIText.text = "Bring the pollen\nto your flower!";
             yield return new WaitForSeconds(2);
 
@@ -301,7 +304,7 @@ public class Manager : MonoBehaviour
     }
 
     public IEnumerator TutorialCoroutine() {
-        countdownBackground.enabled = false;
+        countdownBackground.enabled = countdownGUIText.enabled = false;
         teamManas = InitManas(teams);
         tutorialSong = AudioManager.Main.PlayNewSound("Tutorial", loop: true);
 
@@ -311,31 +314,34 @@ public class Manager : MonoBehaviour
         tutorialGUIText = tutorialGUITexts[0];
         tutorialSkipGUIText = tutorialGUITexts[1];
         
-        tutorialGUIText.fontSize = Screen.width / 24;
-        tutorialSkipGUIText.fontSize = Screen.width / 30;
+        tutorialGUIText.fontSize = Screen.width / 30;
+        tutorialSkipGUIText.fontSize = Screen.width / 34;
 
-        tutorialGUIText.text = "Tutorial Mode";
-        tutorialSkipGUIText.text = "Press Start to skip";
+        tutorialSkipGUIText.text = "Press Start to skip tutorial";
 
         List<KeyValuePair<string, float>> messagesAndWaitTimes =
         new List<KeyValuePair<string, float>> {
-            new KeyValuePair<string, float> ("Left stick for movement", 3f),
-            new KeyValuePair<string, float> ("Right stick for tackling", 3f),
-            new KeyValuePair<string, float> ("Face buttons to drop items", 3f),
+            new KeyValuePair<string, float> ("Move around with the left stick", 3f),
+            new KeyValuePair<string, float> ("Sting your enemies with the right stick", 4f),
+            new KeyValuePair<string, float> ("(While stinging, you're invincible to other stings)", 4f),
+            new KeyValuePair<string, float> ("Press Y to boost!", 4f),
+            new KeyValuePair<string, float> ("Press B to create a drone to fight for you", 4f),
+            new KeyValuePair<string, float> ("Press A to create a turret", 4f),
+            new KeyValuePair<string, float> ("Press X to knock back turrets and enemies", 4f),
             new KeyValuePair<string, float> ("", 30f)
         };
 
         foreach (KeyValuePair<string, float> p in messagesAndWaitTimes) {
             foreach (string k in teamManas.Keys.ToList()) {
-                teamManas[k]++;
+                teamManas[k] = Mathf.Min(teamManas[k] + 1, 3);
             }
-            countdownGUIText.text = p.Key;
+            tutorialGUIText.text = p.Key;
             for (int i=0; i<p.Value*20; ++i) {
                 if (Input.GetButton("start") || Input.GetKey(KeyCode.Return)) {
                     StartGame();
                     yield break;
                 }
-                yield return new WaitForSeconds(0.04f);
+                yield return new WaitForSeconds(0.045f);
             }
         }
     }
@@ -343,7 +349,6 @@ public class Manager : MonoBehaviour
     private void Blink() {
         Color color = tutorialGUIText.material.color;
         color.a = Mathf.Round(Mathf.PingPong(Time.time * 1f, 1.0f));
-        tutorialGUIText.material.color = color;
         tutorialSkipGUIText.material.color = color;
     }   
 }

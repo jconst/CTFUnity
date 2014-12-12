@@ -146,7 +146,7 @@ public class Manager : MonoBehaviour
         Vector3 initialPos = spawnLocations[team];
         spawnLocations[team] = Quaternion.Euler(0,0,30) * spawnLocations[team];
         playerGO.transform.position = player.initialPos = initialPos;
-        player.heading = playerGO.transform.position * -1;
+        player.heading = player.initialHeading = playerGO.transform.position * -1;
         playerGO.layer = teamLayers[team];
         player.team = team;
         player.number = index;
@@ -240,6 +240,7 @@ public class Manager : MonoBehaviour
     }
 
     public void StartGame() {
+        allPlayers.ForEach(p => p.Die());
         tutorialSong.playing = false;
         tutorial = false;
         tutorialGUIText.enabled = false;

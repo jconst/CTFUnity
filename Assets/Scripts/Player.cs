@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 	public string team;
 	public int number;
 	public Vector3 initialPos;
+	public Vector3 initialHeading;	
 	public Vector2 lastInputVelocity;
 	public InputControl inputCtrl;
 
@@ -244,8 +245,10 @@ public class Player : MonoBehaviour
 			Destroy(spawnpoint.gameObject);
 			spawnpoint=null;
 		}
-		else 
+		else {
+			heading = initialHeading;
 			transform.position = initialPos;
+		}
 		flag = null;
 		rigidbody2D.velocity = Vector2.zero;
 		itemNo = -1;

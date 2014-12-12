@@ -45,20 +45,13 @@ public class Flag : MonoBehaviour
 		UpdatePollenateEffect();
 	}
 
-	public void Pickup(Player p)
+	public void Reset()
 	{
-		if (p.canGrabFlag) {
-			carrier = p;
-			p.flag = this;
-			AudioManager.Main.PlayNewSound("Mana");
-		}
-	}
-
-	void Score()
-	{
-		Manager.S.DidScore(carrier);
-		PlayExplodeEffect();
-		countdown = timeLimit; //stop repeated scoring while game reloads
+		transform.position = initialPosit;
+		carrier = null;
+		countdown = timeLimit;
+		renderer.enabled = true;
+		currentScoreZone = null;
 	}
 
 	public void Drop()
@@ -72,20 +65,19 @@ public class Flag : MonoBehaviour
 		Destroy(pb);
 	}
 
-	public void Reset()
-	{
-		transform.position = initialPosit;
-		carrier = null;
-		countdown = timeLimit;
-		renderer.enabled = true;
-	}
-
 	public void OnTriggerEnter2D(Collider2D coll) {
 		CheckPickup(coll);
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
+		if (zone) {
+			currentScoreZone = zone;
+			TryPollenating(zone);
+		}
+	}
+
+	void TryPollenating(ScoreZone zone) {
 		if (zone && carrier && carrier.team == zone.team) {
 			currentScoreZone = zone;
-			StartProgressBar(coll);
+			StartProgressBar(zone);
 			pollenating = true;
 		}
 	}
@@ -94,6 +86,7 @@ public class Flag : MonoBehaviour
 		ScoreZone zone = coll.GetComponent<ScoreZone>();
 		if (zone) {
 			pollenating = false;
+			currentScoreZone = null;
 		}
 	}
 
@@ -104,15 +97,32 @@ public class Flag : MonoBehaviour
 		}
 	}
 
-	void StartProgressBar(Collider2D coll) {
+	public void Pickup(Player p)
+	{
+		if (p.canGrabFlag) {
+			carrier = p;
+			p.flag = this;
+			AudioManager.Main.PlayNewSound("Mana");
+			TryPollenating(currentScoreZone);
+		}
+	}
+
+	void StartProgressBar(ScoreZone zone) {
 		if (!progress) {
 			GameObject go = (GameObject)Instantiate(Resources.Load("ProgressBar"));
 			progress = go.GetComponent<ProgressBar>();
 		}
 		
-		Vector3 temp = coll.transform.position;
+		Vector3 temp = zone.transform.position;
 		temp.y += 2f;
 		progress.transform.position = temp;
+	}
+
+	void Score()
+	{
+		Manager.S.DidScore(carrier);
+		PlayExplodeEffect();
+		countdown = timeLimit; //stop repeated scoring while game reloads
 	}
 
 	void PlayExplodeEffect() {
@@ -135,7 +145,7 @@ public class Flag : MonoBehaviour
 			Vector2 toTarget = (Vector2)currentScoreZone.transform.position - (Vector2)p.transform.position;
 			p.rigidbody2D.velocity = Vector2.Lerp(p.rigidbody2D.velocity.normalized, toTarget.normalized, 0.2f) * speed;
 			p.transform.localScale *= 0.98f;
-			if (toTarget.magnitude <= 0.05) {
+			if (toTarget.magnitude <= 0.05 || p.transform.localScale.magnitude < 0.05) {
 				Destroy(p);
 				return true;
 			}

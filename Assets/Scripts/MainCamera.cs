@@ -5,8 +5,8 @@ using System.Linq;
 
 public class MainCamera : MonoBehaviour
 {
-    const float cameraEasing = 0.1f;
-    const float maxCameraSize = 15f;
+    const float cameraEasing = 0.2f;
+    const float maxCameraSize = 20f;
     const float minCameraSize = 6f;
 	Vector3 opos;
 	public Vector3 deltaPos;
@@ -41,6 +41,6 @@ public class MainCamera : MonoBehaviour
 
         Vector3 lastPos = camera.transform.position;
         Vector3 newPos = new Vector3(Mathf.Lerp(minX, maxX, 0.5f), Mathf.Lerp(minY, maxY, 0.5f), -10);
-        camera.transform.position = Vector3.Lerp(lastPos, newPos, 0.03f);
+        camera.transform.position = Vector3.Lerp(lastPos, newPos, 0.1f);
     }
 }

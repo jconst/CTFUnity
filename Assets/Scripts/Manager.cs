@@ -321,13 +321,13 @@ public class Manager : MonoBehaviour
 
         List<KeyValuePair<string, float>> messagesAndWaitTimes =
         new List<KeyValuePair<string, float>> {
-            new KeyValuePair<string, float> ("Move around with the left stick", 3f),
-            new KeyValuePair<string, float> ("Sting your enemies with the right stick", 4f),
-            new KeyValuePair<string, float> ("(While stinging, you're invincible to other stings)", 4f),
-            new KeyValuePair<string, float> ("Press Y to boost!", 4f),
-            new KeyValuePair<string, float> ("Press B to create a drone to fight for you", 4f),
-            new KeyValuePair<string, float> ("Press A to create a turret", 4f),
-            new KeyValuePair<string, float> ("Press X to knock back turrets and enemies", 4f),
+            new KeyValuePair<string, float> ("Move around with the left stick", 4f),
+            new KeyValuePair<string, float> ("Sting your enemies with the right stick", 6f),
+            new KeyValuePair<string, float> ("(While stinging, you're invincible to other stings)", 6f),
+            new KeyValuePair<string, float> ("Press Y to boost!", 5f),
+            new KeyValuePair<string, float> ("Press B to create a drone to fight for you", 5f),
+            new KeyValuePair<string, float> ("Press A to create a turret", 5f),
+            new KeyValuePair<string, float> ("Press X to knock back turrets and enemies", 5f),
             new KeyValuePair<string, float> ("", 30f)
         };
 

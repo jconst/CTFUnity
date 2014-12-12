@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Bullet : MonoBehaviour
 {
-    public const float speed = 4f;
+    public const float speed = 5f;
     public Vector2 heading = Vector2.up;
     public string team;
 

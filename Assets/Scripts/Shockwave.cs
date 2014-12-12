@@ -7,7 +7,7 @@ using System;
 public class Shockwave : DropItem
 {
     const int numEdgePoints = 200;
-    const float maxScale = 8f;
+    const float maxScale = 12f;
     const float initialLifeTime = 0.6f;
 
     LineRenderer line;

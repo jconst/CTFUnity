@@ -1305,6 +1305,7 @@ GameObject:
   - 23: {fileID: 555319317}
   - 114: {fileID: 555319315}
   - 58: {fileID: 555319316}
+  - 122: {fileID: 555319320}
   m_Layer: 8
   m_Name: Red Side
   m_TagString: RedSide
@@ -1378,6 +1379,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2105744863}
   m_RootOrder: 0
+--- !u!122 &555319320
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 555319314}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278321720
+  m_Size: 4
 --- !u!1001 &558178816
 Prefab:
   m_ObjectHideFlags: 0
@@ -6123,6 +6135,7 @@ GameObject:
   - 23: {fileID: 2099274083}
   - 114: {fileID: 2099274086}
   - 58: {fileID: 2099274082}
+  - 122: {fileID: 2099274087}
   m_Layer: 8
   m_Name: Blue Side
   m_TagString: BlueSide
@@ -6196,6 +6209,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   team: Blue
+--- !u!122 &2099274087
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2099274081}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4281998877
+  m_Size: 4
 --- !u!1 &2102511517
 GameObject:
   m_ObjectHideFlags: 0

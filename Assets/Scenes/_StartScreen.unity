@@ -89,7 +89,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!132 &410894778
 GUIText:
   m_ObjectHideFlags: 0
@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!132 &790392224
 GUIText:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ GUIText:
   m_Text: Press Start
   m_Anchor: 4
   m_Alignment: 1
-  m_PixelOffset: {x: 0, y: -100}
+  m_PixelOffset: {x: 0, y: -50}
   m_LineSpacing: 1
   m_TabSize: 4
   m_Font: {fileID: 12800000, guid: 4e125df1606e141d79d5d37096639356, type: 3}
@@ -251,10 +251,10 @@ GUIText:
   m_GameObject: {fileID: 1610347823}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: Bomb Squad
+  m_Text: Stingularity
   m_Anchor: 4
   m_Alignment: 1
-  m_PixelOffset: {x: 0, y: -50}
+  m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
   m_Font: {fileID: 12800000, guid: 4e125df1606e141d79d5d37096639356, type: 3}

@@ -243,7 +243,7 @@ public class Player : MonoBehaviour
 		if (spawnpoint) {
 			transform.position = spawnpoint.transform.position;
 			Destroy(spawnpoint.gameObject);
-			spawnpoint=null;
+			spawnpoint = null;
 		}
 		else {
 			heading = initialHeading;

@@ -137,15 +137,19 @@ public class Flag : MonoBehaviour
 				soundtimah = 0;
 			}
 			soundtimah += Time.fixedDeltaTime;
-		} else
+		} else {
 			soundtimah = 0;
+		}
 
 		const float speed = 2;
 		pollens.RemoveAll(p => {
-			Vector2 toTarget = (Vector2)currentScoreZone.transform.position - (Vector2)p.transform.position;
-			p.rigidbody2D.velocity = Vector2.Lerp(p.rigidbody2D.velocity.normalized, toTarget.normalized, 0.2f) * speed;
-			p.transform.localScale *= 0.98f;
-			if (toTarget.magnitude <= 0.05 || p.transform.localScale.magnitude < 0.05) {
+			Vector2 toTarget = Vector2.one;
+			if (currentScoreZone) {
+				toTarget = (Vector2)currentScoreZone.transform.position - (Vector2)p.transform.position;
+				p.rigidbody2D.velocity = Vector2.Lerp(p.rigidbody2D.velocity.normalized, toTarget.normalized, 0.2f) * speed;
+			}
+			p.transform.localScale -= (Vector3.one * 0.002f);
+			if (toTarget.magnitude <= 0.05 || p.transform.localScale.x < 0.05) {
 				Destroy(p);
 				return true;
 			}

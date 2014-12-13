@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 	public Vector3 initialPos;
 	public Vector3 initialHeading;	
 	public Vector2 lastInputVelocity;
-	public InputControl inputCtrl;
+	public MyInputControl inputCtrl;
 
 	public Flag flag;
 	public SpawnPad spawnpoint;
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
 	}
 
 	void Awake() {
-		inputCtrl = InputControl.S;
+		inputCtrl = MyInputControl.S;
 	}
 
 	void Update () {

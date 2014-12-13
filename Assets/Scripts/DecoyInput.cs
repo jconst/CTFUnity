@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class DecoyInput : InputControl
+public class DecoyInput : MyInputControl
 {
     public NavMeshPath path;
     public Vector2 tackleForce = Vector2.zero;

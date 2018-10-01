@@ -6,7 +6,7 @@ using System.Linq;
 
 public class DecoyInput : InputControl
 {
-    public NavMeshPath path;
+    public UnityEngine.AI.NavMeshPath path;
     public Vector2 tackleForce = Vector2.zero;
 
     public List<Vector3> waypoints;
@@ -22,7 +22,7 @@ public class DecoyInput : InputControl
 
     public DecoyInput(Decoy d) {
         decoy = d;
-        path = new NavMeshPath();
+        path = new UnityEngine.AI.NavMeshPath();
     }
 
     public void UpdateWaypoints() {

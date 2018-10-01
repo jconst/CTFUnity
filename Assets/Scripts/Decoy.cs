@@ -26,7 +26,7 @@ public class Decoy : DropItem
         GameObject go = Instantiate(owner.gameObject) as GameObject;
         fakePlayer = go.GetComponent<Player>();
 
-        fakePlayer.collider2D.sharedMaterial = physMat;
+        fakePlayer.GetComponent<Collider2D>().sharedMaterial = physMat;
         fakePlayer.canRespawn = false;
         fakePlayer.currentBoost = 1f;
         fakePlayer.flag = null;
@@ -69,7 +69,7 @@ public class Decoy : DropItem
     }
 
     void CalculateNewPath(Vector3 t) {
-        NavMesh.CalculatePath(transform.position.convertXYToXZ(), t.convertXYToXZ(), -1, input.path);
+        UnityEngine.AI.NavMesh.CalculatePath(transform.position.convertXYToXZ(), t.convertXYToXZ(), -1, input.path);
         if (drawPath) {
             line.SetVertexCount(input.path.corners.Length+1);
             line.SetPosition(0, transform.position);

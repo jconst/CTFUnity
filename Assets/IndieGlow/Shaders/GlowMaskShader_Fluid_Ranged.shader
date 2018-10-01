@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "IndieGlow/ObjectShader/GlowMaskShader_Fluid_Ranged" {
 	Properties {
 		_Layer_1_Color ("Layer 1 Color", Color) = (1,1,1,1)
@@ -91,7 +93,7 @@ Shader "IndieGlow/ObjectShader/GlowMaskShader_Fluid_Ranged" {
 			
 			v2f vert (appdata v) {
     			v2f o;
-    			o.pos = mul( UNITY_MATRIX_MVP, v.vertex );
+    			o.pos = UnityObjectToClipPos( v.vertex );
     			o.uv = half4( v.texcoord.xy, 0, 0 );
     			o.projPos = ComputeScreenPos (v.vertex);
     			UNITY_TRANSFER_DEPTH(o.projPos.z);

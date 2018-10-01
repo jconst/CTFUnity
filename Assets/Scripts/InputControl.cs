@@ -20,9 +20,7 @@ public class InputControl
     string platformString {
         get {
             return (Application.platform == RuntimePlatform.OSXEditor ||
-                    Application.platform == RuntimePlatform.OSXPlayer ||
-                    Application.platform == RuntimePlatform.OSXWebPlayer ||
-                    Application.platform == RuntimePlatform.OSXDashboardPlayer)
+                    Application.platform == RuntimePlatform.OSXPlayer)
                     ? "OSX" : "WIN";
         }
     }

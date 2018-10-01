@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "IndieGlow/ObjectShader/GlowMaskShader_Particle_Ranged" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
@@ -48,7 +50,7 @@ Shader "IndieGlow/ObjectShader/GlowMaskShader_Particle_Ranged" {
 			
 			v2f vert (appdata v) {
     			v2f o;
-    			o.pos = mul( UNITY_MATRIX_MVP, v.vertex );
+    			o.pos = UnityObjectToClipPos( v.vertex );
     			o.uv = half4( v.texcoord.xy, 0, 0 );
     			o.color = v.color;
     			o.projPos = ComputeScreenPos (v.vertex);
